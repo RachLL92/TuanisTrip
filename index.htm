@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--Indica al explorador web que el contenido es de HTML5-->
+<html lang="es">
+<!--Etiqueta raíz de todo documento HTML-->
+<head>
+    <!--Podemos agregar características que va a tener la pagina-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuanis Trip | Inicio</title>
+    <!--Titulo de la pagina web-->
+</head>
+
+<!--Contenido de la web-->
+<body>
+    <!-- Encabezado principal fijo del sitio -->
+    <header class="site-header">
+
+        <!-- Agrupa contenido del encabezado -->
+        <div class="container header-content">
+            <p class="logo"><strong>Tuanis Trip</strong></p>
+            <!--Se puede cambiar por la imagen del logo-->
+
+            <label for="busquedaTour">Buscar tour:</label>
+            <input type="text" id="busquedaTour" placeholder="¿Qué deseas explorar?">
+            <p id="mensajeBusqueda"></p>
+
+            <!-- Checkbox oculto para controlar el menú hamburguesa sin JavaScript -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+
+            <!-- Botón visual del menú hamburguesa -->
+            <label for="menu-toggle" class="menu-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- Navegación principal -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a class="active-link" href="index.html">Inicio</a></li>
+                    <li><a href="#">Tours</a></li>
+                    <li><a href="#">Información de guías</a></li>
+                    <li><a href="#">Registrarse como guía</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Ubicación actual Breadcrumb pendiente de hacer -->
+    <nav class="breadcrumb" aria-label="Ubicación actual">
+        <div class="container">
+            <a href="index.html">Inicio</a>
+            <span>Tours</span>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main>
+
+        <!-- Sección hero con imagen de fondo -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Enamorate de Costa Rica</h1>
+                <p>Vive experiencias únicas</p>
+            </div>
+        </section>
+
+        <hr>
+    
+        <!-- Sección de exploración: filtros -->
+        <section class="seccion-exploracion">
+
+            <!-- Columna izquierda: filtros -->
+            <aside class="categorias">
+                <h2>Filtros</h2>
+
+                <!-- Filtrar por destino -->
+                <h3>Destino</h3>
+                
+                <ul>
+                    <li><button type="button">Playa</button></li>
+                    <li><button type="button">Ciudad</button></li>
+                    <li><button type="button">Montaña</button></li>
+                </ul>
+
+                <!-- Filtrar por provincia -->
+                <h3>Provincia</h3>
+                
+                <div class="grupo-provincia">
+                    <select id="provincia" aria-label="Seleccionar provincia">
+                        <option value="">Todas las provincias</option>
+                        <option value="san-jose">San José</option>
+                        <option value="alajuela">Alajuela</option>
+                        <option value="cartago">Cartago</option>
+                        <option value="heredia">Heredia</option>
+                        <option value="guanacaste">Guanacaste</option>
+                        <option value="puntarenas">Puntarenas</option>
+                        <option value="limon">Limón</option>
+                    </select>
+                </div>
+
+                <!-- Filtrar por actividad -->
+                <h3>Actividad</h3>
+                <ul>
+                    <li><button type="button">Senderismo</button></li>
+                    <li><button type="button">Montar a caballo</button></li>
+                    <li><button type="button">Rafting</button></li>
+                    <li><button type="button">Quad</button></li>
+                    <li><button type="button">Canopy</button></li>
+                    <li><button type="button">Snorkel</button></li>
+                    <li><button type="button">Paseo en barco</button></li>
+                    <li><button type="button">Safari</button></li>
+                </ul>
+
+                <!-- Filtrar por cantidad de personas -->
+                <h3>Cantidad de personas</h3>
+                <div class="grupo-personas">
+                    <label for="adultos">Adultos</label>
+                    <input type="number" id="adultos" min="1" max="20" value="1">
+
+                    <label for="ninos">Niños</label>
+                    <input type="number" id="ninos" min="0" max="20" value="0">
+                </div>
+
+            </aside>
+            <!-- Fin columna izquierda -->
+
+            <!-- Columna derecha: tours destacados -->
+            <section class="destacados">
+                <h2>Destacados</h2>
+
+                <article class="tarjeta-tour">
+                    <div class="imagen">
+                        
+                    </div>
+                    <div class="tour-info">
+                        <h3>Titulo del tour 1</h3>
+                        <p>Información del tour 1</p>
+                        <p class="tour-precio">Precio del tour</p>
+                    </div>
+                </article>
+
+                <article class="tarjeta-tour">
+                    <div class="imagen">
+                        
+                    </div>
+                    <div class="tour-info">
+                        <h3>Titulo del tour 2</h3>
+                        <p>Información del tour 2</p>
+                        <p class="tour-precio">Precio del tour</p>
+                    </div>
+                </article>
+
+                <article class="tarjeta-tour">
+                    <div class="imagen">
+                        
+                    </div>
+                    <div class="tour-info">
+                        <h3>Titulo del tour 3</h3>
+                        <p>Información del tour 3</p>
+                        <p class="tour-precio">Precio del tour</p>
+                    </div>
+                </article>
+
+            </section>
+            <!-- Fin columna derecha -->
+
+        </section>
+        <!-- Fin seccion-exploracion -->
+
+        <section class="info-costa-rica">
+            <h2>Sobre Costa Rica</h2>
+            <p class="info-subtitulo">Un pequeño país con una biodiversidad enorme y una cultura única en el mundo.</p>
+            <!-- Números de impacto -->
+            <div class="datos-grid">
+                <div class="dato-card">
+                    <p class="dato-numero">5%</p>
+                    <p class="dato-label">De la biodiversidad mundial</p>
+                </div>
+    
+                <div class="dato-card">
+                    <p class="dato-numero">30%</p>
+                    <p class="dato-label">Del territorio es área protegida</p>
+                </div>
+    
+                <div class="dato-card">
+                    <p class="dato-numero">500+</p>
+                    <p class="dato-label">Especies de aves</p>
+                </div>
+    
+                <div class="dato-card">
+                    <p class="dato-numero">99%</p>
+                    <p class="dato-label">Energía renovable generada</p>
+                </div>
+    
+            </div>
+            <!-- Fin datos-grid -->
+    
+            <!-- Tarjetas de curiosidades -->
+            <div class="curiosidades-grid">
+                <article class="curiosidad-card">
+                    <h3>Sin ejército desde 1948</h3>
+                    <p>Costa Rica abolió su ejército y redirigió ese presupuesto a educación y salud.</p>
+                </article>
+    
+                <article class="curiosidad-card">
+                    <h3>"Pura Vida" como filosofía</h3>
+                    <p>Más que un saludo, es una forma de vida positiva que refleja la cultura costarricense.</p>
+                </article>
+    
+                <article class="curiosidad-card">
+                    <h3>Volcanes activos</h3>
+                    <p>Tiene 6 volcanes activos, incluyendo el Arenal, uno de los más conocidos del mundo.</p>
+                </article>
+    
+                <article class="curiosidad-card">
+                    <h3>Zona Azul del mundo</h3>
+                    <p>La Península de Nicoya es una de las 5 zonas azules del planeta, donde la gente vive más de 100 años.</p>
+                </article>
+        
+                <article class="curiosidad-card">
+                    <h3>Dos costas, dos océanos</h3>
+                    <p>Es uno de los pocos países del mundo con costa en el Pacífico y en el Caribe.</p>
+                </article>
+    
+                <article class="curiosidad-card">
+                    <h3>Café de exportación mundial</h3>
+                    <p>El café costarricense es reconocido internacionalmente por su calidad y aroma único.</p>
+                </article>
+    
+            </div>
+            <!-- Fin curiosidades-grid -->
+        </section>
+    </main>
+</body>
+
+</html>
