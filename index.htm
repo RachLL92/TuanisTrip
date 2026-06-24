@@ -20,41 +20,40 @@
 
 <!--Contenido de la web-->
 <body>
-    <!-- Encabezado principal fijo del sitio -->
-    <header class="site-header">
+    <!--Encabezado principal fijo de la web-->
+    <header class = "site-header">
+    <!--Centrar el contenido de la pantalla-->    
+    <div class = "container site-header">
+        <!--Logotipo-->
+        <img src="assets/images/logoTuanisTrip.png" alt="Logo de Tuanis Trip">
 
-        <!-- Agrupa contenido del encabezado -->
-        <div class="container header-content">
-            <p class="logo"><strong>Tuanis Trip</strong></p>
-            <!--Se puede cambiar por la imagen del logo-->
-
-            <!-- Checkbox oculto para controlar el menú hamburguesa sin JavaScript -->
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-
-            <!-- Botón visual del menú hamburguesa -->
-            <label for="menu-toggle" class="menu-button" aria-label="Abrir menú de navegación">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-
-            <!-- Navegación principal -->
-            <nav class="main-nav" aria-label="Navegación principal">
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#tours">Tours</a></li>
-                    <li><a href="#guias">Información de guías</a></li>
-                    <li><a href="#registro-guia">Registrarse como guía</a></li>
-                </ul>
-            </nav>
-
-            <!-- Barra de busqueda -->
-            <div class = "buscador">
-                <label for="buscar">Buscar tour</label>
+        <!--Navegacion principal-->
+        <!--nav - utilizada para definir contenido que será la sección de navegación de la web-->
+        <nav class = "main-nav">
+            <!--Lista desordenada-->
+            <ul>
+                <li><a href="index.html">Incio</a></li>
+                <li><a href="tour.html">Tour</a></li>
+                <li><a información href="informacionGuia.html">información de guías</a></li>
+            </ul>
+        </nav>
+        
+        <!--Acciones del usuario-->
+        <div class="header-actions">
+            <!--Link para el carrito con icono-->
+            <a href="carrito.html" class="btn-carrito"><i class="fa-solid fa-cart-shopping"></i>Carrito</a>
+            <!--Link para los destinos favoritos con icono-->
+            <a href="favoritos.html" class="btn-favoritos"><i class="fa-regular fa-heart"></i>Favoritos</a>
+            <!--Barra de busqueda-->
+            <div class = "search-tour">
+                <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="search" id = "buscar" placeholder="¿Que deseas explorar?">
             </div>
 
+            <!--Link para registrar el usuario-->
+            <a href="usuario.html" class="btn-usuario"><img src="assets/images/usuario 32 blanco.png" alt="Logo de usuario"></i></a>
         </div>
+    </div>
     </header>
 
     <!-- Imagen de bienvenida -->
@@ -68,227 +67,423 @@
 
     <!-- Contenido principal Filtros y destacados -->
     <main>
-        <!-- Sección de exploración: filtros -->
-        <section class="seccion-exploracion">
+        <!--hero-->
+        <section class = "hero">
 
-            <!-- Filtros -->
-            <aside class="filtros">
-                <h2>Sal y explora a tu manera</h2>
 
-                <!-- Filtrar por categoría -->
-                <div class = "categoria">
-                    <h3>Categoría</h3>
-                    <ul>
-                        <li><button type="button" >Ciudad</button></li>
-                        <li><button type="button">Playa</button></li>
-                        <li><button type="button">Montaña</button></li>
-                    </ul>
+            <div class = "hero-content">
+                <!--Se usa span entre la frase para que en el CSS se logre cambiar el estilo -->
+                <h1><span class="hero-eyebrow">Pura vida,</span> descubre Costa Rica</h1>
+                <p>Encuentra los mejores tours y actividades con guías locales y vive experiencias inolvidables.</p>
+                <!--Investigar-->
+                <a href="tours.html" class="btn-primary">
+                    Explorar tours
+                    <span aria-hidden="true">→</span>
+                </a>
+            </div>
+
+            <!-- Filtro de busqueda -->
+            <div class = "filters">
+
+                <div class = "filter-group">
+                    <!-- label - Etiqueta que define el título de un control que conforma el formulario-->
+                    <label for="filtroProvincia">¿A dónde quieres ir?</label>
+                    <div class="select-wrapper"><i class="fa-solid fa-location-dot"></i>
+                        <select id="filtroProvincia">
+                            <option value>Todas las provincias</option>
+                            <option value="san-jose">San José</option>
+                            <option value="alajuela">Alajuela</option>
+                            <option value="cartago">Cartago</option>
+                            <option value="heredia">Heredia</option>
+                            <option value="guanacaste">Guanacaste</option>
+                            <option value="puntarenas">Puntarenas</option>
+                            <option value="limon">Limón</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Filtrar por provincia -->
-                <div class="grupo-provincia">
-                    <h3>Provincia</h3>
-                    <select id="provincia" aria-label="Seleccionar provincia">
-                        <option value="">Todas las provincias</option>
-                        <option value="san-jose">San José</option>
-                        <option value="alajuela">Alajuela</option>
-                        <option value="cartago">Cartago</option>
-                        <option value="heredia">Heredia</option>
-                        <option value="guanacaste">Guanacaste</option>
-                        <option value="puntarenas">Puntarenas</option>
-                        <option value="limon">Limón</option>
-                    </select>
+                <div class="filter-group">
+                    <label for="filtroCategoria">Categoría</label>
+                    <div class="select-wrapper"><i class="fa-solid fa-table-cells-large"></i>
+                        <select id="filtroCategoria">
+                            <option value>Todas las categorías</option>
+                            <option value="montaña">Montaña</option>
+                            <option value="playa">Playa</option>
+                            <option value="ciudad">Ciudad</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Filtrar por actividad -->
-                <div class = "actividad">
-                    <h3>Actividad</h3>
-                    <ul>
-                        <li><button type="button">Senderismo</button></li>
-                        <li><button type="button">Montar a caballo</button></li>
-                        <li><button type="button">Rafting</button></li>
-                        <li><button type="button">Quad</button></li>
-                        <li><button type="button">Canopy</button></li>
-                        <li><button type="button">Snorkel</button></li>
-                        <li><button type="button">Safari</button></li>
-                </div>
-                    </ul>
-                    
-
-                <button id="btnLimpiarFiltros" class="btn-clear">Limpiar filtros</button>
-
-            </aside>
-            <!-- Fin columna izquierda -->
-
-            <!-- Tours destacados -->
-            <section class="destacados">
-
-                <h2>Destacados</h2>
-
-                <button id="btnAnterior">&#10094;</button>
-
-                <div class="contenedor-carrusel">
-                    <!-- Tour 1 -->
-                    <article class="tarjeta-tour">
-                        <img src="assets/images/Caminata.png" alt="Caminata en Tapantí">
-                        <div>
-                            <h3>Tapantí: Caminata entre bosques y cataratas</h3>
-
-                            <p>
-                                Explora senderos rodeados de naturaleza,
-                                descubre impresionantes cataratas y disfruta
-                                de la biodiversidad única del Parque Nacional Tapantí. 
-                            </p>
-                            <ul>
-                                <li>4 horas</li>
-                                <li>Naturaleza</li>
-                                <li>Dificultad moderada</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- Tour 2 -->
-                    <article class="tarjeta-tour">
-                        <img src="assets/images/Cabalgata.png" alt="Cabalgata en La Fortuna">
-                        <div>
-                            <h3>La Fortuna: Cabalgata con vistas al Volcán Arenal</h3>
-
-                            <p>
-                                Disfruta de un recorrido a caballo por senderos
-                                naturales con impresionantes vistas al volcán.
-                            </p>
-                            <ul>
-                                <li>2 - 3 horas</li>
-                                <li>Guía incluido</li>
-                                <li>Vista al volcán</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- Tour 3 -->
-                    <article class="tarjeta-tour">
-                        <img src="assets/images/Canopy.png" alt="Canopy en Montever">
-                        <div>
-                            <h3>Monteverde: Aventura de canopy entre las nubes</h3>
-
-                            <p>
-                                Deslízate por emocionantes tirolesas sobre el bosque nuboso
-                                y disfruta de vistas panorámicas únicas de Monteverde.
-                            </p>
-                            <ul>
-                                <li>3 horas</li>
-                                <li>Equipo incluido</li>
-                                <li>Alta adrenalina</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <!-- Tour 4 -->
-                    <article class="tarjeta-tour">
-                        <img src="assets/images/Rafting.png" alt="Rafting en el Río Pacuare">
-                        <div>
-                            <h3>Monteverde: Aventura de canopy entre las nubes</h3>
-
-                            <p>
-                                Vive una aventura llena de emoción recorriendo uno de los
-                                ríos más impresionantes de Costa Rica, rodeado de selva tropical.
-                            </p>
-                            <ul>
-                                <li>5 horas</li>
-                                <li>Guía certificado</li>
-                                <li>Nivel intermedio</li>
-                            </ul>
-                        </div>
-                    </article>
-
+                <div class="filter-group">
+                    <label for="fecha">Fecha</label>
+                    <div class="select-wrapper"><i class="fa-regular fa-calendar"></i>
+                        <input type="date" id="fecha" name="fecha">
+                    </div>
                 </div>
 
-                <button id="btnSiguiente">&#10095;</button>
+                <div class="filter-group">
+                    <label for="cantidadPersonas">Personas</label>
+                    <div class="select-wrapper"><i class="fa-solid fa-people-group"></i>
+                        <input type="number" id="cantidadPersonas" value="1" min="1" max="100">
+                    </div>
+                </div>
+                
+                <button id="btnFiltrarInformacion" class="btn-clear">
+                    <i class="fa-solid fa-magnifying-glass"></i>Buscar tour</button>
 
-            </section>
-            <!-- Fin columna derecha -->
-
+            </div>
         </section>
-        <!-- Fin seccion-exploracion -->
+
+        <!-- Explorar por actividad -->
+        <section class="actividades-section">
+
+            <h2 id="actividades-heading">Explora por actividad</h2>
+
+            <ul class="actividades-grid">
+
+                <li>
+                    <button type="button"
+                            class="actividad-card"
+                            data-categoria="senderismo">
+
+                        <i class="fa-solid fa-person-hiking"></i>
+                        <span>Senderismo</span>
+
+                    </button>
+                </li>
+
+                <li>
+                    <button type="button"
+                            class="actividad-card"
+                            data-categoria="quad">
+
+                        <img src="assets/images/quad.png" alt="Icono de quad">
+                        <span>Quad</span>
+
+                    </button>
+                </li>
+
+                <li>
+                    <button type="button"
+                            class="actividad-card"
+                            data-categoria="rafting">
+
+                        <i class="fa-solid fa-water"></i>
+                        <span>Rafting</span>
+
+                    </button>
+                </li>
+
+                <li>
+                    <button type="button"
+                            class="actividad-card"
+                            data-categoria="montarCaballo">
+
+                        <i class="fa-solid fa-horse"></i>
+                        <span>Montar a caballo</span>
+
+                    </button>
+                </li>
+
+                <li>
+                    <button type="button"
+                            class="actividad-card"
+                            data-categoria="snorkel">
+
+                        <i class="fa-solid fa-fish"></i>
+                        <span>Snorkel</span>
+
+                    </button>
+                </li>
+
+                <li>
+                    <button type="button"
+                            class="actividad-card"
+                            data-categoria="kayak">
+
+                        <i class="fa-solid fa-ship"></i>
+                        <span>Kayak</span>
+
+                    </button>
+                </li>
+
+                <li>
+                    <button type="button"
+                            class="actividad-card"
+                            data-categoria="canopy">
+
+                        <i class="fa-solid fa-tree"></i>
+                        <span>Canopy</span>
+
+                    </button>
+                </li>
+
+                <li>
+                    <button type="button"
+                            class="actividad-card"
+                            data-categoria="safari">
+
+                        <img src="assets/images/safari.png" alt="Icono de Safari">
+                        <span>Safari</span>
+
+                    </button>
+                </li>
+            </ul>
+        </section>
+        
+        <!--Tour destacados-->
+
+        <!--Agrupa todo lo relacionado con los tours destacados-->
+        <section class="tours-destacados">
+                <!--Encabezado de la sección-->
+                <div class="section-header">
+                    <h2 id="destacados-heading">Tours destacados</h2>
+                    <a href="tours.html" class="ver-todos">
+                        Ver todos los tours
+                        <span aria-hidden="true">→</span>
+                    </a>
+                </div>
+                <!--Boton para añadir a favoritos-->
+                            <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
+                                <img src="assets/images/heart-regular.png" alt="Icono de corazón">
+                            </button>
+                <!--Lista de tours-->
+                <ul class="tours-grid">
+                <li>
+                    <article class="tour-card">
+                        <!--Figure - Se usar para agrupar contenido visual-->
+                        <figure>
+                            <img src="assets/images/catarata.png" alt="Catarata rodeada de bosque en La Fortuna">
+                            <!-- Etiqueta de "Catergoria"-->
+                            <span class="tour-badge">Senderismo</span>
+                        </figure>
+                        <!--Contenido del tour -->
+                        <div class="tour-card-content">
+                            <!--Titulo del tour-->
+                            <h3>Catarata La Fortuna</h3>
+                            <p class="tour-ubicacion">
+                                <i class="fa-solid fa-location-dot"></i>
+                                La Fortuna, Alajuela
+                            </p>
+                            <p>Disfruta de una caminata hasta la impresionante catarata y sus alrededores.</p>
+                            <ul class="tour-meta">
+                                <li>5 horas</li>
+                                <li>2 - 10 personas</li>
+                            </ul>
+                            <div class="tour-precio">
+                                <p><span class="precio">₡35,000</span> por persona</p>
+                                <p class="rating" aria-label="Calificación 4.8 de 5, 120 reseñas">
+                                    <span aria-hidden="true">★</span> 4.8 <span class="reviews">(120)</span>
+                                </p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
+                        <img src="assets/images/heart-regular.png" alt="Icono de corazón">
+                        </button>   
+                    </article>
+                </li>
+
+                <li>
+                    <article class="tour-card">
+                        <figure>
+                            <img src="assets/images/isla tortuga.png" alt="Playa de Isla Tortuga">
+                            <span class="tour-badge">Snorkel</span>
+                        </figure>
+                        <div class="tour-card-content">
+                            <h3>Isla Tortuga</h3>
+                            <p class="tour-ubicacion">
+                                <i class="fa-solid fa-location-dot"></i>
+                                Puntarenas
+                            </p>
+                            <p>Excursión en catamarán con snorkel, playa blanca y almuerzo incluido.</p>
+                            <ul class="tour-meta">
+                                <li>8 horas</li>
+                                <li>2 - 20 personas</li>
+                            </ul>
+                            <div class="tour-precio">
+                                <p><span class="precio">₡60,000</span> por persona</p>
+                                <p class="rating" aria-label="Calificación 4.7 de 5, 89 reseñas">
+                                    <span aria-hidden="true">★</span> 4.7 <span class="reviews">(89)</span>
+                                </p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
+                        <img src="assets/images/heart-regular.png" alt="Icono de corazón">
+                        </button>  
+                    </article>
+                </li>
+
+                <li>
+                    <article class="tour-card">
+                        <figure>
+                            <img src="assets/images/volcan arenal y termales.png" alt="Volcán Arenal rodeado de bosque tropical">
+                            <span class="tour-badge">Senderismo</span>
+                        </figure>
+                        <div class="tour-card-content">
+                            <h3>Volcán Arenal + Termales</h3>
+                            <p class="tour-ubicacion">
+                                <i class="fa-solid fa-location-dot"></i>
+                                La Fortuna, Alajuela
+                            </p>
+                            <p>Visita el volcán Arenal y relájate en aguas termales naturales.</p>
+                            <ul class="tour-meta">
+                                <li>10 horas</li>
+                                <li>2 - 15 personas</li>
+                            </ul>
+                            <div class="tour-precio">
+                                <p><span class="precio">₡75,000</span> por persona</p>
+                                <p class="rating" aria-label="Calificación 4.9 de 5, 150 reseñas">
+                                    <span aria-hidden="true">★</span> 4.9 <span class="reviews">(150)</span>
+                                </p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
+                        <img src="assets/images/heart-regular.png" alt="Icono de corazón">
+                        </button>  
+                    </article>
+                </li>
+
+                <li>
+                    <article class="tour-card">
+                        <figure>
+                            <img src="assets/images/canopy.png" alt="Persona en canopy sobre el bosque nuboso de Monteverde">
+                            <span class="tour-badge">Canopy</span>
+                        </figure>
+                        <div class="tour-card-content">
+                            <h3>Aventura en Monteverde</h3>
+                            <p class="tour-ubicacion">
+                                <i class="fa-solid fa-location-dot"></i>
+                                Monteverde, Puntarenas
+                            </p>
+                            <p>Canopy, puentes colgantes y caminatas en el bosque nuboso.</p>
+                            <ul class="tour-meta">
+                                <li>6 horas</li>
+                                <li>2 - 8 personas</li>
+                            </ul>
+                            <div class="tour-precio">
+                                <p><span class="precio">₡55,000</span> por persona</p>
+                                <p class="rating" aria-label="Calificación 4.6 de 5, 70 reseñas">
+                                    <span aria-hidden="true">★</span> 4.6 <span class="reviews">(70)</span>
+                                </p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
+                        <img src="assets/images/heart-regular.png" alt="Icono de corazón">
+                        </button>  
+                    </article>
+                </li>
+            </ul>
+        </section>
 
         <!-- Información de CR -->
-        <section class = "sobre-CR">
-            <h2>Sobre Costa Rica</h2>
+        <section class="por-que-visitar" aria-labelledby="porque-heading">
+            <h2 id="porque-heading">¿Por qué visitar Costa Rica?</h2>
 
-            <!-- Dato 1 -->
-            <article class = "card-CR">
-                <img src="assets/images/Perezoso.png" alt="Perezoso">
-                <h3>5%</h3>
-                <p>De la biodiversidad mundial</p>
-            </article>
-
-            <!-- Dato 2 -->
-            <article class = "card-CR">
-                <img src="assets/images/Mapa.png" alt="Mapa de Costa Rica">
-                <h3>30%</h3>
-                <p>Del territorio es área protegida</p>
-            </article>
-
-            <!-- Dato 3 -->
-            <article class = "card-CR">
-                <img src="assets/images/Ave.png" alt="Ave de CR">
-                <h3>500+</h3>
-                <p>Especies de aves</p>
-            </article>
-
-            <!-- Dato 4 -->
-            <article class = "card-CR">
-                <img src="assets/images/EnergíaRenovable.png" alt="Energía renovable">
-                <h3>99%</h3>
-                <p>Energía renovable generada</p>
-            </article>
-
+            <ul class="stats-grid">
+                <li class="stat-card">
+                    <img src="assets/images/Perezoso.png" alt="Perezoso colgado de una rama">
+                    <div>
+                        <p class="stat-number">5%</p>
+                        <p class="stat-label">De la biodiversidad mundial</p>
+                    </div>
+                </li>
+                <li class="stat-card">
+                    <img src="assets/images/Mapa.png" alt="Mapa ilustrado de Costa Rica">
+                    <div>
+                        <p class="stat-number">30%</p>
+                        <p class="stat-label">Del territorio es área protegida</p>
+                    </div>
+                </li>
+                <li class="stat-card">
+                    <img src="assets/images/Ave.png" alt="Ave de Costa Rica">
+                    <div>
+                        <p class="stat-number">500+</p>
+                        <p class="stat-label">Especies de ave</p>
+                    </div>
+                </li>
+                <li class="stat-card">
+                    <img src="assets/images/EnergíaRenovable.png" alt="Turbinas eólicas sobre una colina">
+                    <div>
+                        <p class="stat-number">99%</p>
+                        <p class="stat-label">Energía renovable generada</p>
+                    </div>
+                </li>
+            </ul>
         </section>
-        <!-- Fin Sobre CR -->
 
-        <!-- Sobre la Plataforma -->
-        <section class="sobre-plataforma">
-
-            <article>
-                <h2>Sobre la plataforma</h2>
-                <p>
-                    Tuanis Trip reúne en un solo lugar los mejores tours y
-                    actividades del país. Los usuarios pueden explorar opciones
-                    por categoría o provincia, encontrar experiencias destacadas
-                    y planificar sus aventuras de manera sencilla.
-                </p>
-            </article>
-
+        <!-- Sobre la plataforma -->
+        <section class="sobre-plataforma" aria-labelledby="plataforma-heading">
             <figure>
-                <img src="assets/images/turista.png" alt="Turista explorando Costa Rica">
+                <img src="assets/images/turista.png" alt="Ilustración de un turista caminando con maleta y mapa">
             </figure>
 
+            <div class="plataforma-content">
+                <h2 id="plataforma-heading">Sobre la plataforma</h2>
+                <p>Tuanis Trip reúne en un solo lugar los mejores tours y actividades del país. Los usuarios pueden explorar opciones por categoría o provincia, encontrar experiencias destacadas y planificar sus aventuras de manera sencilla.</p>
+
+                <ul class="plataforma-features">
+                    <li>
+                        <i class="fa-solid fa-bell-concierge"></i>
+                        <p><strong>Reservas</strong> fáciles y rápidas</p>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-person-hiking"></i>
+                        <p><strong>Guías locales</strong> expertos</p>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-money-bills"></i>
+                        <p><strong>Pago seguro</strong> y protegido</p>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-headset"></i>
+                        <p><strong>Soporte local</strong> siempre disponible</p>
+                    </li>
+                </ul>
+            </div>
         </section>
-        <!-- Fin Sobre la Plataforma -->
 
     </main>
     
     <!-- Pie de página -->
-    <footer id="contacto">
-        <h3>Contacto</h3>
-        <address>
-            Tuanis Trip<br>
-            Correo: contacto@tuanisTrip.com<br>
-            Alajuela, Costa Rica
-        </address>
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/Logounico.png" alt="Logo de Tuanis Trip">
+                    <span class="logo-text">
+                        <strong>Tuanis Trip</strong>
+                        <small>Tours &amp; Guías Turísticos</small>
+                    </span>
+                </a>
+                <p>Conectamos viajeros con las mejores experiencias en Costa Rica. Apoyamos a guías locales y al turismo sostenible.</p>
+            </div>
 
-        <h3>Enlaces rápidos</h3>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="tours.html">Tours</a></li>
-            <!-- Se pueden añadir más enlaces rapido -->
-        </ul>
+            <nav class="footer-column" aria-labelledby="footer-enlaces-heading">
+                <h2 id="footer-enlaces-heading">Enlaces rápidos</h2>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="informacion.html">Información</a></li>
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                </ul>
+            </nav>
 
-        <p>
-            <small>&copy; 2026 TuanisTrip. Todos los derechos reservados.</small>
+            <section class="footer-column" aria-labelledby="footer-contacto-heading">
+                <h2 id="footer-contacto-heading">Contacto</h2>
+                <address>
+                    <p>Correo: <a href="mailto:contacto@tuanistrip.com">contacto@tuanistrip.com</a></p>
+                    <p>Alajuela, Costa Rica</p>
+                    <p>Tel: <a href="tel:+50600000000">+506 0000 0000</a></p>
+                </address>
+            </section>
+
+        </div> <p class="copyright">
+            <small>&copy; 2026 Tuanis Trip. Todos los derechos reservados.</small>
         </p>
     </footer>
-
+    
 </body>
 
 </html>

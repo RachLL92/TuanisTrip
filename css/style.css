@@ -1,0 +1,1075 @@
+/* =====================================================
+TUANIS TRIP — styles.css
+Paleta de marca:
+--verde-oscuro:   #052b1e  (header, footer, botones primarios)
+--beige-verdoso:  #dddfc2  (fondos de secciones alternas)
+--blanco-hueso:   #fafaf8  (fondo general)
+--dorado:         #c8893a  (acentos: botón buscar, rating, badges)
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* -----------------------------------------------------
+1. Variables y reset
+----------------------------------------------------- */
+:root {
+    /* Colores de marca */
+    --verde-oscuro: #052b1e;
+    --verde-oscuro-hover: #0a4530;
+    --beige-verdoso: #dddfc2;
+    --blanco-hueso: #fafaf8;
+    --blanco: #ffffff;
+
+    /* Acento dorado/naranja cálido */
+    --dorado: #c8893a;
+    --dorado-claro: #e0a85f;
+    --dorado-oscuro: #a86f2c;
+
+    /* Texto */
+    --texto-principal: #1c2620;
+    --texto-secundario: #5b665e;
+    --texto-claro: #ffffff;
+
+    /* Bordes y sombras */
+    --borde-suave: #e7e7e0;
+    --sombra-suave: 0 4px 16px rgba(5, 43, 30, 0.08);
+    --sombra-media: 0 8px 24px rgba(5, 43, 30, 0.12);
+    --sombra-fuerte: 0 12px 32px rgba(5, 43, 30, 0.18);
+
+    /* Tipografías */
+    --font-principal: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+    --font-script: 'Caveat', cursive;
+
+    /* Radios */
+    --radio-sm: 8px;
+    --radio-md: 14px;
+    --radio-lg: 20px;
+    --radio-pill: 999px;
+
+    /*Layout */
+    --max-width: 1200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-principal);
+    color: var(--texto-principal);
+    background-color: var(--blanco-hueso);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+input, select {
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--texto-principal);
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* -----------------------------------------------------
+2. Header
+----------------------------------------------------- */
+.site-header {
+    background-color: var(--verde-oscuro);
+    color: var(--texto-claro);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.site-header.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.site-header img[alt="Logo de Tuanis Trip"] {
+    height: 100px;
+    width: auto;
+    flex-shrink: 0;
+}
+
+/* Navegación principal */
+.main-nav ul {
+    display: flex;
+    gap: 32px;
+}
+
+.main-nav a {
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: var(--texto-claro);
+    position: relative;
+    padding-bottom: 4px;
+    transition: opacity 0.2s ease;
+}
+
+.main-nav a:hover {
+    opacity: 0.8;
+}
+
+.main-nav li:first-child a {
+    border-bottom: 2px solid var(--dorado-claro);
+}
+
+/* Acciones del header */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.btn-carrito,
+.btn-favoritos {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--texto-claro);
+    white-space: nowrap;
+    position: relative;
+}
+
+.btn-carrito i,
+.btn-favoritos i {
+    font-size: 1.05rem;
+}
+
+.btn-carrito .fa-heart {
+    order: -1;
+}
+
+.btn-favoritos .fa-cart-shopping {
+    order: -1;
+}
+
+/* Barra de búsqueda en el header */
+.search-tour {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.12);
+    border-radius: var(--radio-pill);
+    padding: 9px 18px;
+    min-width: 220px;
+}
+
+.search-tour i {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.search-tour input {
+    color: var(--texto-claro);
+    background: transparent;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.search-tour input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Botón / avatar de usuario */
+.btn-usuario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+}
+
+.btn-usuario img {
+    width: 18px;
+    height: 18px;
+}
+
+/* -----------------------------------------------------
+3. Hero
+----------------------------------------------------- */
+.hero {
+    position: relative;
+    background-image: linear-gradient(180deg, rgba(5, 43, 30, 0.15) 0%, rgba(5, 43, 30, 0.05) 40%, rgba(5, 43, 30, 0.35) 100%),
+        url('../assets/images/BannerVolcanArenal.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 560px;
+    padding: 80px 24px 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero-content {
+    max-width: var(--max-width);
+    width: 100%;
+    margin: 0 auto;
+    color: var(--texto-claro);
+}
+
+.hero-content h1 {
+    font-size: 2.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+.hero-eyebrow {
+    display: block;
+    font-family: var(--font-script);
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--beige-verdoso);
+    line-height: 1;
+}
+
+.hero-content p {
+    font-size: 1.05rem;
+    max-width: 520px;
+    margin-bottom: 28px;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Botón primario reutilizable */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--verde-oscuro);
+    color: var(--texto-claro);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 14px 26px;
+    border-radius: var(--radio-pill);
+    box-shadow: var(--sombra-media);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--verde-oscuro-hover);
+    transform: translateY(-2px);
+}
+
+.btn-primary span {
+    transition: transform 0.2s ease;
+}
+
+.btn-primary:hover span {
+    transform: translateX(3px);
+}
+
+/* -----------------------------------------------------
+4. Filtros de búsqueda (tarjeta flotante)
+----------------------------------------------------- */
+.filters {
+    max-width: var(--max-width);
+    width: calc(100% - 48px);
+    margin: 40px auto -70px;
+    background-color: var(--blanco);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-fuerte);
+    padding: 24px 28px;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 5;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    min-width: 160px;
+}
+
+.filter-group label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--texto-secundario);
+}
+
+.select-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--borde-suave);
+    border-radius: var(--radio-sm);
+    padding: 11px 14px;
+    background-color: var(--blanco-hueso);
+    transition: border-color 0.2s ease;
+}
+
+.select-wrapper:hover,
+.select-wrapper:focus-within {
+    border-color: var(--verde-oscuro);
+}
+
+.select-wrapper i {
+    color: var(--verde-oscuro);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.select-wrapper select,
+.select-wrapper input {
+    width: 100%;
+    background: transparent;
+    font-size: 0.9rem;
+    color: var(--texto-principal);
+}
+
+.select-wrapper select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.btn-clear {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--verde-oscuro);
+    color: var(--texto-claro);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 13px 28px;
+    border-radius: var(--radio-sm);
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.btn-clear:hover {
+    background-color: var(--verde-oscuro-hover);
+}
+
+/* -----------------------------------------------------
+5. Explora por actividad/categoría
+----------------------------------------------------- */
+.actividades-section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 130px 24px 60px;
+}
+
+.actividades-section h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    padding-left: 14px;
+    border-left: 4px solid var(--dorado);
+}
+
+.actividades-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 16px;
+}
+
+.actividades-grid li {
+    min-width: 0;
+}
+
+.actividad-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--blanco);
+    border: 1px solid var(--borde-suave);
+    border-radius: var(--radio-md);
+    padding: 16px 8px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.actividad-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--sombra-suave);
+    border-color: var(--dorado-claro);
+}
+
+.actividad-card i {
+    font-size: 1.6rem;
+    color: var(--verde-oscuro);
+}
+
+.actividad-card img,
+.actividad-card svg {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    flex-shrink: 0;
+    filter: brightness(0) saturate(100%) invert(0.13) sepia(1) saturate(20) hue-rotate(140deg) brightness(0.6);
+}
+
+.actividad-card span {
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-align: center;
+    line-height: 1.2;
+}
+
+/* -----------------------------------------------------
+6. Tours destacados
+----------------------------------------------------- */
+.tours-destacados {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 20px 24px 50px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 28px;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    padding-left: 14px;
+    border-left: 4px solid var(--dorado);
+}
+
+.ver-todos {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--verde-oscuro);
+    transition: gap 0.2s ease;
+}
+
+.ver-todos:hover {
+    gap: 10px;
+}
+
+.tours-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+}
+
+.tour-card {
+    background-color: var(--blanco);
+    border-radius: var(--radio-lg);
+    overflow: hidden;
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tour-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--sombra-media);
+}
+
+.tour-card figure {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.tour-card figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tour-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background-color: rgba(5, 43, 30, 0.85);
+    color: var(--texto-claro);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: var(--radio-pill);
+}
+
+.btn-favorito {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radio-sm);
+    background-color: var(--blanco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.2s ease;
+}
+
+.btn-favorito:hover {
+    transform: scale(1.1);
+}
+
+.btn-favorito img {
+    width: 16px;
+    height: 16px;
+}
+
+.tour-card-content {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.tour-card-content h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.tour-ubicacion {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--texto-secundario);
+}
+
+.tour-ubicacion img {
+    width: 13px;
+    height: 13px;
+}
+
+.tour-card-content > p:not(.tour-ubicacion) {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+    line-height: 1.45;
+    margin-bottom: 4px;
+}
+
+.tour-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 0.8rem;
+    color: var(--texto-secundario);
+    margin-bottom: 6px;
+}
+
+.tour-meta li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tour-meta li::before {
+    font-family: "Font Awesome 7 Free";
+    font-weight: 400;
+    color: var(--texto-secundario);
+}
+
+.tour-meta li:first-child::before {
+    content: "\f017"; /* fa-clock */
+}
+
+.tour-meta li:last-child::before {
+    content: "\f0c0"; /* fa-users */
+    font-weight: 900;
+}
+
+.tour-precio {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 8px;
+    border-top: 1px solid var(--borde-suave);
+}
+
+.tour-precio p {
+    font-size: 0.78rem;
+    color: var(--texto-secundario);
+}
+
+.precio {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--texto-principal);
+}
+
+.rating [aria-hidden="true"] {
+    color: var(--dorado);
+}
+
+.reviews {
+    font-weight: 400;
+    color: var(--texto-secundario);
+}
+
+/* Paginación tipo carrusel */
+.carrusel-paginacion {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.carrusel-paginacion button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--borde-suave);
+    transition: background-color 0.2s ease, width 0.2s ease;
+}
+
+.carrusel-paginacion button[aria-current="true"] {
+    background-color: var(--verde-oscuro);
+    width: 22px;
+    border-radius: var(--radio-pill);
+}
+
+/* -----------------------------------------------------
+7. ¿Por qué visitar Costa Rica?
+----------------------------------------------------- */
+.por-que-visitar {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 30px 24px 50px;
+}
+
+.por-que-visitar h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 28px;
+    padding-left: 14px;
+    border-left: 4px solid var(--dorado);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: var(--beige-verdoso);
+    border-radius: var(--radio-md);
+    padding: 16px;
+    overflow: hidden;
+}
+
+.stat-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: var(--radio-sm);
+    flex-shrink: 0;
+}
+
+.stat-number {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    line-height: 1.1;
+}
+
+.stat-label {
+    font-size: 0.82rem;
+    color: var(--texto-secundario);
+    margin-top: 2px;
+}
+
+/* -----------------------------------------------------
+8. Sobre la plataforma
+----------------------------------------------------- */
+.sobre-plataforma {
+    max-width: var(--max-width);
+    margin: 0 auto 60px;
+    background-color: var(--beige-verdoso);
+    border-radius: var(--radio-lg);
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    align-items: center;
+    padding: 36px;
+}
+
+.sobre-plataforma figure {
+    width: 100%;
+}
+
+.sobre-plataforma figure img {
+    width: 100%;
+    max-width: 220px;
+    margin: 0 auto;
+}
+
+.plataforma-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.plataforma-content > p {
+    font-size: 0.92rem;
+    color: var(--texto-secundario);
+    line-height: 1.6;
+    max-width: 640px;
+    margin-bottom: 24px;
+}
+
+.plataforma-features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.plataforma-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.plataforma-features img {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+}
+
+.plataforma-features p {
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+    line-height: 1.3;
+}
+
+.plataforma-features strong {
+    display: block;
+    color: var(--texto-principal);
+    font-weight: 600;
+}
+
+/* -----------------------------------------------------
+9. Footer
+----------------------------------------------------- */
+.site-footer {
+    background-color: var(--verde-oscuro);
+    color: rgba(255, 255, 255, 0.85);
+    padding: 56px 24px 24px;
+}
+
+
+.footer-container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr; 
+    gap: 40px;
+    padding-bottom: 36px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-brand > a.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+    text-decoration: none; /* Evita subrayados en el logo */
+}
+
+.footer-brand > a.logo img {
+    width: 38px;
+    height: 38px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    color: var(--texto-claro);
+}
+
+.logo-text strong {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+.logo-text small {
+    font-size: 0.72rem;
+    opacity: 0.7;
+}
+
+.footer-brand > p {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    max-width: 300px; 
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+
+.footer-column h2 {
+    color: var(--texto-claro);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.footer-column ul {
+    list-style: none; /* Asegura limpiar los puntitos de la lista */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-column nav a {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-column nav a:hover {
+    color: var(--texto-claro);
+}
+
+.footer-column address {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: normal;
+}
+
+.footer-column address p {
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+}
+
+.footer-column address a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+}
+
+.footer-column address a:hover {
+    color: var(--dorado-claro);
+}
+
+.copyright {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding-top: 20px;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+}
+
+/* -----------------------------------------------------
+10. Responsive
+----------------------------------------------------- */
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .actividades-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .tours-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .sobre-plataforma {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .sobre-plataforma figure img {
+        margin: 0 auto;
+    }
+
+    .plataforma-features {
+        grid-template-columns: repeat(2, 1fr);
+        text-align: left;
+    }
+
+    .footer-brand {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 32px;
+    }
+
+    .search-tour {
+        display: none;
+    }
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+    .site-header.container {
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .main-nav {
+        order: 3;
+        width: 100%;
+    }
+
+    .main-nav ul {
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .hero {
+        padding: 56px 16px 90px;
+        min-height: auto;
+    }
+
+    .hero-content h1 {
+        font-size: 1.9rem;
+    }
+
+    .hero-eyebrow {
+        font-size: 2.2rem;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        width: calc(100% - 32px);
+        margin: 30px auto -90px;
+    }
+
+    .filter-group {
+        min-width: 100%;
+    }
+
+    .btn-clear {
+        width: 100%;
+    }
+
+    .actividades-section {
+        padding-top: 150px;
+    }
+
+    .actividades-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .tours-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .plataforma-features {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-brand {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .actividades-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .header-actions {
+        gap: 14px;
+        flex-wrap: wrap;
+    }
+
+    .btn-carrito span,
+    .btn-favoritos span {
+        display: none;
+    }
+}
