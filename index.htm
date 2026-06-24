@@ -20,41 +20,40 @@
 
 <!--Contenido de la web-->
 <body>
-    <!-- Encabezado principal fijo del sitio -->
-    <header class="site-header">
+    <!--Encabezado principal fijo de la web-->
+    <header class = "site-header">
+    <!--Centrar el contenido de la pantalla-->    
+    <div class = "container site-header">
+        <!--Logotipo-->
+        <img src="assets/images/logoTuanisTrip.png" alt="Logo de Tuanis Trip">
 
-        <!-- Agrupa contenido del encabezado -->
-        <div class="container header-content">
-            <p class="logo"><strong>Tuanis Trip</strong></p>
-            <!--Se puede cambiar por la imagen del logo-->
-
-            <!-- Checkbox oculto para controlar el menú hamburguesa sin JavaScript -->
-            <input type="checkbox" id="menu-toggle" class="menu-toggle">
-
-            <!-- Botón visual del menú hamburguesa -->
-            <label for="menu-toggle" class="menu-button" aria-label="Abrir menú de navegación">
-                <span></span>
-                <span></span>
-                <span></span>
-            </label>
-
-            <!-- Navegación principal -->
-            <nav class="main-nav" aria-label="Navegación principal">
-                <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#tours">Tours</a></li>
-                    <li><a href="#guias">Información de guías</a></li>
-                    <li><a href="#registro-guia">Registrarse como guía</a></li>
-                </ul>
-            </nav>
-
-            <!-- Barra de busqueda -->
-            <div class = "buscador">
-                <label for="buscar">Buscar tour</label>
+        <!--Navegacion principal-->
+        <!--nav - utilizada para definir contenido que será la sección de navegación de la web-->
+        <nav class = "main-nav">
+            <!--Lista desordenada-->
+            <ul>
+                <li><a href="index.html">Incio</a></li>
+                <li><a href="tour.html">Tour</a></li>
+                <li><a información href="informacionGuia.html">información de guías</a></li>
+            </ul>
+        </nav>
+        
+        <!--Acciones del usuario-->
+        <div class="header-actions">
+            <!--Link para el carrito con icono-->
+            <a href="carrito.html" class="btn-carrito"><i class="fa-solid fa-cart-shopping"></i>Carrito</a>
+            <!--Link para los destinos favoritos con icono-->
+            <a href="favoritos.html" class="btn-favoritos"><i class="fa-regular fa-heart"></i>Favoritos</a>
+            <!--Barra de busqueda-->
+            <div class = "search-tour">
+                <i class="fa-solid fa-magnifying-glass"></i>
                 <input type="search" id = "buscar" placeholder="¿Que deseas explorar?">
             </div>
 
+            <!--Link para registrar el usuario-->
+            <a href="usuario.html" class="btn-usuario"><img src="assets/images/usuario 32 blanco.png" alt="Logo de usuario"></i></a>
         </div>
+    </div>
     </header>
 
     <!-- Imagen de bienvenida -->
