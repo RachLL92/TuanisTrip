@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description"
+        content="Tuanis Trip ofrece información sobre guías turísticos locales en Costa Rica.">
+        
+    <meta name="keywords"
+        content="guías turísticos, Costa Rica, turismo, naturaleza, aventura">
+        
+    <meta name="author" content="Tuanis Trip">
+    
+    <title>Tuanis Trip | Información de guías</title>
+    
+    <!-- Link para los iconos -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+        
+        <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Encabezado principal -->
+    <header class = "site-header">
+    <!--Centrar el contenido de la pantalla-->    
+    <div class = "container site-header">
+        <!--Logotipo-->
+        <img src="assets/images/logoTuanisTrip.png" alt="Logo de Tuanis Trip">
+
+        <!--Navegacion principal-->
+        <!--nav - utilizada para definir contenido que será la sección de navegación de la web-->
+        <nav class = "main-nav">
+            <!--Lista desordenada-->
+            <ul>
+                <li><a href="./index.html">Inicio</a></li>
+                <li><a href="tour.html">Tours</a></li>
+                <li><a class="active" href="guias.html">Información de guías</a></li>
+            </ul>
+        </nav>
+        
+        <!--Acciones del usuario-->
+        <div class="header-actions">
+            <!--Link para el carrito con icono-->
+            <a href="carrito.html" class="btn-carrito"><i class="fa-solid fa-cart-shopping"></i>Carrito</a>
+            <!--Link para los destinos favoritos con icono-->
+            <a href="favoritos.html" class="btn-favoritos"><i class="fa-regular fa-heart"></i>Favoritos</a>
+            <!--Barra de busqueda-->
+            <div class = "search-tour">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id = "buscar" placeholder="¿Que deseas explorar?">
+            </div>
+
+            <!--Link para registrar el usuario-->
+            <a href="usuario.html" class="btn-usuario"><img src="assets/images/usuario 32 blanco.png" alt="Logo de usuario"></i></a>
+        </div>
+    </div>
+    </header>
+
+        <!-- Contenido principal -->
+    <main>
+
+        <!-- Hero de la página -->
+        <section class="hero-guias">
+            
+            <div class="hero-guias-content">
+                
+                <span class="hero-script">
+                    
+                    Explora Costa Rica
+                
+                </span>
+                
+                <h1>
+                    Información de guías
+                </h1>
+                
+                <p>
+                    
+                    Conoce a nuestros guías locales, su experiencia,
+                    especialidad e idiomas para elegir el que mejor
+                    se adapte a tu próxima aventura.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Filtros de búsqueda -->
+        <section class="filtros-guias">
+            
+            <h2>Encuentra tu guía ideal</h2>
+            
+            <div class="filtros">
+                
+                <!-- Categoría -->
+                <div class="filter-group">
+                    
+                    <label for="categoria">Categoría</label>
+                    
+                    <div class="select-wrapper">
+                        
+                        <i class="fa-solid fa-table-cells-large"></i>
+                        
+                        <select id="categoria">
+                            
+                            <option value="">Todas las categorías</option>
+                            <option value="Playa">Playa</option>
+                            <option value="Montaña">Montaña</option>
+                            <option value="Ciudad">Ciudad</option>
+                        
+                        </select>
+                    
+                    </div>
+                
+                </div>
+                
+                <!-- Especialidad -->
+                <div class="filter-group">
+                    
+                    <label for="especialidad">Especialidad</label>
+                    
+                    <div class="select-wrapper">
+                        
+                        <i class="fa-solid fa-compass"></i>
+                        
+                        <select id="especialidad">
+                            
+                            <option value="">Todas las especialidades</option>
+                            <option value="Snorkel">Snorkel</option>
+                            <option value="Kayak">Kayak</option>
+                            <option value="Paseo en Catamarán">Paseo en Catamarán</option>
+                            <option value="Senderismo">Senderismo</option>
+                            <option value="Canopy">Canopy</option>
+                            <option value="Montar a caballo">Montar a caballo</option>
+                            <option value="City Tour">City Tour</option>
+                            <option value="Tour Gastronómico">Tour Gastronómico</option>
+                            <option value="Tour Histórico y Cultural">Tour Histórico y Cultural</option>
+                        
+                        </select>
+                    
+                    </div>
+                
+                </div>
+                
+                <!-- Idioma -->
+                <div class="filter-group">
+                    
+                    <label for="idioma">Idioma</label>
+                    
+                    <div class="select-wrapper">
+                        
+                        <i class="fa-solid fa-language"></i>
+                        
+                        <select id="idioma">
+                            
+                            <option value="">Todos los idiomas</option>
+                            <option value="Español">Español</option>
+                            <option value="Inglés">Inglés</option>
+                            <option value="Portugués">Portugués</option>
+                            <option value="Francés">Francés</option>
+                        
+                        </select>
+                    
+                    </div>
+                
+                </div>
+                
+                <!-- Botón de búsqueda -->
+                <button id="btnBuscarGuias" class="btn-clear">
+                    
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    
+                    Buscar guía
+                
+                </button>
+            
+            </div>
+        
+        </section>
+        
+        <!-- Sección de guías -->
+        <section class="guias-section">
+            
+            <!-- Encabezado -->
+            <div class="section-header">
+                
+                <h2>Guías disponibles</h2>
+            
+            </div>
+            
+            <!-- Las tarjetas se cargarán automáticamente desde guias.json -->
+            <div id="contenedorGuias" class="guias-grid">
+
+                
+            </div>
+
+        </section>
+
+    </main>
+    
+        <!-- Pie de página -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/Logounico.png" alt="Logo de Tuanis Trip">
+                    <span class="logo-text">
+                        <strong>Tuanis Trip</strong>
+                        <small>Tours &amp; Guías Turísticos</small>
+                    </span>
+                </a>
+                <p>Conectamos viajeros con las mejores experiencias en Costa Rica. Apoyamos a guías locales y al turismo sostenible.</p>
+            </div>
+
+            <nav class="footer-column" aria-labelledby="footer-enlaces-heading">
+                <h2 id="footer-enlaces-heading">Enlaces rápidos</h2>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="guias.html">Información</a></li>
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                </ul>
+            </nav>
+
+            <section class="footer-column" aria-labelledby="footer-contacto-heading">
+                <h2 id="footer-contacto-heading">Contacto</h2>
+                <address>
+                    <p>Correo: <a href="mailto:contacto@tuanistrip.com">contacto@tuanistrip.com</a></p>
+                    <p>Alajuela, Costa Rica</p>
+                    <p>Tel: <a href="tel:+50600000000">+506 0000 0000</a></p>
+                </address>
+            </section>
+
+        </div> <p class="copyright">
+            <small>&copy; 2026 Tuanis Trip. Todos los derechos reservados.</small>
+        </p>
+    </footer>
+
+    <!-- JavaScript de la página -->
+    <script src="js/guias.js"></script>
+
+</body>
+
+</html>
