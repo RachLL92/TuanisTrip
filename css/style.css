@@ -25,6 +25,9 @@ Paleta de marca:
     --dorado-claro: #e0a85f;
     --dorado-oscuro: #a86f2c;
 
+    /* Estado de favorito activo (corazón) */
+    --rojo-favorito: #e0394f;
+
     /* Texto */
     --texto-principal: #1c2620;
     --texto-secundario: #5b665e;
@@ -151,11 +154,8 @@ input, select {
     opacity: 0.8;
 }
 
-/* Página activa del menú */
-.main-nav a.active {
-
+.main-nav a.activo {
     border-bottom: 2px solid var(--dorado-claro);
-
 }
 
 /* Acciones del header */
@@ -188,6 +188,20 @@ input, select {
 
 .btn-favoritos .fa-cart-shopping {
     order: -1;
+}
+
+.carrito-contador {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: var(--radio-pill);
+    background-color: var(--dorado);
+    color: var(--verde-oscuro);
+    font-size: 0.72rem;
+    font-weight: 700;
 }
 
 /* Barra de búsqueda en el header */
@@ -272,7 +286,6 @@ input, select {
     font-size: 3rem;
     color: var(--beige-verdoso);
     line-height: 1;
-    margin-bottom: 10px;
 }
 
 .hero-content p {
@@ -447,6 +460,17 @@ input, select {
     border-color: var(--dorado-claro);
 }
 
+.actividad-card.activo {
+    background-color: var(--beige-verdoso);
+    border-color: var(--dorado);
+    box-shadow: var(--sombra-suave);
+}
+
+.actividad-card.activo i,
+.actividad-card.activo span {
+    color: var(--dorado-oscuro);
+}
+
 .actividad-card i {
     font-size: 1.6rem;
     color: var(--verde-oscuro);
@@ -491,6 +515,13 @@ input, select {
     border-left: 4px solid var(--dorado);
 }
 
+.section-subtitulo {
+    padding-left: 18px;
+    margin-top: 4px;
+    font-size: 0.88rem;
+    color: var(--texto-secundario);
+}
+
 .ver-todos {
     display: inline-flex;
     align-items: center;
@@ -512,6 +543,7 @@ input, select {
 }
 
 .tour-card {
+    position: relative;
     background-color: var(--blanco);
     border-radius: var(--radio-lg);
     overflow: hidden;
@@ -552,6 +584,25 @@ input, select {
     border-radius: var(--radio-pill);
 }
 
+.tour-estado {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 5px 11px;
+    border-radius: var(--radio-pill);
+    color: var(--texto-claro);
+}
+
+.tour-estado--pocosCupos {
+    background-color: var(--dorado-oscuro);
+}
+
+.tour-estado--agotado {
+    background-color: #8a8a8a;
+}
+
 .btn-favorito {
     position: absolute;
     top: 12px;
@@ -571,9 +622,24 @@ input, select {
     transform: scale(1.1);
 }
 
-.btn-favorito img {
-    width: 16px;
-    height: 16px;
+.btn-favorito i {
+    font-size: 16px;
+    color: var(--texto-secundario);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-favorito.activo i {
+    color: var(--rojo-favorito);
+}
+
+.btn-favorito.activo {
+    animation: latido-favorito 0.3s ease;
+}
+
+@keyframes latido-favorito {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.25); }
+    100% { transform: scale(1); }
 }
 
 .tour-card-content {
@@ -675,6 +741,54 @@ input, select {
 .reviews {
     font-weight: 400;
     color: var(--texto-secundario);
+}
+
+.btn-carrito-tour {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 11px 0;
+    border-radius: var(--radio-sm);
+    background-color: var(--verde-oscuro);
+    color: var(--texto-claro);
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-carrito-tour:hover {
+    background-color: var(--verde-oscuro-hover);
+}
+
+.btn-carrito-tour.agregado {
+    background-color: var(--dorado);
+    color: var(--verde-oscuro);
+}
+
+.btn-carrito-tour:disabled {
+    background-color: var(--borde-suave);
+    color: var(--texto-secundario);
+    cursor: not-allowed;
+}
+
+/* Estado vacío / cargando de cualquier grilla de tours */
+.sin-resultados {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 60px 20px;
+    text-align: center;
+    color: var(--texto-secundario);
+}
+
+.sin-resultados i {
+    font-size: 2rem;
+    color: var(--dorado-claro);
 }
 
 /* Paginación tipo carrusel */
@@ -944,7 +1058,79 @@ input, select {
 }
 
 /* -----------------------------------------------------
-10. Responsive
+10. Página de tours (catálogo) — también sirve de patrón
+    para futuras páginas internas (informacionGuia, etc.)
+----------------------------------------------------- */
+.page-banner {
+    background-color: var(--verde-oscuro);
+    padding: 48px 24px;
+}
+
+.page-banner-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    color: var(--texto-claro);
+}
+
+.page-banner-content h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.page-banner-content p {
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 560px;
+}
+
+.barra-filtros {
+    max-width: var(--max-width);
+    margin: 28px auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.barra-filtros-botones {
+    display: flex;
+    gap: 12px;
+}
+
+/* Botón de acción secundaria (Quitar filtros junto al principal) */
+.btn-secundario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: transparent;
+    color: var(--verde-oscuro);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 24px;
+    border: 1.5px solid var(--verde-oscuro);
+    border-radius: var(--radio-sm);
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.btn-secundario:hover {
+    background-color: var(--beige-verdoso);
+}
+
+/* En tours.html no hay tarjeta flotante que compensar,
+   así que la sección de actividades no necesita el
+   padding-top extra que sí usa index.html.
+   (Cubre los dos nombres: barra-filtros era el original,
+   filtros-tours es el que se usa ahora). */
+.barra-filtros + .actividades-section,
+.filtros-tours + .actividades-section {
+    padding-top: 20px;
+}
+
+/* -----------------------------------------------------
+11. Responsive
 ----------------------------------------------------- */
 
 /* Tablets */
@@ -1030,6 +1216,24 @@ input, select {
         width: 100%;
     }
 
+    .btn-secundario {
+        width: 100%;
+    }
+
+    .barra-filtros-botones {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .barra-filtros {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .page-banner-content h1 {
+        font-size: 1.5rem;
+    }
+
     .actividades-section {
         padding-top: 150px;
     }
@@ -1094,7 +1298,7 @@ linear-gradient(
     rgba(5, 43, 30, 0.05) 40%,
     rgba(5, 43, 30, 0.35) 100%
 ),
-url("../assets/images/BannerGuias.png");
+url("../assets/images/bannerGuias.png");
         
     background-size: cover;
     background-position: center;
@@ -1463,4 +1667,139 @@ url("../assets/images/BannerGuias.png");
 
 }
 
+}
+
+/* -----------------------------------------------------
+11. Información de Tours
+----------------------------------------------------- */
+.hero-tours {
+    position: relative;
+    background-image: linear-gradient(
+    180deg,
+    rgba(5, 43, 30, 0.15) 0%,
+    rgba(5, 43, 30, 0.05) 40%,
+    rgba(5, 43, 30, 0.35) 100%),
+        url('../assets/images/BannerTours.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    padding: 40px 24px;
+}
+
+.hero-tours-content {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    color: var(--texto-claro);
+    text-align: left;
+    padding-bottom: 60px;
+}
+
+.hero-tours-content h1 {
+    font-size: 2.6rem;
+    margin-bottom: 18px;
+}
+
+.hero-tours-content p {
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 650px;
+}
+
+/* =====================================================
+Bordes un poco más redondeados en general
+(afecta selects y botones en todo el sitio, para que
+combine con lo que ya hizo tu compañera en Guías)
+===================================================== */
+:root {
+    --radio-sm: 12px; /* antes 8px */
+}
+
+/* =====================================================
+Filtros de Tours — mismo patrón que .filtros-guias
+Tarjeta blanca flotante que sube sobre .hero-tours con
+margin negativo, mostrando esquinas redondeadas.
+===================================================== */
+.filtros-tours {
+    position: relative;
+    max-width: var(--max-width);
+    margin: -55px auto 80px;
+    background: var(--blanco);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-media);
+    padding: 28px;
+    z-index: 10;
+}
+
+.filtros-tours h2 {
+    margin-bottom: 24px;
+    font-size: 1.35rem;
+    font-weight: 700;
+    padding-left: 16px;
+    border-left: 4px solid var(--dorado);
+}
+
+/* Reutiliza la grilla ".filtros" que ya tiene tu compañera:
+aquí van 3 selects (Provincia, Tipo, Orden) y los botones
+en su propia fila, alineados a la derecha. */
+.filtros-tours .filtros {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.filtros-tours .barra-filtros-botones {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* Botones más redondeados solo dentro de esta tarjeta
+(no afecta el botón del index ni el de "sin resultados") */
+.filtros-tours .btn-clear,
+.filtros-tours .btn-secundario {
+    height: 56px;
+    border-radius: 12px;
+}
+
+.btn-secundario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 24px;
+    background: transparent;
+    color: var(--verde-oscuro);
+    font-weight: 600;
+    border: 1.5px solid var(--verde-oscuro);
+    border-radius: var(--radio-sm);
+    white-space: nowrap;
+    transition: background-color .2s ease;
+}
+
+.btn-secundario:hover {
+    background-color: var(--beige-verdoso);
+}
+
+@media (max-width: 1024px) {
+    .filtros-tours .filtros {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .filtros-tours {
+        margin: -40px auto 60px;
+        width: calc(100% - 32px);
+    }
+
+    .filtros-tours .filtros {
+        grid-template-columns: 1fr;
+    }
+
+    .filtros-tours .barra-filtros-botones {
+        flex-direction: column;
+        align-items: stretch;
+    }
 }
