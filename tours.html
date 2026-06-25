@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Explora el catálogo completo de tours de Tuanis Trip: filtra por provincia, tipo y actividad, y agrega tus favoritos al carrito.">
+    <meta name="keywords"
+        content="guia turistico, Costa Rica, turismo, tours, naturaleza, fauna">
+    <meta name="author" content="Tuanis Trip">
+    <title>Tuanis Trip | Tours</title>
+    <!--Link para los iconos-->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<!--Contenido de la web-->
+<body>
+    <!--Encabezado principal fijo de la web-->
+    <header class = "site-header">
+    <div class = "container site-header">
+        <img src="assets/images/logoTuanisTrip.png" alt="Logo de Tuanis Trip">
+
+        <nav class = "main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="tours.html" class="activo">Tours</a></li>
+                <li><a href="guias.html">Información de guías</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="carrito.html" class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i>Carrito
+                <span class="carrito-contador">0</span>
+            </a>
+            <a href="favoritos.html" class="btn-favoritos"><i class="fa-regular fa-heart"></i>Favoritos</a>
+            <div class = "search-tour">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id = "buscar" placeholder="¿Que deseas explorar?">
+            </div>
+            <a href="usuario.html" class="btn-usuario"><img src="assets/images/usuario 32 blanco.png" alt="Logo de usuario"></a>
+        </div>
+    </div>
+    </header>
+
+    <main>
+        <!-- Banner de la página -->
+        <section class="hero-tours">
+            <div class="hero-tours-content">
+                <span class="hero-script">
+                    Tu próxima aventura
+                </span>
+                <h1>Todos los tours</h1>
+                <p> 
+                    Filtra por provincia, tipo o actividad y agrega tus aventuras favoritas al carrito.
+                </p>
+            </div>
+        </section>
+
+        <!-- Filtros del catálogo -->
+        <section class="filtros-tours">
+            <h2>Encuentra tu tour ideal</h2>
+            <div class="filtros">
+                <div class="filter-group">
+                    <label for="filtroProvinciaTours">Provincia</label>
+                    <div class="select-wrapper"><i class="fa-solid fa-location-dot"></i>
+                        <select id="filtroProvinciaTours">
+                            <option value>Todas las provincias</option>
+                            <option value="san-jose">San José</option>
+                            <option value="alajuela">Alajuela</option>
+                            <option value="cartago">Cartago</option>
+                            <option value="heredia">Heredia</option>
+                            <option value="guanacaste">Guanacaste</option>
+                            <option value="puntarenas">Puntarenas</option>
+                            <option value="limon">Limón</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="filtroTipoTours">Tipo</label>
+                    <div class="select-wrapper"><i class="fa-solid fa-table-cells-large"></i>
+                        <select id="filtroTipoTours">
+                            <option value>Todos los tipos</option>
+                            <option value="montaña">Montaña</option>
+                            <option value="playa">Playa</option>
+                            <option value="ciudad">Ciudad</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <label for="ordenTours">Ordenar por</label>
+                    <div class="select-wrapper"><i class="fa-solid fa-arrow-down-wide-short"></i>
+                        <select id="ordenTours">
+                            <option value="recomendados">Recomendados</option>
+                            <option value="precioAsc">Precio: menor a mayor</option>
+                            <option value="precioDesc">Precio: mayor a menor</option>
+                            <option value="rating">Mejor calificados</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="barra-filtros-botones">
+                    <button type="button" id="btnBuscarTours" class="btn-clear">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Buscar tour
+                    </button>
+                    <button type="button" class="btn-secundario btn-limpiar-filtros">
+                        <i class="fa-solid fa-filter-circle-xmark"></i>
+                        Quitar filtros
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filtro rápido por actividad -->
+        <section class="actividades-section">
+            <h2 id="actividades-heading-tours">Filtrar por actividad</h2>
+
+            <ul class="actividades-grid">
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="senderismo">
+                        <i class="fa-solid fa-person-hiking"></i>
+                        <span>Senderismo</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="montarCaballo">
+                        <i class="fa-solid fa-horse"></i>
+                        <span>Montar a caballo</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="snorkel">
+                        <i class="fa-solid fa-fish"></i>
+                        <span>Snorkel</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="catamaran">
+                        <i class="fa-solid fa-ship"></i>
+                        <span>Paseo en Catamarán</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="canopy">
+                        <i class="fa-solid fa-tree"></i>
+                        <span>Canopy</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="cityTour">
+                        <i class="fa-solid fa-tree-city"></i>
+                        <span>City Tour</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="tourGastronomico">
+                        <i class="fa-solid fa-utensils"></i>
+                        <span>Tour Gastronómico</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="tourHistoricoCultural">
+                        <i class="fa-solid fa-masks-theater"></i>
+                        <span>Tour Histórico y Cultural</span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="actividad-card" data-categoria="kayak">
+                        <i class="fa-solid fa-sailboat"></i>
+                        <span>Kayak</span>
+                    </button>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Catálogo, lo llena tours.js usando data/tours.json -->
+        <section class="tours-destacados">
+            <div class="section-header">
+                <div>
+                    <h2 id="catalogo-heading">Todos los tours</h2>
+                    <p id="catalogo-subtitulo" class="section-subtitulo">Cargando catálogo...</p>
+                </div>
+            </div>
+
+            <ul class="tours-grid" id="catalogoTours">
+                <li class="sin-resultados">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>Cargando tours...</p>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/Logounico.png" alt="Logo de Tuanis Trip">
+                    <span class="logo-text">
+                        <strong>Tuanis Trip</strong>
+                        <small>Tours &amp; Guías Turísticos</small>
+                    </span>
+                </a>
+                <p>Conectamos viajeros con las mejores experiencias en Costa Rica. Apoyamos a guías locales y al turismo sostenible.</p>
+            </div>
+
+            <nav class="footer-column" aria-labelledby="footer-enlaces-heading">
+                <h2 id="footer-enlaces-heading">Enlaces rápidos</h2>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="guias.html">Información de guías</a></li>
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                    <li><a href="carrito.html">Carrito</a></li>
+                </ul>
+            </nav>
+
+            <section class="footer-column" aria-labelledby="footer-contacto-heading">
+                <h2 id="footer-contacto-heading">Contacto</h2>
+                <address>
+                    <p>Correo: <a href="mailto:contacto@tuanistrip.com">contacto@tuanistrip.com</a></p>
+                    <p>Alajuela, Costa Rica</p>
+                    <p>Tel: <a href="tel:+50600000000">+506 0000 0000</a></p>
+                </address>
+            </section>
+
+        </div> <p class="copyright">
+            <small>&copy; 2026 Tuanis Trip. Todos los derechos reservados.</small>
+        </p>
+    </footer>
+
+    <!-- JavaScript externo (en orden: utilidades antes que lo que las usa) -->
+    <script src="js/utilidades.js"></script>
+    <script src="js/favoritos.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/tarjetas-tour.js"></script>
+    <script src="js/tours.js"></script>
+
+</body>
+
+</html>
