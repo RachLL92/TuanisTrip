@@ -151,8 +151,11 @@ input, select {
     opacity: 0.8;
 }
 
-.main-nav li:first-child a {
+/* Página activa del menú */
+.main-nav a.active {
+
     border-bottom: 2px solid var(--dorado-claro);
+
 }
 
 /* Acciones del header */
@@ -269,6 +272,7 @@ input, select {
     font-size: 3rem;
     color: var(--beige-verdoso);
     line-height: 1;
+    margin-bottom: 10px;
 }
 
 .hero-content p {
@@ -1071,4 +1075,392 @@ input, select {
     .btn-favoritos span {
         display: none;
     }
+}
+
+/* -----------------------------------------------------
+11. Información de guías
+----------------------------------------------------- */
+
+/* Hero */
+
+.hero-guias {
+    
+    position: relative;
+    
+    background-image:
+linear-gradient(
+    180deg,
+    rgba(5, 43, 30, 0.15) 0%,
+    rgba(5, 43, 30, 0.05) 40%,
+    rgba(5, 43, 30, 0.35) 100%
+),
+url("../assets/images/BannerGuias.png");
+        
+    background-size: cover;
+    background-position: center;
+    
+    min-height: 420px;
+    
+    display: flex;
+    align-items: center;
+    
+    padding: 40px 24px;
+
+}
+
+.hero-guias-content {
+    
+    width: 100%;
+    max-width: var(--max-width);
+    
+    margin: 0 auto;
+    
+    color: var(--texto-claro);
+    
+    text-align: left;
+    
+    padding-bottom: 60px;
+
+}
+
+.hero-guias-content h1 {
+    
+    font-size: 2.6rem;
+    
+    margin-bottom: 18px;
+
+}
+
+.hero-guias-content p {
+    
+    font-size: 1rem;
+    
+    line-height: 1.7;
+    
+    max-width: 650px;
+
+}
+
+.hero-script {
+    display: block;
+    font-family: var(--font-script);
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--beige-verdoso);
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+
+/* Filtros */
+
+.filtros-guias{
+    
+    position: relative;
+    
+    max-width: var(--max-width);
+    
+    margin: -55px auto 80px;
+    
+    background: var(--blanco);
+    
+    border-radius: var(--radio-lg);
+    
+    box-shadow: var(--sombra-media);
+    
+    padding: 28px;
+    
+    z-index: 10;
+
+}
+
+.filtros-guias h2{
+    
+    margin-bottom: 24px;
+    
+    font-size: 1.35rem;
+    
+    font-weight: 700;
+    
+    padding-left: 16px;
+    
+    border-left: 4px solid var(--dorado);
+
+}
+
+.filtros{
+    
+    display: grid;
+    
+    grid-template-columns: repeat(4,1fr);
+    
+    gap: 18px;
+    
+    align-items: end;
+
+}
+
+/* Campos de los filtros */
+
+.filter-group{
+    
+    display:flex;
+    
+    flex-direction:column;
+    
+    gap:10px;
+
+}
+
+.filter-group label{
+    
+    font-size:.95rem;
+    
+    font-weight:600;
+    
+    color:var(--texto-secundario);
+
+}
+
+.select-wrapper{
+    
+    display:flex;
+    
+    align-items:center;
+    
+    gap:12px;
+    
+    padding:15px 18px;
+    
+    border:1px solid var(--borde-suave);
+    
+    border-radius:12px;
+    
+    background:var(--blanco);
+
+}
+
+.select-wrapper i{
+    
+    color:var(--verde-oscuro);
+
+}
+
+.select-wrapper select{
+    
+    width:100%;
+    
+    border:none;
+    
+    outline:none;
+    
+    background:none;
+    
+    cursor:pointer;
+    
+    font-size:.95rem;
+
+}
+
+/* Botón */
+
+#btnBuscarGuias{
+    
+    display:flex;
+    
+    align-items:center;
+    
+    justify-content:center;
+    
+    gap:10px;
+    
+    height:56px;
+    
+    background:var(--verde-oscuro);
+    
+    color:white;
+    
+    font-weight:600;
+    
+    border-radius:12px;
+    
+    transition:.25s;
+
+}
+
+#btnBuscarGuias:hover{
+
+    background:var(--verde-oscuro-hover);
+
+}
+
+
+/* Sección */
+
+.guias-section {
+    
+    max-width: var(--max-width);
+    
+    margin: 0 auto;
+    
+    padding: 0 24px 70px;
+
+}
+
+
+/* Grid */
+
+.guias-grid {
+    
+    display: grid;
+    
+    grid-template-columns: repeat(3, 1fr);
+    
+    gap: 28px;
+
+}
+
+
+/* Tarjeta */
+
+.guia-card {
+    
+    background: var(--blanco);
+    
+    border-radius: var(--radio-lg);
+    
+    overflow: hidden;
+    
+    box-shadow: var(--sombra-suave);
+    
+    transition: .25s ease;
+    
+    max-width: 360px;
+    
+    margin: 0 auto;
+
+}
+
+.guia-card:hover {
+    
+    transform: translateY(-6px);
+    
+    box-shadow: var(--sombra-media);
+
+}
+
+.guia-card img {
+    
+    width: 100%;
+    
+    height: 240px;
+    
+    object-fit: cover;
+
+}
+
+
+/* Información */
+
+.guia-info {
+    
+    padding: 16px;
+
+}
+
+.guia-info h3 {
+
+    color: var(--dorado-oscuro);
+
+    font-size: 1rem;
+    
+    font-weight: 700;
+    
+    margin-bottom: 10px;
+
+}
+
+.guia-info p {
+    
+    margin-bottom: 8px;
+    
+    color: var(--texto-secundario);
+    
+    font-size: .9rem;
+    
+    line-height:1.4;
+
+}
+
+.guia-info strong {
+    
+    color: var(--texto-principal);
+
+}
+
+
+/* Responsive */
+
+@media (max-width:1024px){
+    
+    .guias-grid{
+        
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .filtros{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+}
+
+@media (max-width:768px){
+    
+    .hero-guias{
+        
+        min-height:320px;
+        
+        padding:60px 16px;
+
+    }
+    
+    .hero-guias-content{
+        
+        text-align:center;
+
+    }
+
+    .hero-guias-content h1{
+        
+        font-size:2rem;
+
+    }
+
+    .hero-guias-content p{
+        
+        max-width:100%;
+
+    }
+
+    .filtros{
+        
+        flex-direction:column;
+        
+        align-items:stretch;
+
+    }
+
+    .guias-grid{
+        
+        grid-template-columns:1fr;
+
+    }
+
+    .filtros{
+
+    grid-template-columns:1fr;
+
+}
+
 }
