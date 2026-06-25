@@ -34,7 +34,7 @@
             <!--Lista desordenada-->
             <ul>
                 <li><a class="active" href="index.html">Inicio</a></li>
-                <li><a href="tour.html">Tours</a></li>
+                <li><a href="tours.html">Tours</a></li>
                 <li><a href="guias.html">Información de guías</a></li>
             </ul>
         </nav>
@@ -42,9 +42,14 @@
         <!--Acciones del usuario-->
         <div class="header-actions">
             <!--Link para el carrito con icono-->
-            <a href="carrito.html" class="btn-carrito"><i class="fa-solid fa-cart-shopping"></i>Carrito</a>
+            <a href="carrito.html" class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i>Carrito
+                <span class="carrito-contador">0</span>
+            </a>
+
             <!--Link para los destinos favoritos con icono-->
-            <a href="favoritos.html" class="btn-favoritos"><i class="fa-regular fa-heart"></i>Favoritos</a>
+            <a href="favoritos.html" class="btn-favoritos">
+                <i class="fa-regular fa-heart"></i>Favoritos</a>
             <!--Barra de busqueda-->
             <div class = "search-tour">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -169,7 +174,7 @@
                 <li>
                     <button type="button"
                             class="actividad-card"
-                            data-categoria="canopy">
+                            data-categoria="catamaran">
 
                         <i class="fa-solid fa-ship"></i>
                         <span>Paseo en Catamarán</span>
@@ -241,142 +246,25 @@
         <section class="tours-destacados">
                 <!--Encabezado de la sección-->
                 <div class="section-header">
-                    <h2 id="destacados-heading">Tours destacados</h2>
+                    <div>
+                        <h2 id="destacados-heading">Tours destacados</h2>
+                        <p id="destacados-subtitulo" class="section-subtitulo">
+                            Las experiencias favoritas de quienes ya turistiaron con nosotros
+                        </p>
+                    </div>
                     <a href="tours.html" class="ver-todos">
                         Ver todos los tours
                         <span aria-hidden="true">→</span>
                     </a>
                 </div>
-                <!--Boton para añadir a favoritos-->
-                            <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
-                                <img src="assets/images/heart-regular.png" alt="Icono de corazón">
-                            </button>
+
                 <!--Lista de tours-->
-                <ul class="tours-grid">
-                <li>
-                    <article class="tour-card">
-                        <!--Figure - Se usar para agrupar contenido visual-->
-                        <figure>
-                            <img src="assets/images/catarata.png" alt="Catarata rodeada de bosque en La Fortuna">
-                            <!-- Etiqueta de "Catergoria"-->
-                            <span class="tour-badge">Senderismo</span>
-                        </figure>
-                        <!--Contenido del tour -->
-                        <div class="tour-card-content">
-                            <!--Titulo del tour-->
-                            <h3>Catarata La Fortuna</h3>
-                            <p class="tour-ubicacion">
-                                <i class="fa-solid fa-location-dot"></i>
-                                La Fortuna, Alajuela
-                            </p>
-                            <p>Disfruta de una caminata hasta la impresionante catarata y sus alrededores.</p>
-                            <ul class="tour-meta">
-                                <li>5 horas</li>
-                                <li>2 - 10 personas</li>
-                            </ul>
-                            <div class="tour-precio">
-                                <p><span class="precio">₡35,000</span> por persona</p>
-                                <p class="rating" aria-label="Calificación 4.8 de 5, 120 reseñas">
-                                    <span aria-hidden="true">★</span> 4.8 <span class="reviews">(120)</span>
-                                </p>
-                            </div>
-                        </div>
-                        <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
-                        <img src="assets/images/heart-regular.png" alt="Icono de corazón">
-                        </button>   
-                    </article>
-                </li>
-
-                <li>
-                    <article class="tour-card">
-                        <figure>
-                            <img src="assets/images/isla tortuga.png" alt="Playa de Isla Tortuga">
-                            <span class="tour-badge">Snorkel</span>
-                        </figure>
-                        <div class="tour-card-content">
-                            <h3>Isla Tortuga</h3>
-                            <p class="tour-ubicacion">
-                                <i class="fa-solid fa-location-dot"></i>
-                                Puntarenas
-                            </p>
-                            <p>Excursión en catamarán con snorkel, playa blanca y almuerzo incluido.</p>
-                            <ul class="tour-meta">
-                                <li>8 horas</li>
-                                <li>2 - 20 personas</li>
-                            </ul>
-                            <div class="tour-precio">
-                                <p><span class="precio">₡60,000</span> por persona</p>
-                                <p class="rating" aria-label="Calificación 4.7 de 5, 89 reseñas">
-                                    <span aria-hidden="true">★</span> 4.7 <span class="reviews">(89)</span>
-                                </p>
-                            </div>
-                        </div>
-                        <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
-                        <img src="assets/images/heart-regular.png" alt="Icono de corazón">
-                        </button>  
-                    </article>
-                </li>
-
-                <li>
-                    <article class="tour-card">
-                        <figure>
-                            <img src="assets/images/volcan arenal y termales.png" alt="Volcán Arenal rodeado de bosque tropical">
-                            <span class="tour-badge">Senderismo</span>
-                        </figure>
-                        <div class="tour-card-content">
-                            <h3>Volcán Arenal + Termales</h3>
-                            <p class="tour-ubicacion">
-                                <i class="fa-solid fa-location-dot"></i>
-                                La Fortuna, Alajuela
-                            </p>
-                            <p>Visita el volcán Arenal y relájate en aguas termales naturales.</p>
-                            <ul class="tour-meta">
-                                <li>10 horas</li>
-                                <li>2 - 15 personas</li>
-                            </ul>
-                            <div class="tour-precio">
-                                <p><span class="precio">₡75,000</span> por persona</p>
-                                <p class="rating" aria-label="Calificación 4.9 de 5, 150 reseñas">
-                                    <span aria-hidden="true">★</span> 4.9 <span class="reviews">(150)</span>
-                                </p>
-                            </div>
-                        </div>
-                        <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
-                        <img src="assets/images/heart-regular.png" alt="Icono de corazón">
-                        </button>  
-                    </article>
-                </li>
-
-                <li>
-                    <article class="tour-card">
-                        <figure>
-                            <img src="assets/images/canopy.png" alt="Persona en canopy sobre el bosque nuboso de Monteverde">
-                            <span class="tour-badge">Canopy</span>
-                        </figure>
-                        <div class="tour-card-content">
-                            <h3>Aventura en Monteverde</h3>
-                            <p class="tour-ubicacion">
-                                <i class="fa-solid fa-location-dot"></i>
-                                Monteverde, Puntarenas
-                            </p>
-                            <p>Canopy, puentes colgantes y caminatas en el bosque nuboso.</p>
-                            <ul class="tour-meta">
-                                <li>6 horas</li>
-                                <li>2 - 8 personas</li>
-                            </ul>
-                            <div class="tour-precio">
-                                <p><span class="precio">₡55,000</span> por persona</p>
-                                <p class="rating" aria-label="Calificación 4.6 de 5, 70 reseñas">
-                                    <span aria-hidden="true">★</span> 4.6 <span class="reviews">(70)</span>
-                                </p>
-                            </div>
-                        </div>
-                        <button type="button" class="btn-favorito" aria-label="Agregar a favoritos" aria-pressed="false">
-                        <img src="assets/images/heart-regular.png" alt="Icono de corazón">
-                        </button>  
-                    </article>
-                </li>
-            </ul>
+                <ul class="tours-grid" id="toursDestacados">
+                    <li class="sin-resultados">
+                        <i class="fa-solid fa-spinner fa-spin"></i>
+                        <p>Cargando tours...</p>
+                    </li>
+                </ul>
         </section>
 
         <!-- Información de CR -->
