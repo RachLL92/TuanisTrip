@@ -44,12 +44,13 @@
                 <li><a href="./index.html">Inicio</a></li>
                 <li><a href="tours.html">Tours</a></li>
                 <li><a class="activo" href="guias.html">Información de guías</a></li>
+                <li><a href="reserva.html">Reserva</a></li>
             </ul>
         </nav>
         
         <!--Acciones del usuario-->
         <div class="header-actions">
-            <a href="carrito.html" class="btn-carrito">
+            <a href="reserva.html" class="btn-carrito">
                 <i class="fa-solid fa-cart-shopping"></i>Carrito
                 <span class="carrito-contador">0</span>
             </a>
@@ -173,13 +174,16 @@
                 </div>
                 
                 <!-- Botón de búsqueda -->
-                <button id="btnBuscarGuias" class="btn-clear">
-                    
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    
-                    Buscar guía
-                
-                </button>
+                <div class="barra-filtros-botones">
+                    <button type="button" id="btnBuscarGuias" class="btn-clear">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Buscar guía
+                    </button>
+                    <button type="button" class="btn-secundario btn-limpiar-filtros">
+                        <i class="fa-solid fa-filter-circle-xmark"></i>
+                        Quitar filtros
+                    </button>
+                </div>
             
             </div>
         
@@ -191,7 +195,10 @@
             <!-- Encabezado -->
             <div class="section-header">
                 
-                <h2>Guías disponibles</h2>
+                <div>
+                    <h2>Guías disponibles</h2>
+                    <p id="guias-subtitulo" class="section-subtitulo">Cargando guías...</p>
+                </div>
             
             </div>
             
@@ -217,7 +224,8 @@
                         <small>Tours &amp; Guías Turísticos</small>
                     </span>
                 </a>
-                <p>Conectamos viajeros con las mejores experiencias en Costa Rica. Apoyamos a guías locales y al turismo sostenible.</p>
+                <p>Conectamos viajeros con las mejores experiencias en Costa Rica. 
+                    Apoyamos a guías locales y al turismo sostenible.</p>
             </div>
 
             <nav class="footer-column" aria-labelledby="footer-enlaces-heading">
@@ -225,9 +233,9 @@
                 <ul>
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="tours.html">Tours</a></li>
-                    <li><a href="guias.html">Información</a></li>
+                    <li><a href="guias.html">Información de guías</a></li>
+                    <li><a href="reserva.html">Reserva</a></li>
                     <li><a href="favoritos.html">Favoritos</a></li>
-                    <li><a href="carrito.html">Carrito</a></li>
                 </ul>
             </nav>
 

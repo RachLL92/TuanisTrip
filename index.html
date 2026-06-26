@@ -36,13 +36,14 @@
                 <li><a class="activo" href="index.html">Inicio</a></li>
                 <li><a href="tours.html">Tours</a></li>
                 <li><a href="guias.html">Información de guías</a></li>
+                <li><a href="reserva.html">Reserva</a></li>
             </ul>
         </nav>
         
         <!--Acciones del usuario-->
         <div class="header-actions">
             <!--Link para el carrito con icono-->
-            <a href="carrito.html" class="btn-carrito">
+            <a href="reserva.html" class="btn-carrito">
                 <i class="fa-solid fa-cart-shopping"></i>Carrito
                 <span class="carrito-contador">0</span>
             </a>
@@ -57,7 +58,8 @@
             </div>
 
             <!--Link para registrar el usuario-->
-            <a href="usuario.html" class="btn-usuario"><img src="assets/images/usuario 32 blanco.png" alt="Logo de usuario"></a>
+            <a href="usuario.html" class="btn-usuario">
+                <img src="assets/images/usuario 32 blanco.png" alt="Logo de usuario"></a>
         </div>
     </div>
     </header>
@@ -258,7 +260,7 @@
                     </a>
                 </div>
 
-                <!--Lista de tours-->
+                <!--Lista de tours cargados por el archivo de JSON-->
                 <ul class="tours-grid" id="toursDestacados">
                     <li class="sin-resultados">
                         <i class="fa-solid fa-spinner fa-spin"></i>
@@ -357,8 +359,8 @@
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="tours.html">Tours</a></li>
                     <li><a href="guias.html">Información de guías</a></li>
+                    <li><a href="reserva.html">Reserva</a></li>
                     <li><a href="favoritos.html">Favoritos</a></li>
-                    <li><a href="carrito.html">Carrito</a></li>
                 </ul>
             </nav>
 
@@ -376,6 +378,7 @@
         </p>
     </footer>
     
+    <!-- JavaScript externo -->
     <script src="js/utilidades.js"></script>
     <script src="js/favoritos.js"></script>
     <script src="js/carrito.js"></script>
