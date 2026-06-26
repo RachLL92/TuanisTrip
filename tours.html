@@ -31,11 +31,12 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="tours.html" class="activo">Tours</a></li>
                 <li><a href="guias.html">Información de guías</a></li>
+                <li><a href="reserva.html">Reserva</a></li>
             </ul>
         </nav>
 
         <div class="header-actions">
-            <a href="carrito.html" class="btn-carrito">
+            <a href="reserva.html" class="btn-carrito">
                 <i class="fa-solid fa-cart-shopping"></i>Carrito
                 <span class="carrito-contador">0</span>
             </a>
@@ -120,7 +121,7 @@
             </div>
         </section>
 
-        <!-- Filtro rápido por actividad -->
+        <!-- Filtro por actividad -->
         <section class="actividades-section">
             <h2 id="actividades-heading-tours">Filtrar por actividad</h2>
 
@@ -182,7 +183,7 @@
             </ul>
         </section>
 
-        <!-- Catálogo, lo llena tours.js usando data/tours.json -->
+        <!-- Catálogo, lo llena tours.js usando tours.json -->
         <section class="tours-destacados">
             <div class="section-header">
                 <div>
@@ -191,6 +192,7 @@
                 </div>
             </div>
 
+            <!-- Mensaje de carga temporal, tours.js lo reemplaza con las tarjetas reales -->
             <ul class="tours-grid" id="catalogoTours">
                 <li class="sin-resultados">
                     <i class="fa-solid fa-spinner fa-spin"></i>
@@ -221,8 +223,8 @@
                     <li><a href="index.html">Inicio</a></li>
                     <li><a href="tours.html">Tours</a></li>
                     <li><a href="guias.html">Información de guías</a></li>
+                    <li><a href="reserva.html">Reserva</a></li>
                     <li><a href="favoritos.html">Favoritos</a></li>
-                    <li><a href="carrito.html">Carrito</a></li>
                 </ul>
             </nav>
 
@@ -240,7 +242,7 @@
         </p>
     </footer>
 
-    <!-- JavaScript externo (en orden: utilidades antes que lo que las usa) -->
+    <!-- JavaScript externo -->
     <script src="js/utilidades.js"></script>
     <script src="js/favoritos.js"></script>
     <script src="js/carrito.js"></script>

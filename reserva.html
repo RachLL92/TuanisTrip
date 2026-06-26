@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Revisa tu carrito, completa tus datos y confirma tu reserva de tours con Tuanis Trip.">
+    <meta name="keywords"
+        content="reserva, carrito, Costa Rica, turismo, tours">
+    <meta name="author" content="Tuanis Trip">
+    <title>Tuanis Trip | Reserva</title>
+    <!--Link para los iconos-->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<!--Contenido de la web-->
+<body>
+    <!--Encabezado principal fijo de la web-->
+    <header class = "site-header">
+    <div class = "container site-header">
+        <img src="assets/images/logoTuanisTrip.png" alt="Logo de Tuanis Trip">
+
+        <nav class = "main-nav">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="tours.html">Tours</a></li>
+                <li><a href="guias.html">Información de guías</a></li>
+                <li><a href="reserva.html" class="activo">Reserva</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="reserva.html" class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i>Carrito
+                <span class="carrito-contador">0</span>
+            </a>
+            <a href="favoritos.html" class="btn-favoritos"><i class="fa-regular fa-heart"></i>Favoritos</a>
+            <div class = "search-tour">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id = "buscar" placeholder="¿Que deseas explorar?">
+            </div>
+            <a href="usuario.html" class="btn-usuario"><img src="assets/images/usuario 32 blanco.png" alt="Logo de usuario"></a>
+        </div>
+    </div>
+    </header>
+
+    <main>
+        <!-- Banner de la página -->
+        <section class="hero-reserva">
+            <div class="hero-reserva-content">
+                <span class="hero-script">Ya casi está listo</span>
+                <h1>Finaliza tu reserva</h1>
+                <p>Revisa los tours que elegiste, completa tus datos y confirma tu próxima aventura en Costa Rica.</p>
+            </div>
+        </section>
+
+        <!-- Sección del carrito-->
+        <section class="reserva-carrito-section">
+            <div class="section-header">
+                <div>
+                    <h2 id="carrito-heading">Tu carrito</h2>
+                    <!-- pintarCarrito() cambia este texto: Tu carrito está vacío o tales tours en tu carrito -->
+                    <p id="carrito-subtitulo" class="section-subtitulo">Cargando carrito...</p>
+                </div>
+            </div>
+
+            <div id="carritoReserva" class="lista-carrito">
+                <div class="sin-resultados">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>Cargando carrito...</p>
+                </div>
+            </div>
+
+            <div class="carrito-total-bar">
+                <span>Total</span>
+                <strong id="totalCarritoReserva">₡0</strong>
+            </div>
+        </section>
+
+        <!-- Formulario de datos del cliente -->
+        <section class="reserva-form-section">
+            <div class="section-header">
+                <div>
+                    <h2>Tus datos</h2>
+                    <p class="section-subtitulo">Completa el formulario para confirmar tu reserva</p>
+                </div>
+            </div>
+
+            <form id="formReserva" class="formulario-reserva" novalidate>
+
+                <div class="campo-formulario">
+                    <label for="nombreReserva">Nombre completo</label>
+                    <input type="text" id="nombreReserva" name="nombre" placeholder="Ej. María Pérez Solano" required>
+                    <p class="mensaje-error" aria-live="polite"></p>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="correoReserva">Correo electrónico</label>
+                    <input type="email" id="correoReserva" name="correo" placeholder="nombre@correo.com" required>
+                    <p class="mensaje-error" aria-live="polite"></p>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="telefonoReserva">Teléfono (opcional)</label>
+                    <input type="tel" id="telefonoReserva" name="telefono" placeholder="8888-8888">
+                    <p class="mensaje-error" aria-live="polite"></p>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="fechaReserva">Fecha deseada</label>
+                    <input type="date" id="fechaReserva" name="fecha" required>
+                    <p class="mensaje-error" aria-live="polite"></p>
+                </div>
+
+                <div class="campo-formulario campo-formulario--ancho">
+                    <label for="mensajeReserva">Mensaje adicional (opcional)</label>
+                    <textarea id="mensajeReserva" name="mensaje" rows="3" placeholder="¿Alguna indicación especial para tu reserva?"></textarea>
+                </div>
+
+                <div class="formulario-acciones">
+                    <button type="submit" id="btnConfirmarReserva" class="btn-clear" disabled>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Confirmar reserva
+                    </button>
+                    <p id="mensajeFormularioReserva" class="mensaje-formulario" aria-live="polite"></p>
+                </div>
+
+            </form>
+        </section>
+
+        <!--Mis reservas (gestión de lo ya guardado)-->
+        <section class="reserva-lista-section">
+            <div class="section-header">
+                <div>
+                    <h2 id="reservas-heading">Mis reservas</h2>
+                    <p id="reservas-subtitulo" class="section-subtitulo">Cargando reservas...</p>
+                </div>
+
+                <div class="acciones-lista-reservas">
+                    <button type="button" id="btnLimpiarReservas" class="btn-secundario">
+                        <i class="fa-solid fa-trash-can"></i>
+                        Cancelar todas
+                    </button>
+
+                    <div id="confirmarLimpiarReservas" class="confirmar-accion" hidden>
+                        <p>¿Cancelar todas tus reservas guardadas? Esta acción no se puede deshacer.</p>
+                        <div class="confirmar-accion-botones">
+                            <button type="button" id="btnConfirmarLimpiar" class="btn-clear btn-peligro">Sí, cancelar todas</button>
+                            <button type="button" id="btnCancelarLimpiar" class="btn-secundario">No, mantenerlas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="listaReservas" class="lista-reservas">
+                <div class="sin-resultados">
+                    <i class="fa-solid fa-spinner fa-spin"></i>
+                    <p>Cargando reservas...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/Logounico.png" alt="Logo de Tuanis Trip">
+                    <span class="logo-text">
+                        <strong>Tuanis Trip</strong>
+                        <small>Tours &amp; Guías Turísticos</small>
+                    </span>
+                </a>
+                <p>Conectamos viajeros con las mejores experiencias en Costa Rica. Apoyamos a guías locales y al turismo sostenible.</p>
+            </div>
+
+            <nav class="footer-column" aria-labelledby="footer-enlaces-heading">
+                <h2 id="footer-enlaces-heading">Enlaces rápidos</h2>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="guias.html">Información de guías</a></li>
+                    <li><a href="reserva.html">Reserva</a></li>
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                </ul>
+            </nav>
+
+            <section class="footer-column" aria-labelledby="footer-contacto-heading">
+                <h2 id="footer-contacto-heading">Contacto</h2>
+                <address>
+                    <p>Correo: <a href="mailto:contacto@tuanistrip.com">contacto@tuanistrip.com</a></p>
+                    <p>Alajuela, Costa Rica</p>
+                    <p>Tel: <a href="tel:+50600000000">+506 0000 0000</a></p>
+                </address>
+            </section>
+
+        </div> <p class="copyright">
+            <small>&copy; 2026 Tuanis Trip. Todos los derechos reservados.</small>
+        </p>
+    </footer>
+
+    <!-- JavaScript externo -->
+    <script src="js/utilidades.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/reserva.js"></script>
+
+</body>
+
+</html>

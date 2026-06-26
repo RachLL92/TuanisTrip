@@ -1120,10 +1120,10 @@ input, select {
 }
 
 /* En tours.html no hay tarjeta flotante que compensar,
-   así que la sección de actividades no necesita el
-   padding-top extra que sí usa index.html.
-   (Cubre los dos nombres: barra-filtros era el original,
-   filtros-tours es el que se usa ahora). */
+así que la sección de actividades no necesita el
+padding-top extra que sí usa index.html.
+(Cubre los dos nombres: barra-filtros era el original,
+filtros-tours es el que se usa ahora). */
 .barra-filtros + .actividades-section,
 .filtros-tours + .actividades-section {
     padding-top: 20px;
@@ -1602,6 +1602,13 @@ url("../assets/images/bannerGuias.png");
 
 }
 
+/* Misma estrella dorada que usa .rating en las tarjetas de tours */
+.rating-star {
+
+    color: var(--dorado);
+
+}
+
 
 /* Responsive */
 
@@ -1742,18 +1749,8 @@ margin negativo, mostrando esquinas redondeadas.
 }
 
 /* Reutiliza la grilla ".filtros" que ya tiene tu compañera:
-aquí van 3 selects (Provincia, Tipo, Orden) y los botones
-en su propia fila, alineados a la derecha. */
-.filtros-tours .filtros {
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.filtros-tours .barra-filtros-botones {
-    grid-column: 1 / -1;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-}
+mismo patrón de 4 columnas (3 selects + botones) que usa
+.filtros-guias, para que ambas páginas se vean alineadas. */
 
 /* Botones más redondeados solo dentro de esta tarjeta
 (no afecta el botón del index ni el de "sin resultados") */
@@ -1801,5 +1798,438 @@ en su propia fila, alineados a la derecha. */
     .filtros-tours .barra-filtros-botones {
         flex-direction: column;
         align-items: stretch;
+    }
+}
+
+/* -----------------------------------------------------
+12. Página de Reserva (carrito + formulario + gestión)
+----------------------------------------------------- */
+
+/* Hero, mismo patrón de .hero-tours pero sin foto: solo
+degradado en verde de marca (no había banner para esta
+página todavía). */
+.hero-reserva {
+    background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde-oscuro-hover) 100%);
+    min-height: 260px;
+    display: flex;
+    align-items: center;
+    padding: 40px 24px;
+}
+
+.hero-reserva-content {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    color: var(--texto-claro);
+}
+
+.hero-reserva-content h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.hero-reserva-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    opacity: .9;
+}
+
+/* Secciones genéricas de la página (carrito / formulario / lista) */
+.reserva-carrito-section,
+.reserva-form-section,
+.reserva-lista-section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.reserva-form-section {
+    background-color: var(--beige-verdoso);
+}
+
+/* --- Sección 1: carrito --- */
+.lista-carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.item-carrito {
+    display: grid;
+    grid-template-columns: 90px 1fr auto auto auto;
+    align-items: center;
+    gap: 18px;
+    background: var(--blanco);
+    border-radius: var(--radio-md);
+    box-shadow: var(--sombra-suave);
+    padding: 16px;
+}
+
+.item-carrito img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: var(--radio-sm);
+}
+
+.item-carrito-info h3 {
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.item-carrito-precio {
+    font-size: .85rem;
+    color: var(--texto-secundario);
+}
+
+.item-carrito-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.btn-cantidad {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radio-pill);
+    border: 1.5px solid var(--verde-oscuro);
+    background: transparent;
+    color: var(--verde-oscuro);
+    font-size: 1.1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color .2s ease;
+}
+
+.btn-cantidad:hover {
+    background-color: var(--beige-verdoso);
+}
+
+.item-carrito-subtotal {
+    font-weight: 700;
+    color: var(--verde-oscuro);
+    white-space: nowrap;
+}
+
+.btn-eliminar-item {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radio-pill);
+    border: none;
+    background: transparent;
+    color: var(--texto-secundario);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.btn-eliminar-item:hover {
+    background-color: #fbe7e9;
+    color: var(--rojo-favorito);
+}
+
+.carrito-total-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--borde-suave);
+    font-size: 1.1rem;
+}
+
+.carrito-total-bar strong {
+    font-size: 1.6rem;
+    color: var(--verde-oscuro);
+}
+
+/* --- Sección 2: formulario --- */
+.formulario-reserva {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background: var(--blanco);
+    border-radius: var(--radio-lg);
+    box-shadow: var(--sombra-media);
+    padding: 28px;
+}
+
+.campo-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo-formulario--ancho {
+    grid-column: 1 / -1;
+}
+
+.campo-formulario label {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--texto-secundario);
+}
+
+.campo-formulario input,
+.campo-formulario textarea {
+    border: 1.5px solid var(--borde-suave);
+    border-radius: var(--radio-sm);
+    padding: 12px 16px;
+    font-family: var(--font-principal);
+    font-size: .95rem;
+    color: var(--texto-principal);
+    background-color: var(--blanco-hueso);
+}
+
+.campo-formulario textarea {
+    resize: vertical;
+}
+
+.campo-formulario input:focus,
+.campo-formulario textarea:focus {
+    outline: 2px solid var(--dorado);
+    outline-offset: 1px;
+}
+
+.campo-formulario input.input-invalido,
+.campo-formulario textarea.input-invalido {
+    border-color: var(--rojo-favorito);
+}
+
+.mensaje-error {
+    min-height: 16px;
+    font-size: .8rem;
+    color: var(--rojo-favorito);
+}
+
+.formulario-acciones {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.formulario-acciones .btn-clear:disabled {
+    background-color: var(--borde-suave);
+    color: var(--texto-secundario);
+    cursor: not-allowed;
+}
+
+.mensaje-formulario {
+    font-size: .9rem;
+    font-weight: 600;
+}
+
+.mensaje-exito-formulario {
+    color: var(--verde-oscuro);
+}
+
+.mensaje-error-formulario {
+    color: var(--rojo-favorito);
+}
+
+/* --- Sección 3: mis reservas --- */
+.acciones-lista-reservas {
+    position: relative;
+}
+
+.confirmar-accion {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    z-index: 5;
+    width: 280px;
+    background: var(--blanco);
+    border-radius: var(--radio-md);
+    box-shadow: var(--sombra-fuerte);
+    padding: 18px;
+}
+
+.confirmar-accion p {
+    font-size: .85rem;
+    color: var(--texto-secundario);
+    margin-bottom: 14px;
+}
+
+.confirmar-accion-botones {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-peligro {
+    background-color: var(--rojo-favorito);
+}
+
+.btn-peligro:hover {
+    background-color: #c12a3d;
+}
+
+.lista-reservas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.reserva-card {
+    background: var(--blanco);
+    border-radius: var(--radio-md);
+    box-shadow: var(--sombra-suave);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.reserva-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.reserva-card-header h3 {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+}
+
+.reserva-fecha {
+    font-size: .82rem;
+    color: var(--texto-secundario);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.reserva-estado {
+    font-size: .75rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: var(--radio-pill);
+    white-space: nowrap;
+}
+
+.reserva-estado--pendiente {
+    background-color: var(--beige-verdoso);
+    color: var(--verde-oscuro);
+}
+
+.reserva-estado--confirmada {
+    background-color: var(--verde-oscuro);
+    color: var(--texto-claro);
+}
+
+.reserva-items {
+    list-style: none;
+    font-size: .85rem;
+    color: var(--texto-secundario);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.reserva-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--borde-suave);
+    flex-wrap: wrap;
+}
+
+.reserva-total {
+    font-size: .9rem;
+}
+
+.reserva-acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.reserva-acciones .btn-secundario,
+.reserva-acciones .btn-eliminar-reserva {
+    padding: 8px 16px;
+    font-size: .82rem;
+}
+
+.btn-eliminar-reserva {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radio-pill);
+    border: 1.5px solid var(--borde-suave);
+    background: transparent;
+    color: var(--texto-secundario);
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+}
+
+.btn-eliminar-reserva:hover {
+    background-color: #fbe7e9;
+    color: var(--rojo-favorito);
+    border-color: #fbe7e9;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .lista-reservas {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .formulario-reserva {
+        grid-template-columns: 1fr;
+    }
+
+    .item-carrito {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        grid-template-columns: none;
+    }
+
+    .item-carrito img {
+        width: 64px;
+        height: 64px;
+    }
+
+    .item-carrito-info {
+        flex: 1 1 calc(100% - 76px);
+        min-width: 140px;
+    }
+
+    .item-carrito-cantidad {
+        order: 3;
+    }
+
+    .item-carrito-subtotal {
+        order: 4;
+        margin-left: auto;
+    }
+
+    .btn-eliminar-item {
+        order: 5;
+    }
+
+    .confirmar-accion {
+        width: 100%;
+        right: auto;
+        left: 0;
+    }
+
+    .reserva-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .reserva-acciones {
+        justify-content: flex-end;
     }
 }

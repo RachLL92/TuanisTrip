@@ -14,7 +14,7 @@
         "personasMax": 10,
         "rating": 4.8,
         "resenas": 120,
-        "imagen": "assets/images/catarata.png"
+        "imagen": "assets/images/tours/CatarataFortunatour.png"
     },
     {
         "id": 2,
@@ -31,7 +31,7 @@
         "personasMax": 15,
         "rating": 4.9,
         "resenas": 150,
-        "imagen": "assets/images/volcan-arenal-termales.png"
+        "imagen": "assets/images/tours/VolcanArenalTour.png"
     },
     {
         "id": 3,
@@ -48,7 +48,7 @@
         "personasMax": 20,
         "rating": 4.7,
         "resenas": 89,
-        "imagen": "assets/images/isla-tortuga.png"
+        "imagen": "assets/images/tours/SnorkelTour2.png"
     },
     {
         "id": 4,
@@ -65,7 +65,7 @@
         "personasMax": 25,
         "rating": 4.6,
         "resenas": 64,
-        "imagen": "assets/images/ImagenPlaya.png"
+        "imagen": "assets/images/tours/CatamaranBahiaBallenaTour.jpg"
     },
     {
         "id": 5,
@@ -82,7 +82,7 @@
         "personasMax": 8,
         "rating": 4.6,
         "resenas": 70,
-        "imagen": "assets/images/Canopy.png"
+        "imagen": "assets/images/tours/CanopyMonteverdeTour.png"
     },
     {
         "id": 6,
@@ -99,7 +99,7 @@
         "personasMax": 12,
         "rating": 4.5,
         "resenas": 45,
-        "imagen": "assets/images/safari.png"
+        "imagen": "assets/images/tours/MontarCaballoTour.png"
     },
     {
         "id": 7,
@@ -116,7 +116,7 @@
         "personasMax": 15,
         "rating": 4.3,
         "resenas": 58,
-        "imagen": "assets/images/turista.png"
+        "imagen": "assets/images/tours/SanJoseTour.jpg"
     },
     {
         "id": 8,
@@ -133,7 +133,7 @@
         "personasMax": 10,
         "rating": 4.4,
         "resenas": 33,
-        "imagen": "assets/images/quad.png"
+        "imagen": "assets/images/tours/TourGastronomico.png"
     },
     {
         "id": 9,
@@ -150,7 +150,7 @@
         "personasMax": 12,
         "rating": 4.5,
         "resenas": 27,
-        "imagen": "assets/images/turista.png"
+        "imagen": "assets/images/tours/FortinHerediaTour.jpg"
     },
     {
         "id": 10,
@@ -167,7 +167,7 @@
         "personasMax": 10,
         "rating": 4.6,
         "resenas": 38,
-        "imagen": "assets/images/isla-tortuga.png"
+        "imagen": "assets/images/tours/ManglarTour.jpg"
     },
     {
         "id": 11,
@@ -184,7 +184,7 @@
         "personasMax": 14,
         "rating": 4.4,
         "resenas": 21,
-        "imagen": "assets/images/ImagenPlaya.png"
+        "imagen": "assets/images/tours/SnorkelTour.jpg"
     },
     {
         "id": 12,
@@ -201,6 +201,6 @@
         "personasMax": 8,
         "rating": 4.7,
         "resenas": 19,
-        "imagen": "assets/images/safari.png"
+        "imagen": "assets/images/tours/AtardecerTamarindoTour.jpg"
     }
 ]
