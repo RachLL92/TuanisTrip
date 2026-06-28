@@ -124,6 +124,9 @@ function mostrarGuias(listaGuias) {
         contenedorGuias.appendChild(tarjeta);
     });
 
+    // Restaurar el estado de los favoritos
+    aplicarEstadoFavoritos();
+
 }
 
 // ------------------------------------------------------
