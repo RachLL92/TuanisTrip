@@ -1,86 +1,142 @@
 /* =====================================================
 favoritos.js
-Lógica COMPARTIDA de favoritos (corazón).
-Se usa en index.html y en tours.html, por eso vive
-en su propio archivo y no se repite el código.
 
-Guarda en localStorage un arreglo con los ID de los
-tours marcados como favoritos. Ej: [1, 5, 10]
+Lógica compartida de favoritos (corazón).
+
+Se utiliza en las tarjetas de tours y de guías.
+
+Guarda en localStorage los elementos marcados como
+favoritos para conservar la información aunque el
+usuario cierre o recargue la página.
+
 ===================================================== */
 
 const CLAVE_FAVORITOS = "tuanisTripFavoritos";
 
-/* Lee el arreglo de favoritos guardado en el navegador.
+/* Lee la lista de favoritos guardada.
 Si no existe nada todavía, devuelve un arreglo vacío. */
 function obtenerFavoritos() {
+
     const datos = localStorage.getItem(CLAVE_FAVORITOS);
+
     return datos ? JSON.parse(datos) : [];
+
 }
 
-/* Sobrescribe el arreglo de favoritos en localStorage. */
+/* Guarda la lista de favoritos en localStorage. */
 function guardarFavoritos(listaFavoritos) {
+
     localStorage.setItem(CLAVE_FAVORITOS, JSON.stringify(listaFavoritos));
+
 }
 
-/* Indica si un tour (por id) ya está en favoritos. */
-function esFavorito(idTour) {
-    return obtenerFavoritos().includes(idTour);
+/* Indica si un tour o guía ya está en favoritos. */
+function esFavorito(tipo, id) {
+
+    return obtenerFavoritos().some(favorito =>
+        favorito.tipo === tipo &&
+        favorito.id === id
+    );
+
 }
 
-/* Agrega o quita un tour de favoritos y devuelve el
-nuevo estado (true = quedó como favorito). */
-function alternarFavorito(idTour) {
+/* Agrega o elimina un favorito y devuelve
+el nuevo estado (true = quedó como favorito). */
+function alternarFavorito(tipo, id) {
+
     let favoritos = obtenerFavoritos();
 
-    if (favoritos.includes(idTour)) {
-        favoritos = favoritos.filter(id => id !== idTour);
-    } else {
-        favoritos.push(idTour);
+    const existe = favoritos.some(favorito =>
+        favorito.tipo === tipo &&
+        favorito.id === id
+    );
+
+    if (existe) {
+
+        favoritos = favoritos.filter(favorito =>
+            !(favorito.tipo === tipo && favorito.id === id)
+        );
+
+    }
+
+    else {
+
+        favoritos.push({
+            tipo: tipo,
+            id: id
+        });
+
     }
 
     guardarFavoritos(favoritos);
-    return favoritos.includes(idTour);
+
+    return favoritos.some(favorito =>
+        favorito.tipo === tipo &&
+        favorito.id === id
+    );
+
 }
 
-/* Cambia la apariencia de UN botón de corazón según si
-el tour está en favoritos o no (clase + ícono + aria). */
+/* Cambia la apariencia de un botón de favorito
+(clase, ícono y atributo aria). */
 function pintarBotonFavorito(boton, activo) {
+
     boton.classList.toggle("activo", activo);
+
     boton.setAttribute("aria-pressed", String(activo));
 
     const icono = boton.querySelector("i");
+
     if (icono) {
+
         icono.classList.toggle("fa-regular", !activo);
+
         icono.classList.toggle("fa-solid", activo);
+
     }
+
 }
 
-/* Recorre TODOS los botones de favorito presentes en la
-página en este momento y los pinta según localStorage.
-Hay que llamarla de nuevo después de pintar tarjetas
-dinámicas (fetch + render), porque esos botones no
-existían cuando se cargó la página. */
+/* Recorre todos los botones de favoritos de la
+página y actualiza su apariencia según el
+contenido de localStorage. */
 function aplicarEstadoFavoritos() {
+
     document.querySelectorAll(".btn-favorito").forEach(boton => {
-        const idTour = Number(boton.dataset.tourId);
-        pintarBotonFavorito(boton, esFavorito(idTour));
+
+        const tipo = boton.dataset.tipo;
+
+        const id = Number(boton.dataset.id);
+
+        pintarBotonFavorito(
+            boton,
+            esFavorito(tipo, id)
+        );
+
     });
+
 }
 
-/* Delegación de eventos: en vez de poner un "click" en cada
-corazón (que puede no existir aún si se generó por JS),
-escuchamos los clics en todo el documento y revisamos si
-el clic vino de un botón ".btn-favorito". Así funciona
-también con tarjetas creadas dinámicamente desde el JSON. */
+/* Delegación de eventos.
+Detecta el clic sobre cualquier corazón, incluso
+si la tarjeta fue creada dinámicamente desde un
+archivo JSON. */
 document.addEventListener("click", (evento) => {
+
     const boton = evento.target.closest(".btn-favorito");
+
     if (!boton) return;
 
-    const idTour = Number(boton.dataset.tourId);
-    const quedoFavorito = alternarFavorito(idTour);
+    const tipo = boton.dataset.tipo;
+
+    const id = Number(boton.dataset.id);
+
+    const quedoFavorito = alternarFavorito(tipo, id);
+
     pintarBotonFavorito(boton, quedoFavorito);
+
 });
 
-/* Pinta el estado correcto en cuanto el HTML esté listo
-(cubre los botones que ya vienen escritos en el HTML). */
+/* Pinta el estado correcto de todos los botones
+cuando el HTML termina de cargarse. */
 document.addEventListener("DOMContentLoaded", aplicarEstadoFavoritos);

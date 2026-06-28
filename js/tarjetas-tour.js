@@ -78,7 +78,8 @@ function crearTarjetaTour(tour, mostrarBotonCarrito) {
                 </div>
                 <button type="button"
                         class="btn-favorito"
-                        data-tour-id="${tour.id}"
+                        data-tipo="tour"
+                        data-id="${tour.id}"
                         aria-label="Agregar a favoritos"
                         aria-pressed="false">
                     <i class="fa-regular fa-heart"></i>

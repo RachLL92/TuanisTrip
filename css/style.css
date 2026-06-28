@@ -163,6 +163,11 @@ input, select {
     display: flex;
     align-items: center;
     gap: 24px;
+
+    margin-left: 24px;
+    padding-left: 24px;
+
+    border-left: 1px solid rgba(210, 158, 82, 0.7);
 }
 
 .btn-carrito,
@@ -229,23 +234,6 @@ input, select {
 
 .search-tour input::placeholder {
     color: rgba(255, 255, 255, 0.6);
-}
-
-/* Botón / avatar de usuario */
-.btn-usuario {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.15);
-    flex-shrink: 0;
-}
-
-.btn-usuario img {
-    width: 18px;
-    height: 18px;
 }
 
 /* -----------------------------------------------------
@@ -540,6 +528,10 @@ input, select {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .tour-card {
@@ -1514,13 +1506,15 @@ url("../assets/images/bannerGuias.png");
 
 /* Grid */
 
-.guias-grid {
-    
-    display: grid;
-    
-    grid-template-columns: repeat(3, 1fr);
-    
-    gap: 28px;
+.guias-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3, 320px);
+
+    justify-content:start;
+
+    gap:28px;
 
 }
 
@@ -1550,6 +1544,22 @@ url("../assets/images/bannerGuias.png");
     transform: translateY(-6px);
     
     box-shadow: var(--sombra-media);
+
+}
+
+.guia-imagen{
+
+    position: relative;
+
+}
+
+.guia-imagen img{
+
+    width: 100%;
+
+    height: 240px;
+
+    object-fit: cover;
 
 }
 
@@ -1606,6 +1616,132 @@ url("../assets/images/bannerGuias.png");
 .rating-star {
 
     color: var(--dorado);
+
+}
+
+.btn-perfil{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:100%;
+
+    padding:12px;
+
+    background:var(--verde-oscuro);
+
+    color:var(--texto-claro);
+
+    border-radius:var(--radio-sm);
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    transition:
+        background-color .25s ease,
+        transform .25s ease;
+
+}
+
+.btn-perfil:hover{
+
+    background:var(--verde-oscuro-hover);
+
+    transform:translateY(-2px);
+
+}
+
+/* -----------------------------------------------------
+¿Por qué viajar con nuestros guías?
+----------------------------------------------------- */
+
+.porque-guias{
+
+    max-width:var(--max-width);
+
+    margin:0 auto;
+
+    padding:20px 24px 80px;
+
+}
+
+.porque-guias h2{
+
+    font-size:1.4rem;
+
+    font-weight:700;
+
+    margin-bottom:30px;
+
+    padding-left:14px;
+
+    border-left:4px solid var(--dorado);
+
+}
+
+.beneficios-guias{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:22px;
+
+}
+
+.beneficio-card{
+
+    background:var(--blanco);
+
+    border-radius:var(--radio-lg);
+
+    padding:28px 24px;
+
+    text-align:center;
+
+    box-shadow:var(--sombra-suave);
+
+    transition:.25s;
+
+}
+
+.beneficio-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:var(--sombra-media);
+
+}
+
+.beneficio-card i{
+
+    font-size:2rem;
+
+    color:var(--dorado);
+
+    margin-bottom:18px;
+
+}
+
+.beneficio-card h3{
+
+    margin-bottom:12px;
+
+    color:var(--verde-oscuro);
+
+}
+
+.beneficio-card p{
+
+    color:var(--texto-secundario);
+
+    font-size:.9rem;
+
+    line-height:1.6;
 
 }
 
@@ -1671,6 +1807,26 @@ url("../assets/images/bannerGuias.png");
     .filtros{
 
     grid-template-columns:1fr;
+
+}
+
+@media (max-width:1024px){
+
+    .beneficios-guias{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .beneficios-guias{
+
+        grid-template-columns:1fr;
+
+    }
 
 }
 
@@ -2232,4 +2388,84 @@ página todavía). */
     .reserva-acciones {
         justify-content: flex-end;
     }
+}
+
+/* -----------------------------------------------------
+13. Página de Favoritos
+----------------------------------------------------- */
+
+/* Hero */
+
+.hero-favoritos{
+
+    background:linear-gradient(
+        135deg,
+        var(--verde-oscuro) 0%,
+        var(--verde-oscuro-hover) 100%
+    );
+
+    min-height:260px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:40px 24px;
+
+}
+
+.hero-favoritos-content{
+
+    width:100%;
+
+    max-width:var(--max-width);
+
+    margin:0 auto;
+
+    color:var(--texto-claro);
+
+}
+
+.hero-favoritos-content h1{
+
+    font-size:2.2rem;
+
+    margin-bottom:10px;
+
+}
+
+.hero-favoritos-content p{
+
+    max-width:620px;
+
+    font-size:1rem;
+
+    line-height:1.6;
+
+}
+
+/* Secciones */
+
+.favoritos-section{
+
+    max-width:var(--max-width);
+
+    margin:0 auto;
+
+    padding:20px 24px 60px;
+
+}
+
+/* Botón Favoritos activo en el header */
+
+.btn-favoritos.activo{
+
+    color:var(--dorado);
+
+}
+
+.btn-favoritos.activo i{
+
+    color:var(--dorado);
+
 }
