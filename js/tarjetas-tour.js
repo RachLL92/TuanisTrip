@@ -1,16 +1,11 @@
-/* =====================================================
-tarjetas-tour.js
-Construye el HTML de una tarjeta de tour a partir de
-UN objeto que viene del archivo data/tours.json.
+/*tarjetas-tour.js
+Contiene las funciones encargadas de crear y mostrar
+las tarjetas de los tours
+También genera el botón para agregar al carrito y el
+estado vacío cuando no existen resultados*/
 
-Se usa tanto en home.js (sección "Tours destacados")
-como en tours.js (catálogo completo de tours.html),
-para no repetir el mismo HTML en dos archivos distintos.
-===================================================== */
-
-/* Nombres "bonitos" para mostrar en pantalla, a partir de
-los valores cortos que usamos como data-categoria en el
-HTML y en el JSON (ej: "tourGastronomico" -> "Tour Gastronómico"). */
+/* Convierte el nombre interno de la categoría en un
+texto más bonito para mostrar al usuario */
 const ETIQUETAS_CATEGORIA = {
     senderismo: "Senderismo",
     montarCaballo: "Cabalgata",
@@ -23,14 +18,17 @@ const ETIQUETAS_CATEGORIA = {
     kayak: "Kayak"
 };
 
+/* Textos que se muestran según el estado del tour */
 const ETIQUETAS_ESTADO = {
     pocosCupos: "Últimos cupos",
     agotado: "Agotado"
 };
 
-/* Construye el botón de "Agregar al carrito". Si el tour
-está agotado, el botón se deshabilita y avisa por qué. */
+/* Crea el botón para agregar un tour al carrito.
+Si el tour está agotado, el botón queda deshabilitado. */
 function crearBotonCarrito(tour) {
+
+    /* Verifica si el tour ya no tiene cupos */
     const agotado = tour.estado === "agotado";
 
     return `
@@ -43,9 +41,9 @@ function crearBotonCarrito(tour) {
         </button>`;
 }
 
-/* Construye la tarjeta completa de un tour.
-mostrarBotonCarrito: true solo en tours.html. */
+/* Construye la tarjeta completa de un tour */
 function crearTarjetaTour(tour, mostrarBotonCarrito) {
+     /* Obtiene el nombre de la categoría y del estado */
     const etiquetaCategoria = ETIQUETAS_CATEGORIA[tour.categoria] || tour.categoria;
     const etiquetaEstado = ETIQUETAS_ESTADO[tour.estado];
 
@@ -88,10 +86,10 @@ function crearTarjetaTour(tour, mostrarBotonCarrito) {
         </li>`;
 }
 
-/* Pinta un arreglo de tours dentro de un <ul> y deja un
-mensaje de "no hay resultados" cuando el arreglo viene
-vacío (estado vacío que pide la rúbrica). */
+/* Muestra una lista de tarjetas de tours dentro del
+contenedor recibido */
 function renderizarListaTours(contenedor, listaTours, mostrarBotonCarrito) {
+    /* Si no existen resultados, muestra un mensaje */
     if (listaTours.length === 0) {
         contenedor.innerHTML = `
             <li class="sin-resultados">
@@ -105,6 +103,7 @@ function renderizarListaTours(contenedor, listaTours, mostrarBotonCarrito) {
         return;
     }
 
+    /* Genera todas las tarjetas de los tours encontrados */
     contenedor.innerHTML = listaTours
         .map(tour => crearTarjetaTour(tour, mostrarBotonCarrito))
         .join("");

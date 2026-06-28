@@ -1,14 +1,10 @@
 /* =====================================================
 favoritos.js
-
 Lógica compartida de favoritos (corazón).
-
 Se utiliza en las tarjetas de tours y de guías.
-
 Guarda en localStorage los elementos marcados como
 favoritos para conservar la información aunque el
 usuario cierre o recargue la página.
-
 ===================================================== */
 
 const CLAVE_FAVORITOS = "tuanisTripFavoritos";

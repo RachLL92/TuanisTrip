@@ -59,15 +59,18 @@ Paleta de marca:
     box-sizing: border-box;
 }
 
+/*Hace que scroll sea suave y animado*/
 html {
     scroll-behavior: smooth;
 }
 
+/*Define los estilos generales del cuerpo de la página*/
 body {
     font-family: var(--font-principal);
     color: var(--texto-principal);
     background-color: var(--blanco-hueso);
     line-height: 1.5;
+    /*Suaviza la apariencia del texto en navegadores compatibles*/
     -webkit-font-smoothing: antialiased;
 }
 
@@ -76,22 +79,27 @@ img {
     display: block;
 }
 
+/*Elimina los estilos predeterminados de las listas*/
 ul {
     list-style: none;
 }
 
+/*Elimina el subrayado de los enlaces*/
 a {
     text-decoration: none;
     color: inherit;
 }
 
+/*Configuración general para todos los botones */
 button {
     font-family: inherit;
+    /*Cambia el cursor al pasar sobre el botón*/
     cursor: pointer;
     border: none;
     background: none;
 }
 
+/*Configuración general para campos de texto y listas desplegables*/
 input, select {
     font-family: inherit;
     font-size: 0.95rem;
@@ -101,6 +109,7 @@ input, select {
     background: transparent;
 }
 
+/* Centra el contenido de la página */
 .container {
     width: 100%;
     max-width: var(--max-width);
@@ -312,7 +321,7 @@ input, select {
 }
 
 /* -----------------------------------------------------
-4. Filtros de búsqueda (tarjeta flotante)
+4. Filtros de búsqueda
 ----------------------------------------------------- */
 .filters {
     max-width: var(--max-width);
@@ -399,7 +408,7 @@ input, select {
 }
 
 /* -----------------------------------------------------
-5. Explora por actividad/categoría
+5. Explora por actividad o categoría
 ----------------------------------------------------- */
 .actividades-section {
     max-width: var(--max-width);
@@ -628,9 +637,13 @@ input, select {
     animation: latido-favorito 0.3s ease;
 }
 
+
 @keyframes latido-favorito {
+    /* Tamaño normal al iniciar */
     0%   { transform: scale(1); }
+     /* Aumenta el tamaño para crear el efecto de latido */
     40%  { transform: scale(1.25); }
+    /* Regresa al tamaño original */
     100% { transform: scale(1); }
 }
 
@@ -1050,8 +1063,7 @@ input, select {
 }
 
 /* -----------------------------------------------------
-10. Página de tours (catálogo) — también sirve de patrón
-    para futuras páginas internas (informacionGuia, etc.)
+10. Página de tours (catálogo)
 ----------------------------------------------------- */
 .page-banner {
     background-color: var(--verde-oscuro);
@@ -1111,11 +1123,6 @@ input, select {
     background-color: var(--beige-verdoso);
 }
 
-/* En tours.html no hay tarjeta flotante que compensar,
-así que la sección de actividades no necesita el
-padding-top extra que sí usa index.html.
-(Cubre los dos nombres: barra-filtros era el original,
-filtros-tours es el que se usa ahora). */
 .barra-filtros + .actividades-section,
 .filtros-tours + .actividades-section {
     padding-top: 20px;
@@ -1124,7 +1131,6 @@ filtros-tours es el que se usa ahora). */
 /* -----------------------------------------------------
 11. Responsive
 ----------------------------------------------------- */
-
 /* Tablets */
 @media (max-width: 1024px) {
     .actividades-grid {
@@ -1278,7 +1284,6 @@ filtros-tours es el que se usa ahora). */
 ----------------------------------------------------- */
 
 /* Hero */
-
 .hero-guias {
     
     position: relative;
@@ -1349,7 +1354,6 @@ url("../assets/images/bannerGuias.png");
 
 
 /* Filtros */
-
 .filtros-guias{
     
     position: relative;
@@ -1397,7 +1401,6 @@ url("../assets/images/bannerGuias.png");
 }
 
 /* Campos de los filtros */
-
 .filter-group{
     
     display:flex;
@@ -1459,7 +1462,6 @@ url("../assets/images/bannerGuias.png");
 }
 
 /* Botón */
-
 #btnBuscarGuias{
     
     display:flex;
@@ -1492,7 +1494,6 @@ url("../assets/images/bannerGuias.png");
 
 
 /* Sección */
-
 .guias-section {
     
     max-width: var(--max-width);
@@ -1505,7 +1506,6 @@ url("../assets/images/bannerGuias.png");
 
 
 /* Grid */
-
 .guias-grid{
 
     display:grid;
@@ -1520,7 +1520,6 @@ url("../assets/images/bannerGuias.png");
 
 
 /* Tarjeta */
-
 .guia-card {
     
     background: var(--blanco);
@@ -1575,7 +1574,6 @@ url("../assets/images/bannerGuias.png");
 
 
 /* Información */
-
 .guia-info {
     
     padding: 16px;
@@ -1612,7 +1610,7 @@ url("../assets/images/bannerGuias.png");
 
 }
 
-/* Misma estrella dorada que usa .rating en las tarjetas de tours */
+
 .rating-star {
 
     color: var(--dorado);
@@ -1626,6 +1624,8 @@ url("../assets/images/bannerGuias.png");
     justify-content:center;
 
     align-items:center;
+
+    gap: 8px;
 
     width:100%;
 
@@ -1655,8 +1655,44 @@ url("../assets/images/bannerGuias.png");
 
 }
 
+.btn-perfil.activo {
+    background: var(--dorado-oscuro);
+}
+
+/* Panel con la descripción y el contacto del guía, que
+aparece/desaparece al hacer clic en "Ver perfil" */
+.guia-detalle-extra {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--borde-suave);
+    font-size: .85rem;
+    color: var(--texto-secundario);
+    animation: aparecerDetalleGuia .2s ease;
+}
+
+.guia-detalle-extra p {
+    margin-bottom: 8px;
+}
+
+.guia-contacto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--texto-principal);
+}
+
+.guia-contacto i {
+    color: var(--dorado);
+}
+
+@keyframes aparecerDetalleGuia {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* -----------------------------------------------------
-¿Por qué viajar con nuestros guías?
+12. ¿Por qué viajar con nuestros guías?
 ----------------------------------------------------- */
 
 .porque-guias{
@@ -1747,7 +1783,6 @@ url("../assets/images/bannerGuias.png");
 
 
 /* Responsive */
-
 @media (max-width:1024px){
     
     .guias-grid{
@@ -1833,7 +1868,7 @@ url("../assets/images/bannerGuias.png");
 }
 
 /* -----------------------------------------------------
-11. Información de Tours
+13. Información de Tours
 ----------------------------------------------------- */
 .hero-tours {
     position: relative;
@@ -1871,20 +1906,10 @@ url("../assets/images/bannerGuias.png");
     max-width: 650px;
 }
 
-/* =====================================================
-Bordes un poco más redondeados en general
-(afecta selects y botones en todo el sitio, para que
-combine con lo que ya hizo tu compañera en Guías)
-===================================================== */
 :root {
     --radio-sm: 12px; /* antes 8px */
 }
 
-/* =====================================================
-Filtros de Tours — mismo patrón que .filtros-guias
-Tarjeta blanca flotante que sube sobre .hero-tours con
-margin negativo, mostrando esquinas redondeadas.
-===================================================== */
 .filtros-tours {
     position: relative;
     max-width: var(--max-width);
@@ -1904,12 +1929,6 @@ margin negativo, mostrando esquinas redondeadas.
     border-left: 4px solid var(--dorado);
 }
 
-/* Reutiliza la grilla ".filtros" que ya tiene tu compañera:
-mismo patrón de 4 columnas (3 selects + botones) que usa
-.filtros-guias, para que ambas páginas se vean alineadas. */
-
-/* Botones más redondeados solo dentro de esta tarjeta
-(no afecta el botón del index ni el de "sin resultados") */
 .filtros-tours .btn-clear,
 .filtros-tours .btn-secundario {
     height: 56px;
@@ -1958,12 +1977,9 @@ mismo patrón de 4 columnas (3 selects + botones) que usa
 }
 
 /* -----------------------------------------------------
-12. Página de Reserva (carrito + formulario + gestión)
+14. Página de Reserva
 ----------------------------------------------------- */
 
-/* Hero, mismo patrón de .hero-tours pero sin foto: solo
-degradado en verde de marca (no había banner para esta
-página todavía). */
 .hero-reserva {
     background: linear-gradient(135deg, var(--verde-oscuro) 0%, var(--verde-oscuro-hover) 100%);
     min-height: 260px;
@@ -2037,6 +2053,48 @@ página todavía). */
 .item-carrito-precio {
     font-size: .85rem;
     color: var(--texto-secundario);
+}
+
+/* Selector de fecha individual de cada tour del carrito */
+.item-carrito-fecha-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--texto-secundario);
+}
+
+.input-fecha-item {
+    border: 1.5px solid var(--borde-suave);
+    border-radius: var(--radio-sm);
+    padding: 6px 10px;
+    font-family: var(--font-principal);
+    font-size: .85rem;
+    color: var(--texto-principal);
+    background-color: var(--blanco-hueso);
+}
+
+.input-fecha-item.input-invalido {
+    border-color: var(--rojo-favorito);
+}
+
+/* Aviso de "elige la fecha de cada tour" arriba del carrito */
+.aviso-fecha-por-tour {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0 20px;
+    padding: 12px 16px;
+    background-color: var(--beige-verdoso);
+    border-radius: var(--radio-sm);
+    font-size: .85rem;
+    color: var(--texto-principal);
+}
+
+.aviso-fecha-por-tour i {
+    color: var(--dorado);
 }
 
 .item-carrito-cantidad {
@@ -2214,11 +2272,31 @@ página todavía). */
 
 .confirmar-accion-botones {
     display: flex;
+    flex-direction: column;
     gap: 10px;
+}
+
+.confirmar-accion-botones .btn-clear,
+.confirmar-accion-botones .btn-secundario {
+    width: 100%;
+    white-space: normal;
 }
 
 .btn-peligro {
     background-color: var(--rojo-favorito);
+}
+
+.aviso-cancelacion {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: .85rem;
+    color: var(--texto-secundario);
+}
+
+.aviso-cancelacion i {
+    color: var(--dorado);
 }
 
 .btn-peligro:hover {
@@ -2391,7 +2469,7 @@ página todavía). */
 }
 
 /* -----------------------------------------------------
-13. Página de Favoritos
+15. Página de Favoritos
 ----------------------------------------------------- */
 
 /* Hero */
@@ -2455,6 +2533,7 @@ página todavía). */
     padding:20px 24px 60px;
 
 }
+
 
 /* Botón Favoritos activo en el header */
 
