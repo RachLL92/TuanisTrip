@@ -73,26 +73,53 @@ function mostrarGuias(listaGuias) {
         tarjeta.classList.add("guia-card");
         
         tarjeta.innerHTML = `
-        
-            <img src="${guia.imagen}" alt="${guia.nombre}">
-            
-            <div class="guia-info">
-            
-                <h3>${guia.nombre}</h3>
-                
-                <p><strong>Categoría:</strong> ${guia.categoria}</p>
-                
-                <p><strong>Especialidad:</strong> ${guia.especialidad}</p>
-                
-                <p><strong>Idiomas:</strong> ${guia.idiomas.join(", ")}</p>
-                
-                <p><strong>Experiencia:</strong> ${guia.experiencia} años</p>
-                
-                <p><strong>Calificación:</strong> <span class="rating-star" aria-hidden="true">★</span> ${guia.calificacion}</p>
-                
+
+        <div class="guia-imagen">
+
+        <img src="${guia.imagen}" alt="${guia.nombre}">
+
+            <button
+                type="button"
+                class="btn-favorito"
+                data-tipo="guia"
+                data-id="${guia.id}"
+                aria-label="Agregar a favoritos"
+                aria-pressed="false">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </button>
+
+        </div>
+
+        <div class="guia-info">
+
+            <h3>${guia.nombre}</h3>
+
+            <p><strong>Categoría:</strong> ${guia.categoria}</p>
+
+            <p><strong>Especialidad:</strong> ${guia.especialidad}</p>
+
+            <p><strong>Idiomas:</strong> ${guia.idiomas.join(", ")}</p>
+
+            <p><strong>Experiencia:</strong> ${guia.experiencia} años</p>
+
+            <p><strong>Calificación:</strong>
+                <span class="rating-star" aria-hidden="true">★</span>
+                ${guia.calificacion}
+            </p>
+
+            <div class="acciones-guia">
+
+            <button type="button" class="btn-perfil">
+                Ver perfil
+            </button>
+
             </div>
-            
-        `;
+
+        </div>
+
+`;
         
         contenedorGuias.appendChild(tarjeta);
     });

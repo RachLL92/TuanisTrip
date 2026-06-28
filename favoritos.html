@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description"
+        content="Tuanis Trip ofrece información sobre guías turísticos locales en Costa Rica.">
+        
+    <meta name="keywords"
+        content="guías turísticos, Costa Rica, turismo, naturaleza, aventura">
+        
+    <meta name="author" content="Tuanis Trip">
+    
+    <title>Tuanis Trip | Favoritos</title>
+    
+    <!-- Link para los iconos -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
+        
+        <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+    <!-- Encabezado principal -->
+    <header class = "site-header">
+    <!--Centrar el contenido de la pantalla-->    
+    <div class = "container site-header">
+        <!--Logotipo-->
+        <img src="assets/images/logoTuanisTrip.png" alt="Logo de Tuanis Trip">
+
+        <!--Navegacion principal-->
+        <!--nav - utilizada para definir contenido que será la sección de navegación de la web-->
+        <nav class = "main-nav">
+            <!--Lista desordenada-->
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="tours.html">Tours</a></li>
+                <li><a href="guias.html">Información de guías</a></li>
+                <li><a href="reserva.html">Reserva</a></li>
+            </ul>
+        </nav>
+        
+        <!--Acciones del usuario-->
+        <div class="header-actions">
+            <a href="reserva.html" class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i>Carrito
+                <span class="carrito-contador">0</span>
+            </a>
+            <a href="favoritos.html" class="btn-favoritos activo"><i class="fa-regular fa-heart"></i>Favoritos</a>
+            <div class = "search-tour">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="search" id = "buscar" placeholder="¿Que deseas explorar?">
+            </div>
+        </div>
+    </div>
+    </header>
+
+        <!-- Contenido principal -->
+        <main>
+
+        <!-- Hero -->
+        <section class="hero-favoritos">
+
+            <div class="hero-favoritos-content">
+
+                <span class="hero-script">
+                    Tus experiencias favoritas
+                </span>
+
+                <h1>
+                    Favoritos
+                </h1>
+
+                <p>
+                    Aquí encontrarás todos los tours y guías que has guardado para
+                    planificar tu próxima aventura por Costa Rica.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- Tours favoritos -->
+        <section class="favoritos-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Tours favoritos</h2>
+
+                    <p class="section-subtitulo">
+                        Tus experiencias guardadas.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <ul id="contenedorToursFavoritos" class="tours-grid">
+
+                <!-- Se llenará desde JavaScript -->
+
+            </ul>
+
+        </section>
+
+        <!-- Guías favoritas -->
+        <section class="favoritos-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <h2>Guías favoritos</h2>
+
+                    <p class="section-subtitulo">
+                        Los guías turísticos que has agregado a favoritos.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div id="contenedorGuiasFavoritos"
+                    class="guias-grid">
+
+                <!-- Se llenará desde JavaScript -->
+
+            </div>
+
+        </section>
+
+    </main>
+
+<!-- Pie de página -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <div class="footer-brand">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/Logounico.png" alt="Logo de Tuanis Trip">
+                    <span class="logo-text">
+                        <strong>Tuanis Trip</strong>
+                        <small>Tours &amp; Guías Turísticos</small>
+                    </span>
+                </a>
+                <p>Conectamos viajeros con las mejores experiencias en Costa Rica. 
+                    Apoyamos a guías locales y al turismo sostenible.</p>
+            </div>
+
+            <nav class="footer-column" aria-labelledby="footer-enlaces-heading">
+                <h2 id="footer-enlaces-heading">Enlaces rápidos</h2>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="guias.html">Información de guías</a></li>
+                    <li><a href="reserva.html">Reserva</a></li>
+                    <li><a href="favoritos.html">Favoritos</a></li>
+                </ul>
+            </nav>
+
+            <section class="footer-column" aria-labelledby="footer-contacto-heading">
+                <h2 id="footer-contacto-heading">Contacto</h2>
+                <address>
+                    <p>Correo: <a href="mailto:contacto@tuanistrip.com">contacto@tuanistrip.com</a></p>
+                    <p>Alajuela, Costa Rica</p>
+                    <p>Tel: <a href="tel:+50600000000">+506 0000 0000</a></p>
+                </address>
+            </section>
+
+        </div> <p class="copyright">
+            <small>&copy; 2026 Tuanis Trip. Todos los derechos reservados.</small>
+        </p>
+    </footer>
+
+    <!-- JavaScript de la página -->
+    <script src="js/utilidades.js"></script>
+    <script src="js/favoritos.js"></script>
+    <script src="js/carrito.js"></script>
+    <script src="js/tarjetas-tour.js"></script>
+    <script src="js/favoritosPagina.js"></script>
+
+</body>
+
+</html>
