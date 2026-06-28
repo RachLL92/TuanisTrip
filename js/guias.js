@@ -111,9 +111,21 @@ function mostrarGuias(listaGuias) {
 
             <div class="acciones-guia">
 
-            <button type="button" class="btn-perfil">
+            <button type="button" class="btn-perfil" aria-expanded="false">
                 Ver perfil
+                <i class="fa-solid fa-chevron-down"></i>
             </button>
+
+            </div>
+
+            <div class="guia-detalle-extra" hidden>
+
+                <p>${guia.descripcion}</p>
+
+                <p class="guia-contacto">
+                    <i class="fa-solid fa-phone"></i>
+                    ${guia.contacto}
+                </p>
 
             </div>
 
@@ -174,7 +186,10 @@ function aplicarFiltrosGuias() {
 
 // Búsqueda instantánea por nombre: filtra mientras se escribe,
 // sin necesidad de presionar el botón "Buscar guía".
-inputBuscarGuias.addEventListener("input", aplicarFiltrosGuias);
+inputBuscarGuias.addEventListener("input", () => {
+    aplicarFiltrosGuias();
+    desplazarSiNoEsVisible(contenedorGuias, subtituloGuias);
+});
 
 btnBuscarGuias.addEventListener("click", (evento) => {
 

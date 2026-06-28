@@ -1,13 +1,10 @@
 /* =====================================================
 favoritosPagina.js
-
 Este archivo carga y muestra los tours y guías
 que el usuario ha agregado a favoritos.
-
 Obtiene los favoritos desde localStorage, carga
 los archivos JSON y muestra únicamente los
 elementos guardados.
-
 ===================================================== */
 
 // Contenedores donde se mostrarán las tarjetas
@@ -18,6 +15,7 @@ const contenedorGuias = document.getElementById("contenedorGuiasFavoritos");
 // Cargar los favoritos
 // ------------------------------------------------------
 
+/* Obtiene los favoritos y carga la información necesaria */
 async function cargarFavoritos() {
 
     try {
@@ -40,6 +38,7 @@ async function cargarFavoritos() {
 
     catch (error) {
 
+        /* Muestra el error en la consola */
         console.error("Error al cargar los favoritos:", error);
 
     }
@@ -61,6 +60,7 @@ function mostrarToursFavoritos(tours, favoritos) {
 
     if (listaTours.length === 0) {
 
+        /* Si no hay favoritos, muestra un mensaje */
         contenedorTours.innerHTML = `
             <div class="sin-resultados">
                 <i class="fa-regular fa-heart"></i>
@@ -71,8 +71,10 @@ function mostrarToursFavoritos(tours, favoritos) {
 
     }
 
+    /* Genera las tarjetas de los tours */
     renderizarListaTours(contenedorTours, listaTours, true);
 
+    /* Actualiza el estado de los corazones */
     aplicarEstadoFavoritos();
 
 }
@@ -83,6 +85,7 @@ function mostrarToursFavoritos(tours, favoritos) {
 
 function mostrarGuiasFavoritos(guias, favoritos) {
 
+    /* Busca los guías guardados como favoritos */
     const listaGuias = guias.filter(guia =>
         favoritos.some(favorito =>
             favorito.tipo === "guia" &&
@@ -92,6 +95,7 @@ function mostrarGuiasFavoritos(guias, favoritos) {
 
     if (listaGuias.length === 0) {
 
+        /* Si no hay guías favoritos, muestra un mensaje */
         contenedorGuias.innerHTML = `
             <div class="sin-resultados">
                 <i class="fa-regular fa-heart"></i>
@@ -104,12 +108,15 @@ function mostrarGuiasFavoritos(guias, favoritos) {
 
     contenedorGuias.innerHTML = "";
 
+    /* Recorre la lista y crea una tarjeta para cada guía */
     listaGuias.forEach(guia => {
 
+        /* Crea el elemento de la tarjeta */
         const tarjeta = document.createElement("article");
 
         tarjeta.classList.add("guia-card");
 
+        /* Agrega el contenido de la tarjeta */
         tarjeta.innerHTML = `
 
             <div class="guia-imagen">
@@ -148,18 +155,32 @@ function mostrarGuiasFavoritos(guias, favoritos) {
                     ${guia.calificacion}
                 </p>
 
-                <button type="button" class="btn-perfil">
+                <button type="button" class="btn-perfil" aria-expanded="false">
                     Ver perfil
+                    <i class="fa-solid fa-chevron-down"></i>
                 </button>
+
+            </div>
+
+            <div class="guia-detalle-extra" hidden>
+
+                <p>${guia.descripcion}</p>
+
+                <p class="guia-contacto">
+                    <i class="fa-solid fa-phone"></i>
+                    ${guia.contacto}
+                </p>
 
             </div>
 
         `;
 
+        /* Agrega el contenido de la tarjeta */
         contenedorGuias.appendChild(tarjeta);
 
     });
 
+    /* Actualiza el estado de los botones de favoritos */
     aplicarEstadoFavoritos();
 
 }
@@ -169,3 +190,15 @@ function mostrarGuiasFavoritos(guias, favoritos) {
 // ------------------------------------------------------
 
 cargarFavoritos();
+
+/* Si un favorito se elimina desde esta misma página,
+vuelve a cargar la lista para actualizarla */
+document.addEventListener("click", (evento) => {
+
+    if (evento.target.closest(".btn-favorito")) {
+
+        cargarFavoritos();
+
+    }
+
+});
