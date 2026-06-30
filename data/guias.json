@@ -1,110 +1,149 @@
 [
     {
-    "id": 1,
-    "nombre": "Sofía Vargas",
-    "categoria": "Playa",
-    "especialidad": "Snorkel",
-    "idiomas": ["Español", "Inglés"],
-    "experiencia": 6,
-    "calificacion": 4.9,
-    "descripcion": "Apasionada por la vida marina del Pacífico, lleva a sus grupos a los mejores arrecifes poco visitados de la zona.",
-    "contacto": "8777-7777",
-    "imagen": "assets/images/guias/sofia-vargas.png"
+        "id": 1,
+        "nombre": "Sofía Vargas",
+        "categoria": "Playa",
+        "especialidad": "Snorkel",
+        "idiomas": [
+            "Español",
+            "Inglés"
+        ],
+        "experiencia": 6,
+        "calificacion": 4.9,
+        "descripcion": "Apasionada por la vida marina del Pacífico, lleva a sus grupos a los mejores arrecifes poco visitados de la zona.",
+        "contacto": "8777-7777",
+        "imagen": "assets/images/guias/sofia-vargas.png",
+        "instagram": "sofia.vargas.tours"
     },
     {
-    "id": 2,
-    "nombre": "Diego Rojas",
-    "categoria": "Playa",
-    "especialidad": "Kayak",
-    "idiomas": ["Español", "Portugués"],
-    "experiencia": 8,
-    "calificacion": 4.8,
-    "descripcion": "Guía certificado en rescate acuático, conoce los manglares y esteros más tranquilos para principiantes.",
-    "contacto": "8888-8888",
-    "imagen": "assets/images/guias/diego-rojas.png"
+        "id": 2,
+        "nombre": "Diego Rojas",
+        "categoria": "Playa",
+        "especialidad": "Kayak",
+        "idiomas": [
+            "Español",
+            "Portugués"
+        ],
+        "experiencia": 8,
+        "calificacion": 4.8,
+        "descripcion": "Guía certificado en rescate acuático, conoce los manglares y esteros más tranquilos para principiantes.",
+        "contacto": "8888-8888",
+        "imagen": "assets/images/guias/diego-rojas.png",
+        "instagram": "diego.rojas.kayak"
     },
     {
-    "id": 3,
-    "nombre": "Mariana López",
-    "categoria": "Playa",
-    "especialidad": "Paseo en Catamarán",
-    "idiomas": ["Español", "Inglés", "Francés"],
-    "experiencia": 10,
-    "calificacion": 5.0,
-    "descripcion": "Guía paseos en catamarán y procura que cada recorrido sea cómodo y seguro para todos.",
-    "contacto": "8999-9999",
-    "imagen": "assets/images/guias/mariana-lopez.png"
+        "id": 3,
+        "nombre": "Mariana López",
+        "categoria": "Playa",
+        "especialidad": "Paseo en Catamarán",
+        "idiomas": [
+            "Español",
+            "Inglés",
+            "Francés"
+        ],
+        "experiencia": 10,
+        "calificacion": 5.0,
+        "descripcion": "Guía paseos en catamarán y procura que cada recorrido sea cómodo y seguro para todos.",
+        "contacto": "8999-9999",
+        "imagen": "assets/images/guias/mariana-lopez.png",
+        "instagram": "mariana.lopez.cr"
     },
     {
-    "id": 4,
-    "nombre": "Carlos Jiménez",
-    "categoria": "Montaña",
-    "especialidad": "Senderismo",
-    "idiomas": ["Español", "Inglés"],
-    "experiencia": 9,
-    "calificacion": 4.9,
-    "descripcion": "Biólogo de formación, hace énfasis en flora y fauna durante las caminatas por bosque nuboso y volcanes.",
-    "contacto": "8666-6666",
-    "imagen": "assets/images/guias/carlos-jimenez.png"
+        "id": 4,
+        "nombre": "Carlos Jiménez",
+        "categoria": "Montaña",
+        "especialidad": "Senderismo",
+        "idiomas": [
+            "Español",
+            "Inglés"
+        ],
+        "experiencia": 9,
+        "calificacion": 4.9,
+        "descripcion": "Biólogo de formación, hace énfasis en flora y fauna durante las caminatas por bosque nuboso y volcanes.",
+        "contacto": "8666-6666",
+        "imagen": "assets/images/guias/carlos-jimenez.png",
+        "instagram": "carlos.jimenez.tours"
     },
     {
-    "id": 5,
-    "nombre": "Andrea Solano",
-    "categoria": "Montaña",
-    "especialidad": "Canopy",
-    "idiomas": ["Español", "Francés"],
-    "experiencia": 7,
-    "calificacion": 4.8,
-    "descripcion": "Instructora certificada en rappel y tirolesa, prioriza la seguridad sin quitarle la adrenalina al recorrido.",
-    "contacto": "8000-0000",
-    "imagen": "assets/images/guias/andrea-solano.png"
+        "id": 5,
+        "nombre": "Andrea Solano",
+        "categoria": "Montaña",
+        "especialidad": "Canopy",
+        "idiomas": [
+            "Español",
+            "Francés"
+        ],
+        "experiencia": 7,
+        "calificacion": 4.8,
+        "descripcion": "Instructora certificada en rappel y tirolesa, prioriza la seguridad sin quitarle la adrenalina al recorrido.",
+        "contacto": "8000-0000",
+        "imagen": "assets/images/guias/andrea-solano.png",
+        "instagram": "andrea.solano.canopy"
     },
     {
-    "id": 6,
-    "nombre": "Luis Mora",
-    "categoria": "Montaña",
-    "especialidad": "Montar a caballo",
-    "idiomas": ["Español", "Inglés", "Portugués"],
-    "experiencia": 12,
-    "calificacion": 4.9,
-    "descripcion": "Cuenta con amplia experiencia guiando cabalgatas por diferentes rutas y paisajes naturales.",
-    "contacto": "8111-1111",
-    "imagen": "assets/images/guias/luis-mora.png"
+        "id": 6,
+        "nombre": "Luis Mora",
+        "categoria": "Montaña",
+        "especialidad": "Montar a caballo",
+        "idiomas": [
+            "Español",
+            "Inglés",
+            "Portugués"
+        ],
+        "experiencia": 12,
+        "calificacion": 4.9,
+        "descripcion": "Cuenta con amplia experiencia guiando cabalgatas por diferentes rutas y paisajes naturales.",
+        "contacto": "8111-1111",
+        "imagen": "assets/images/guias/luis-mora.png",
+        "instagram": "luis.mora.guanacaste"
     },
     {
-    "id": 7,
-    "nombre": "Valeria Castro",
-    "categoria": "Ciudad",
-    "especialidad": "City Tour",
-    "idiomas": ["Español", "Inglés"],
-    "experiencia": 5,
-    "calificacion": 4.7,
-    "descripcion": "Historiadora local, conecta cada parada del recorrido urbano con anécdotas reales de la San José de antes.",
-    "contacto": "8333-3333",
-    "imagen": "assets/images/guias/valeria-castro.png"
+        "id": 7,
+        "nombre": "Valeria Castro",
+        "categoria": "Ciudad",
+        "especialidad": "City Tour",
+        "idiomas": [
+            "Español",
+            "Inglés"
+        ],
+        "experiencia": 5,
+        "calificacion": 4.7,
+        "descripcion": "Historiadora local, conecta cada parada del recorrido urbano con anécdotas reales de la San José de antes.",
+        "contacto": "8333-3333",
+        "imagen": "assets/images/guias/valeria-castro.png",
+        "instagram": "valeria.castro.cr"
     },
     {
-    "id": 8,
-    "nombre": "Pablo Herrera",
-    "categoria": "Ciudad",
-    "especialidad": "Tour Gastronómico",
-    "idiomas": ["Español", "Francés"],
-    "experiencia": 11,
-    "calificacion": 4.9,
-    "descripcion": "Ex chef de restaurante, selecciona personalmente cada parada del tour según la temporada de ingredientes.",
-    "contacto": "8444-4444",
-    "imagen": "assets/images/guias/pablo-herrera.png"
+        "id": 8,
+        "nombre": "Pablo Herrera",
+        "categoria": "Ciudad",
+        "especialidad": "Tour Gastronómico",
+        "idiomas": [
+            "Español",
+            "Francés"
+        ],
+        "experiencia": 11,
+        "calificacion": 4.9,
+        "descripcion": "Ex chef de restaurante, selecciona personalmente cada parada del tour según la temporada de ingredientes.",
+        "contacto": "8444-4444",
+        "imagen": "assets/images/guias/pablo-herrera.png",
+        "instagram": "pablo.herrera.gastro"
     },
     {
-    "id": 9,
-    "nombre": "Fernanda Ruiz",
-    "categoria": "Ciudad",
-    "especialidad": "Tour Histórico y Cultural",
-    "idiomas": ["Español", "Inglés", "Portugués"],
-    "experiencia": 8,
-    "calificacion": 4.8,
-    "descripcion": "Egresada de Patrimonio Cultural, profundiza en los museos y barrios históricos menos visitados por turistas.",
-    "contacto": "8555-5555",
-    "imagen": "assets/images/guias/fernanda-ruiz.png"
+        "id": 9,
+        "nombre": "Fernanda Ruiz",
+        "categoria": "Ciudad",
+        "especialidad": "Tour Histórico y Cultural",
+        "idiomas": [
+            "Español",
+            "Inglés",
+            "Portugués"
+        ],
+        "experiencia": 8,
+        "calificacion": 4.8,
+        "descripcion": "Egresada de Patrimonio Cultural, profundiza en los museos y barrios históricos menos visitados por turistas.",
+        "contacto": "8555-5555",
+        "imagen": "assets/images/guias/fernanda-ruiz.png",
+        "instagram": "fernanda.ruiz.tours"
     }
 ]

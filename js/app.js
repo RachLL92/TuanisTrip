@@ -3,23 +3,20 @@ app.js
 Lógica específica de index.html:
 - Carga los tours desde data/tours.json (fetch)
 - Pinta "Tours destacados" con los mejor calificados
-- Aplica los filtros (provincia, tipo, personas, fecha,
-búsqueda del header y botones de actividad) y muestra
-los resultados en la MISMA sección de destacados
+- Aplica los filtros (provincia, tipo, actividad y la
+búsqueda del header) y muestra los resultados en la
+MISMA sección de destacados
 ===================================================== */
 
 /* Lista donde se almacenan todos los tours cargados desde el archivo JSON */
 let todosLosTours = [];
-/* Guarda la categoría seleccionada en "Explora por actividad" */
-let categoriaActividadSeleccionada = "";
 
 /* Referencias a los elementos del HTML */
 const inputBuscar = document.getElementById("buscar");
 const selectProvincia = document.getElementById("filtroProvincia");
-const selectCategoria = document.getElementById("filtroCategoria");
-const inputFecha = document.getElementById("fecha");
-const inputPersonas = document.getElementById("cantidadPersonas");
-const botonBuscarTour = document.getElementById("btnFiltrarInformacion");
+const selectTipo = document.getElementById("filtroTipo");
+const selectActividad = document.getElementById("filtroActividad");
+const botonBuscarTour = document.getElementById("btnBuscarTours");
 const contenedorDestacados = document.getElementById("toursDestacados");
 const tituloDestacados = document.getElementById("destacados-heading");
 const subtituloDestacados = document.getElementById("destacados-subtitulo");
@@ -64,8 +61,8 @@ function aplicarFiltros() {
     /* Obtiene los valores de los filtros */
     const texto = inputBuscar.value.trim().toLowerCase();
     const provincia = selectProvincia.value;
-    const tipo = selectCategoria.value;
-    const personas = Number(inputPersonas.value) || 1;
+    const tipo = selectTipo.value;
+    const actividad = selectActividad.value;
 
     /* Filtra únicamente los tours que cumplen todas las condiciones */
     const resultado = todosLosTours.filter(tour => {
@@ -80,30 +77,23 @@ function aplicarFiltros() {
         /* Verifica la provincia seleccionada */
         const coincideProvincia = !provincia || tour.provincia === provincia;
 
-        /* Verifica el tipo de tour */
+        /* Verifica el tipo de tour (montaña, playa, ciudad) */
         const coincideTipo = !tipo || tour.tipo === tipo;
 
-        /* Verifica la categoría elegida desde las tarjetas de actividad */
-        const coincideActividad =
-            !categoriaActividadSeleccionada ||
-            tour.categoria === categoriaActividadSeleccionada;
-
-        /* Verifica que el tour acepte la cantidad de personas */
-        const alcanzaParaElGrupo = tour.personasMax >= personas;
+        /* Verifica la actividad específica elegida (senderismo, kayak, etc.) */
+        const coincideActividad = !actividad || tour.tipo === actividad;
 
         /* Solo devuelve los tours que cumplen todas las condiciones */
         return (
             coincideTexto &&
             coincideProvincia &&
             coincideTipo &&
-            coincideActividad &&
-            alcanzaParaElGrupo
+            coincideActividad
         );
     });
 
     /* Determina si existe al menos un filtro activo */
-    const hayFiltrosActivos =
-        texto || provincia || tipo || categoriaActividadSeleccionada || personas > 1;
+    const hayFiltrosActivos = texto || provincia || tipo || actividad;
 
     /* Muestra los resultados encontrados */
     pintarResultados(resultado, hayFiltrosActivos);
@@ -128,34 +118,15 @@ function pintarResultados(listaTours, hayFiltrosActivos) {
 function limpiarFiltros() {
     inputBuscar.value = "";
     selectProvincia.value = "";
-    selectCategoria.value = "";
-    inputPersonas.value = 1;
-    categoriaActividadSeleccionada = "";
-    document.querySelectorAll(".actividad-card").forEach(boton => boton.classList.remove("activo"));
+    selectTipo.value = "";
+    selectActividad.value = "";
     mostrarDestacadosPorDefecto();
 }
 
-/* Eventos de las tarjetas "Explora por actividad" */
-document.querySelectorAll(".actividad-card").forEach(boton => {
-    boton.addEventListener("click", () => {
-        const yaEstabaActivo = boton.classList.contains("activo");
-
-        document.querySelectorAll(".actividad-card").forEach(b => b.classList.remove("activo"));
-
-        /* Activa o desactiva la categoría */
-        categoriaActividadSeleccionada = yaEstabaActivo ? "" : boton.dataset.categoria;
-        if (!yaEstabaActivo) boton.classLsist.add("activo");
-
-        /* Desplaza la página hasta la sección de resultados */
-        aplicarFiltros();
-        contenedorDestacados.closest("section").scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-});
-
 /* Eventos de los filtros principales */
 selectProvincia.addEventListener("change", aplicarFiltros);
-selectCategoria.addEventListener("change", aplicarFiltros);
-inputPersonas.addEventListener("change", aplicarFiltros);
+selectTipo.addEventListener("change", aplicarFiltros);
+selectActividad.addEventListener("change", aplicarFiltros);
 /* Filtra mientras el usuario escribe */
 inputBuscar.addEventListener("input", () => {
     aplicarFiltros();
@@ -179,7 +150,5 @@ document.addEventListener("click", (evento) => {
     }
 });
 
-/* Evita que se puedan seleccionar fechas anteriores al día actual */
-impedirFechasPasadas(inputFecha); // viene de utilidades.js
 /* Inicia la carga de los tours al abrir la página */
 cargarTours();

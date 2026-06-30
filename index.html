@@ -70,11 +70,6 @@
                 <!--Se usa span entre la frase para que en el CSS se logre cambiar el estilo -->
                 <h1><span class="hero-eyebrow">Pura vida,</span> descubre Costa Rica</h1>
                 <p>Encuentra los mejores tours y actividades con guías locales y vive experiencias inolvidables.</p>
-                <!--Investigar-->
-                <a href="tours.html" class="btn-primary">
-                    Explorar tours
-                    <span aria-hidden="true">→</span>
-                </a>
             </div>
 
             <!-- Filtro de busqueda -->
@@ -98,10 +93,10 @@
                 </div>
 
                 <div class="filter-group">
-                    <label for="filtroCategoria">Categoría</label>
+                    <label for="filtroTipo">Tipo</label>
                     <div class="select-wrapper"><i class="fa-solid fa-table-cells-large"></i>
-                        <select id="filtroCategoria">
-                            <option value>Todas las categorías</option>
+                        <select id="filtroTipo">
+                            <option value>Todos los tipos</option>
                             <option value="montaña">Montaña</option>
                             <option value="playa">Playa</option>
                             <option value="ciudad">Ciudad</option>
@@ -110,132 +105,35 @@
                 </div>
 
                 <div class="filter-group">
-                    <label for="fecha">Fecha</label>
-                    <div class="select-wrapper"><i class="fa-regular fa-calendar"></i>
-                        <input type="date" id="fecha" name="fecha">
+                    <label for="filtroActividad">Actividad</label>
+                    <div class="select-wrapper"><i class="fa-solid fa-list"></i>
+                        <select id="filtroActividad">
+                            <option value>Todas las actividades</option>
+                            <option value="senderismo">Senderismo</option>
+                            <option value="montarCaballo">Montar a caballo</option>
+                            <option value="snorkel">Snorkel</option>
+                            <option value="catamaran">Paseo en Catamarán</option>
+                            <option value="canopy">Canopy</option>
+                            <option value="cityTour">City Tour</option>
+                            <option value="tourGastronomico">Tour Gastronómico</option>
+                            <option value="tourHistoricoCultural">Tour Histórico y Cultural</option>
+                            <option value="kayak">Kayak</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="filter-group">
-                    <label for="cantidadPersonas">Personas</label>
-                    <div class="select-wrapper"><i class="fa-solid fa-people-group"></i>
-                        <input type="number" id="cantidadPersonas" value="1" min="1" max="100">
-                    </div>
+                <div class="barra-filtros-botones">
+                    <button type="button" id="btnBuscarTours" class="btn-clear">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        Buscar tour
+                    </button>
+                    <button type="button" class="btn-secundario btn-limpiar-filtros">
+                        <i class="fa-solid fa-filter-circle-xmark"></i>
+                        Quitar filtros
+                    </button>
                 </div>
-                
-                <button id="btnFiltrarInformacion" class="btn-clear">
-                    <i class="fa-solid fa-magnifying-glass"></i>Buscar tour</button>
 
             </div>
-        </section>
-
-        <!-- Explorar por actividad -->
-        <section class="actividades-section">
-
-            <h2 id="actividades-heading">Explora por actividad</h2>
-
-            <ul class="actividades-grid">
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="senderismo">
-
-                        <i class="fa-solid fa-person-hiking"></i>
-                        <span>Senderismo</span>
-
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="montarCaballo">
-
-                        <i class="fa-solid fa-horse"></i>
-                        <span>Montar a caballo</span>
-
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="snorkel">
-
-                        <i class="fa-solid fa-fish"></i>
-                        <span>Snorkel</span>
-
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="catamaran">
-
-                        <i class="fa-solid fa-ship"></i>
-                        <span>Paseo en Catamarán</span>
-
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="canopy">
-
-                        <i class="fa-solid fa-tree"></i>
-                        <span>Canopy</span>
-
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="cityTour">
-
-                        <i class="fa-solid fa-tree-city"></i>
-                        <span>City Tour</span>
-
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="tourGastronomico">
-
-                        <i class="fa-solid fa-utensils"></i>
-                        <span>Tour Gastronómico</span>
-
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="tourHistoricoCultural">
-
-                        <i class="fa-solid fa-masks-theater"></i>
-                        <span>Tour Histórico y Cultural</span>
-
-                    </button>
-                </li>
-
-                <li>
-                    <button type="button"
-                            class="actividad-card"
-                            data-categoria="kayak">
-
-                        <i class="fa-solid fa-sailboat"></i>
-                        <span>Kayak</span>
-
-                    </button>
-                </li>
-
-            </ul>
         </section>
         
         <!--Tour destacados-->
@@ -308,7 +206,7 @@
 
             <div class="plataforma-content">
                 <h2 id="plataforma-heading">Sobre la plataforma</h2>
-                <p>Tuanis Trip reúne en un solo lugar los mejores tours y actividades del país. Los usuarios pueden explorar opciones por categoría o provincia, encontrar experiencias destacadas y planificar sus aventuras de manera sencilla.</p>
+                <p>Tuanis Trip reúne en un solo lugar los mejores tours y actividades del país. Los usuarios pueden explorar opciones por tipo o provincia, encontrar experiencias destacadas y planificar sus aventuras de manera sencilla.</p>
 
                 <ul class="plataforma-features">
                     <li>

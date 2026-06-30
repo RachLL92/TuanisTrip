@@ -127,6 +127,11 @@ function mostrarGuias(listaGuias) {
                     ${guia.contacto}
                 </p>
 
+                <p class="guia-instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                    @${guia.instagram}
+                </p>
+
             </div>
 
         </div>
