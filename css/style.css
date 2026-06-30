@@ -495,7 +495,7 @@ input, select {
 .tours-destacados {
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 20px 24px 50px;
+    padding: 70px 24px 50px;
 }
 
 .section-header {
@@ -1686,6 +1686,18 @@ aparece/desaparece al hacer clic en "Ver perfil" */
     color: var(--dorado);
 }
 
+.guia-instagram {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--texto-principal);
+}
+
+.guia-instagram i {
+    color: #C13584;
+}
+
 @keyframes aparecerDetalleGuia {
     from { opacity: 0; transform: translateY(-4px); }
     to { opacity: 1; transform: translateY(0); }
@@ -2078,6 +2090,12 @@ aparece/desaparece al hacer clic en "Ver perfil" */
 
 .input-fecha-item.input-invalido {
     border-color: var(--rojo-favorito);
+}
+
+.mensaje-error-fecha {
+    margin-top: 4px;
+    font-size: .75rem;
+    min-height: 0;
 }
 
 /* Aviso de "elige la fecha de cada tour" arriba del carrito */

@@ -77,7 +77,14 @@ según el estado del carrito */
 function actualizarEstadoBotonConfirmar() {
     const carrito = obtenerCarrito();
     const faltaFecha = carrito.some(item => !item.fecha);
-    btnConfirmarReserva.disabled = carrito.length === 0 || faltaFecha;
+
+    /* Respaldo: si por alguna razón el carrito ya tenía dos
+    tours guardados con la misma fecha (por ejemplo, de antes
+    de aplicar esta regla), tampoco se deja confirmar. */
+    const fechasUsadas = carrito.map(item => item.fecha).filter(Boolean);
+    const hayFechasRepetidas = new Set(fechasUsadas).size !== fechasUsadas.length;
+
+    btnConfirmarReserva.disabled = carrito.length === 0 || faltaFecha || hayFechasRepetidas;
 }
 
 /* Muestra todos los tours agregados al carrito */
@@ -129,6 +136,7 @@ function pintarCarrito() {
                                data-id-tour="${tour.id}"
                                value="${item.fecha || ""}">
                     </label>
+                    <p class="mensaje-error mensaje-error-fecha" aria-live="polite"></p>
                 </div>
 
                 <div class="item-carrito-cantidad">
@@ -156,6 +164,34 @@ function pintarCarrito() {
             const carritoActual = obtenerCarrito();
             const itemActual = carritoActual.find(i => i.idTour === idTour);
             if (!itemActual) return;
+
+            const mensajeErrorFecha = input.closest(".item-carrito-info")?.querySelector(".mensaje-error-fecha");
+
+            // Regla: dos tours distintos del carrito no pueden compartir la
+            // misma fecha de viaje (cada uno necesita su propio día).
+            const fechaYaUsadaPorOtroTour = input.value && carritoActual.some(
+                otro => otro.idTour !== idTour && otro.fecha === input.value
+            );
+
+            if (fechaYaUsadaPorOtroTour) {
+                const tourEnConflicto = obtenerTourPorId(
+                    carritoActual.find(otro => otro.idTour !== idTour && otro.fecha === input.value).idTour
+                );
+
+                if (mensajeErrorFecha) {
+                    mensajeErrorFecha.textContent =
+                        `Esa fecha ya la usa "${tourEnConflicto ? tourEnConflicto.nombre : "otro tour"}". Elige un día distinto para cada tour.`;
+                }
+                input.classList.add("input-invalido");
+
+                // No se guarda la fecha en conflicto: el input vuelve a
+                // mostrar la última fecha válida que tenía este tour.
+                input.value = itemActual.fecha || "";
+                actualizarEstadoBotonConfirmar();
+                return;
+            }
+
+            if (mensajeErrorFecha) mensajeErrorFecha.textContent = "";
 
             itemActual.fecha = input.value;
             guardarCarrito(carritoActual);
@@ -233,15 +269,31 @@ function validarCorreo() {
     return true;
 }
 
+function validarTelefono() {
+    /* Acepta 8 dígitos, con o sin guion en medio (8888-8888 u 88888888) */
+    const valor = inputTelefono.value.trim();
+    const formatoValido = /^\d{4}-?\d{4}$/.test(valor);
+
+    if (!formatoValido) {
+        mostrarError(inputTelefono, "Escribe un teléfono válido de 8 dígitos (ej. 8888-8888).");
+        return false;
+    }
+
+    mostrarError(inputTelefono, "");
+    return true;
+}
+
 function validarFormularioReserva() {
     const nombreValido = validarNombre();
     const correoValido = validarCorreo();
-    return nombreValido && correoValido;
+    const telefonoValido = validarTelefono();
+    return nombreValido && correoValido && telefonoValido;
 }
 
 /* Validación en tiempo real, mientras el usuario escribe. */
 inputNombre.addEventListener("input", validarNombre);
 inputCorreo.addEventListener("input", validarCorreo);
+inputTelefono.addEventListener("input", validarTelefono);
 
 /* =====================================================
 Guardar / leer reservas en localStorage
@@ -278,6 +330,13 @@ formReserva.addEventListener("submit", (evento) => {
 
     if (obtenerCarrito().some(item => !item.fecha)) {
         mensajeFormulario.textContent = "Elige la fecha de cada tour de tu carrito antes de confirmar.";
+        mensajeFormulario.className = "mensaje-formulario mensaje-error-formulario";
+        return;
+    }
+
+    const fechasDelCarrito = obtenerCarrito().map(item => item.fecha);
+    if (new Set(fechasDelCarrito).size !== fechasDelCarrito.length) {
+        mensajeFormulario.textContent = "Dos tours no pueden reservarse para la misma fecha. Cambia una de las fechas marcadas en rojo.";
         mensajeFormulario.className = "mensaje-formulario mensaje-error-formulario";
         return;
     }
@@ -329,7 +388,7 @@ formReserva.addEventListener("submit", (evento) => {
     mensajeFormulario.className = "mensaje-formulario mensaje-exito-formulario";
 
     formReserva.reset();
-    [inputNombre, inputCorreo].forEach(input => mostrarError(input, ""));
+    [inputNombre, inputCorreo, inputTelefono].forEach(input => mostrarError(input, ""));
 
     pintarCarrito();
     pintarReservas();
