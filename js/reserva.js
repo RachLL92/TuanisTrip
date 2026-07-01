@@ -22,6 +22,12 @@ const inputMensaje = document.getElementById("mensajeReserva");
 const btnConfirmarReserva = document.getElementById("btnConfirmarReserva");
 const mensajeFormulario = document.getElementById("mensajeFormularioReserva");
 
+/* Referencias al panel de advertencia del formulario (paso 2) */
+const accionesFormStep1 = document.getElementById("accionesFormStep1");
+const panelAdvertenciaForm = document.getElementById("panelAdvertenciaForm");
+const btnConfirmarReservaFinal = document.getElementById("btnConfirmarReservaFinal");
+const btnCancelarAdvertenciaForm = document.getElementById("btnCancelarAdvertenciaForm");
+
 const subtituloReservas = document.getElementById("reservas-subtitulo");
 const contenedorReservas = document.getElementById("listaReservas");
 const btnLimpiarReservas = document.getElementById("btnLimpiarReservas");
@@ -291,9 +297,9 @@ function validarFormularioReserva() {
 }
 
 /* Validación en tiempo real, mientras el usuario escribe. */
-inputNombre.addEventListener("input", validarNombre);
-inputCorreo.addEventListener("input", validarCorreo);
-inputTelefono.addEventListener("input", validarTelefono);
+inputNombre.addEventListener("input", () => { mensajeFormulario.textContent = ""; validarNombre(); });
+inputCorreo.addEventListener("input", () => { mensajeFormulario.textContent = ""; validarCorreo(); });
+inputTelefono.addEventListener("input", () => { mensajeFormulario.textContent = ""; validarTelefono(); });
 
 /* =====================================================
 Guardar / leer reservas en localStorage
@@ -307,20 +313,392 @@ function guardarReservas(reservas) {
     localStorage.setItem(CLAVE_RESERVAS, JSON.stringify(reservas));
 }
 
-/* Convierte "2026-07-04" en "4 de julio de 2026" para que
-se lea mejor en la tarjeta de "Mis reservas". */
+/* Convierte "2026-07-04" en "4 de julio de 2026" */
 function formatoFechaLegible(fechaISO) {
     const [anio, mes, dia] = fechaISO.split("-").map(Number);
     const fecha = new Date(anio, mes - 1, dia);
     return fecha.toLocaleDateString("es-CR", { day: "numeric", month: "long", year: "numeric" });
 }
 
+/* Convierte "2026-07-04" en "sábado, 4 de julio de 2026" (con día de la semana) */
+function formatoFechaConDia(fechaISO) {
+    const [anio, mes, dia] = fechaISO.split("-").map(Number);
+    const fecha = new Date(anio, mes - 1, dia);
+    const texto = fecha.toLocaleDateString("es-CR", {
+        weekday: "long", day: "numeric", month: "long", year: "numeric"
+    });
+    // Capitaliza la primera letra
+    return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
 /* =====================================================
-Envío del formulario: valida, guarda la reserva y
-vacía el carrito
+3. MIS RESERVAS
 ===================================================== */
-formReserva.addEventListener("submit", (evento) => {
-    evento.preventDefault();
+function pintarReservas() {
+    const reservas = obtenerReservas();
+
+    subtituloReservas.textContent =
+        `${reservas.length} ${reservas.length === 1 ? "reserva guardada" : "reservas guardadas"}`;
+
+    btnLimpiarReservas.hidden = reservas.length === 0;
+    confirmarLimpiarReservas.hidden = true;
+
+    if (reservas.length === 0) {
+        contenedorReservas.innerHTML = `
+            <div class="sin-resultados">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <p>Aún no tienes solicitudes. Explora los tours y arma tu próxima aventura.</p>
+                <a href="tours.html" class="btn-clear">
+                    <i class="fa-solid fa-binoculars"></i>
+                    Ver tours
+                </a>
+            </div>`;
+        return;
+    }
+
+    contenedorReservas.innerHTML = reservas.map(reserva => `
+        <section class="reserva-grupo" data-id-reserva="${reserva.id}">
+
+            <!-- Encabezado del grupo -->
+            <div class="reserva-grupo-header">
+                <div>
+                    <p class="reserva-grupo-cliente">
+                        <i class="fa-solid fa-user"></i> ${reserva.nombre}
+                    </p>
+                    <p class="reserva-grupo-fecha">
+                        <i class="fa-regular fa-calendar"></i>
+                        Solicitada el ${formatoFechaLegible(reserva.fechaCreacion.slice(0, 10))}
+                    </p>
+                </div>
+                <p class="reserva-grupo-total">Total: <strong>${formatoColones(reserva.total)}</strong></p>
+            </div>
+
+            <!-- Una tarjeta por cada tour dentro de la reserva -->
+            ${reserva.items.map((item, index) => {
+                const tour = obtenerTourPorId(item.idTour);
+                const imgSrc = tour ? tour.imagen : "";
+                return `
+                <article class="reserva-item-card" data-index="${index}">
+
+                    <!-- Fila principal: imagen + info + acciones -->
+                    <div class="reserva-item-main">
+                        <img src="${imgSrc}" alt="${item.nombre}" class="reserva-item-img">
+
+                        <div class="reserva-item-info">
+                            <h4 class="reserva-item-nombre">${item.nombre}</h4>
+                            <p class="reserva-item-fecha">
+                                <i class="fa-regular fa-calendar-days"></i>
+                                ${formatoFechaConDia(item.fecha)}
+                            </p>
+                            <p class="reserva-item-meta">
+                                <span>
+                                    <i class="fa-solid fa-user-group"></i>
+                                    ${item.cantidad} ${item.cantidad === 1 ? "persona" : "personas"}
+                                </span>
+                                <span class="reserva-item-precio">${formatoColones(item.subtotal)}</span>
+                            </p>
+                        </div>
+
+                        <div class="reserva-item-derecha">
+                            <span class="reserva-estado reserva-estado--${reserva.estado}">
+                                ${reserva.estado === "confirmada" ? "Confirmada" : "Pendiente"}
+                            </span>
+                            <div class="reserva-item-acciones">
+                                <button type="button" class="btn-secundario btn-abrir-modificar"
+                                        data-index="${index}">
+                                    <i class="fa-solid fa-pencil"></i> Modificar
+                                </button>
+                                <button type="button" class="btn-cancelar-tour-btn"
+                                        data-index="${index}">
+                                    <i class="fa-solid fa-trash-can"></i> Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ==============================================
+                    PANEL MODIFICAR (2 pasos: formulario → confirmación)
+                    ============================================== -->
+                    <div class="panel-reserva-advertencia panel-modificar-tour" hidden>
+
+                        <!-- Paso 1: formulario de fecha y personas -->
+                        <div class="paso-form-modificar">
+                            <p class="panel-modificar-titulo">
+                                <i class="fa-solid fa-pencil"></i>
+                                Modificar: "${item.nombre}"
+                            </p>
+                            <div class="panel-modificar-campos">
+                                <label class="item-carrito-fecha-label">
+                                    Nueva fecha
+                                    <input type="date"
+                                           class="input-fecha-modificar input-fecha-item"
+                                           value="${item.fecha}">
+                                </label>
+                                <label class="campo-cantidad-modificar-label">
+                                    Personas
+                                    <div class="panel-cantidad-control">
+                                        <button type="button" class="btn-cantidad btn-restar-modificar">−</button>
+                                        <span class="cantidad-modificar">${item.cantidad}</span>
+                                        <button type="button" class="btn-cantidad btn-sumar-modificar">+</button>
+                                    </div>
+                                </label>
+                            </div>
+                            <p class="panel-modificar-error mensaje-error" aria-live="polite"></p>
+                            <div class="panel-reserva-botones">
+                                <!-- "Guardar cambios" valida y pasa al paso 2 -->
+                                <button type="button" class="btn-clear btn-ir-a-confirmar-modificar">
+                                    <i class="fa-solid fa-floppy-disk"></i> Guardar cambios
+                                </button>
+                                <button type="button" class="btn-secundario btn-cerrar-modificar">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Paso 2: advertencia antes de guardar -->
+                        <div class="paso-confirm-modificar" hidden>
+                            <p>
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                ¿Confirmar los cambios en este tour?
+                            </p>
+                            <div class="panel-reserva-botones">
+                                <button type="button" class="btn-clear btn-confirmar-guardar-modificar">
+                                    <i class="fa-solid fa-check"></i> Sí, guardar cambios
+                                </button>
+                                <button type="button" class="btn-secundario btn-volver-modificar">
+                                    Volver
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ==============================================
+                    PANEL CANCELAR TOUR (advertencia con cargo del 20%)
+                    ============================================== -->
+                    <div class="panel-reserva-advertencia panel-cancelar-tour" hidden>
+                        <p>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            ¿Cancelar "${item.nombre}"? Si la reserva ya fue procesada se aplicará un cargo del 20% (${formatoColones(Math.round(item.subtotal * 0.2))}).
+                        </p>
+                        <div class="panel-reserva-botones">
+                            <button type="button" class="btn-clear btn-peligro btn-cancelar-tour-si">
+                                Sí, cancelar
+                            </button>
+                            <button type="button" class="btn-secundario btn-cancelar-tour-no">
+                                Mantener
+                            </button>
+                        </div>
+                    </div>
+
+                </article>`;
+            }).join("")}
+
+        </section>
+    `).join("");
+
+    /* Aplica restricción de fechas pasadas a todos los inputs de modificar */
+    document.querySelectorAll(".input-fecha-modificar").forEach(input => {
+        impedirFechasPasadas(input);
+    });
+}
+
+/* =====================================================
+Listener unificado para "Mis reservas"
+Maneja: confirmar, eliminar, modificar (2 pasos) y cancelar tours
+===================================================== */
+contenedorReservas.addEventListener("click", (evento) => {
+    const grupo = evento.target.closest(".reserva-grupo");
+    if (!grupo) return;
+
+    const idReserva = Number(grupo.dataset.idReserva);
+    const itemCard = evento.target.closest(".reserva-item-card");
+    const index = itemCard ? Number(itemCard.dataset.index) : null;
+
+    /* Cierra todos los paneles del item card y resetea
+    el panel de modificar al paso 1 */
+    const cerrarPanelesItem = () => {
+        if (!itemCard) return;
+        itemCard.querySelectorAll(".panel-reserva-advertencia").forEach(p => {
+            p.hidden = true;
+        });
+        const pasoForm = itemCard.querySelector(".paso-form-modificar");
+        const pasoConfirm = itemCard.querySelector(".paso-confirm-modificar");
+        if (pasoForm) pasoForm.hidden = false;
+        if (pasoConfirm) pasoConfirm.hidden = true;
+        const errorPanel = itemCard.querySelector(".panel-modificar-error");
+        if (errorPanel) errorPanel.textContent = "";
+    };
+
+    /* Cierra los paneles del footer del grupo */
+    const cerrarPanelesFooter = () => {
+        grupo.querySelectorAll(".panel-eliminar-reserva")
+            .forEach(p => p.hidden = true);
+    };
+
+    /* ============================================
+    ACCIONES DEL FOOTER (reserva completa)
+    ============================================ */
+
+    /* Abrir panel de ELIMINAR reserva completa */
+    if (evento.target.closest(".btn-abrir-eliminar-reserva")) {
+        cerrarPanelesFooter();
+        grupo.querySelector(".panel-eliminar-reserva").hidden = false;
+        return;
+    }
+
+    /* Eliminar reserva — SÍ */
+    if (evento.target.closest(".btn-eliminar-reserva-si")) {
+        guardarReservas(obtenerReservas().filter(r => r.id !== idReserva));
+        pintarReservas();
+        return;
+    }
+
+    /* Eliminar reserva — NO */
+    if (evento.target.closest(".btn-eliminar-reserva-no")) {
+        grupo.querySelector(".panel-eliminar-reserva").hidden = true;
+        return;
+    }
+
+    /* ============================================
+    ACCIONES POR TOUR INDIVIDUAL
+    ============================================ */
+    if (!itemCard) return;
+
+    /* ABRIR panel de MODIFICAR (paso 1) */
+    if (evento.target.closest(".btn-abrir-modificar")) {
+        cerrarPanelesItem();
+        itemCard.querySelector(".panel-modificar-tour").hidden = false;
+        return;
+    }
+
+    /* CERRAR panel de modificar sin guardar */
+    if (evento.target.closest(".btn-cerrar-modificar")) {
+        cerrarPanelesItem();
+        return;
+    }
+
+    /* Controles de cantidad (paso 1 de modificar) */
+    if (evento.target.closest(".btn-sumar-modificar")) {
+        const span = itemCard.querySelector(".cantidad-modificar");
+        span.textContent = Number(span.textContent) + 1;
+        return;
+    }
+
+    if (evento.target.closest(".btn-restar-modificar")) {
+        const span = itemCard.querySelector(".cantidad-modificar");
+        const actual = Number(span.textContent);
+        if (actual > 1) span.textContent = actual - 1;
+        return;
+    }
+
+    /* GUARDAR CAMBIOS → valida y pasa al paso 2 (confirmación) */
+    if (evento.target.closest(".btn-ir-a-confirmar-modificar")) {
+        const nuevaFecha = itemCard.querySelector(".input-fecha-modificar").value;
+        const nuevaCantidad = Number(itemCard.querySelector(".cantidad-modificar").textContent);
+        const errorPanel = itemCard.querySelector(".panel-modificar-error");
+
+        /* Validaciones antes de pasar al paso 2 */
+        if (!nuevaFecha) {
+            errorPanel.textContent = "Selecciona una fecha para este tour.";
+            return;
+        }
+
+        const reservas = obtenerReservas();
+        const reserva = reservas.find(r => r.id === idReserva);
+        if (!reserva) return;
+
+        const fechaOcupada = reserva.items.some(
+            (it, i) => i !== index && it.fecha === nuevaFecha
+        );
+
+        if (fechaOcupada) {
+            errorPanel.textContent = "Esa fecha ya la usa otro tour de esta reserva. Elige un día diferente.";
+            return;
+        }
+
+        /* Todo válido → guarda los valores en el paso 2 y lo muestra */
+        const pasoConfirm = itemCard.querySelector(".paso-confirm-modificar");
+        pasoConfirm.dataset.nuevaFecha = nuevaFecha;
+        pasoConfirm.dataset.nuevaCantidad = nuevaCantidad;
+
+        itemCard.querySelector(".paso-form-modificar").hidden = true;
+        pasoConfirm.hidden = false;
+        errorPanel.textContent = "";
+        return;
+    }
+
+    /* VOLVER al paso 1 desde la confirmación */
+    if (evento.target.closest(".btn-volver-modificar")) {
+        itemCard.querySelector(".paso-form-modificar").hidden = false;
+        itemCard.querySelector(".paso-confirm-modificar").hidden = true;
+        return;
+    }
+
+    /* SÍ GUARDAR — aplica los cambios en localStorage */
+    if (evento.target.closest(".btn-confirmar-guardar-modificar")) {
+        const pasoConfirm = itemCard.querySelector(".paso-confirm-modificar");
+        const nuevaFecha = pasoConfirm.dataset.nuevaFecha;
+        const nuevaCantidad = Number(pasoConfirm.dataset.nuevaCantidad);
+
+        const reservas = obtenerReservas();
+        const reserva = reservas.find(r => r.id === idReserva);
+        if (!reserva) return;
+
+        const tour = obtenerTourPorId(reserva.items[index].idTour);
+        reserva.items[index].fecha = nuevaFecha;
+        reserva.items[index].cantidad = nuevaCantidad;
+        reserva.items[index].subtotal = tour
+            ? tour.precio * nuevaCantidad
+            : reserva.items[index].subtotal;
+
+        reserva.total = reserva.items.reduce((suma, it) => suma + it.subtotal, 0);
+
+        guardarReservas(reservas);
+        pintarReservas();
+        return;
+    }
+
+    /* ABRIR panel de CANCELAR tour */
+    if (evento.target.closest(".btn-cancelar-tour-btn")) {
+        cerrarPanelesItem();
+        itemCard.querySelector(".panel-cancelar-tour").hidden = false;
+        return;
+    }
+
+    /* Cancelar tour — SÍ */
+    if (evento.target.closest(".btn-cancelar-tour-si")) {
+        const reservas = obtenerReservas();
+        const reserva = reservas.find(r => r.id === idReserva);
+        if (!reserva) return;
+
+        reserva.items.splice(index, 1);
+
+        if (reserva.items.length === 0) {
+            guardarReservas(reservas.filter(r => r.id !== idReserva));
+        } else {
+            reserva.total = reserva.items.reduce((suma, it) => suma + it.subtotal, 0);
+            guardarReservas(reservas);
+        }
+
+        pintarReservas();
+        return;
+    }
+
+    /* Cancelar tour — NO */
+    if (evento.target.closest(".btn-cancelar-tour-no")) {
+        itemCard.querySelector(".panel-cancelar-tour").hidden = true;
+    }
+});
+/* =====================================================
+FORMULARIO: flujo de 2 pasos
+Paso 1: "Confirmar reserva" → valida → muestra advertencia
+Paso 2: "Sí, confirmar" → guarda la reserva como confirmada
+===================================================== */
+
+/* Paso 1 — valida y abre el panel de advertencia */
+btnConfirmarReserva.addEventListener("click", () => {
+    mensajeFormulario.textContent = "";
 
     if (obtenerCarrito().length === 0) {
         mensajeFormulario.textContent = "Tu carrito está vacío: agrega al menos un tour antes de reservar.";
@@ -336,7 +714,7 @@ formReserva.addEventListener("submit", (evento) => {
 
     const fechasDelCarrito = obtenerCarrito().map(item => item.fecha);
     if (new Set(fechasDelCarrito).size !== fechasDelCarrito.length) {
-        mensajeFormulario.textContent = "Dos tours no pueden reservarse para la misma fecha. Cambia una de las fechas marcadas en rojo.";
+        mensajeFormulario.textContent = "Dos tours no pueden reservarse para la misma fecha.";
         mensajeFormulario.className = "mensaje-formulario mensaje-error-formulario";
         return;
     }
@@ -347,6 +725,19 @@ formReserva.addEventListener("submit", (evento) => {
         return;
     }
 
+    /* Todo válido → ocultar el botón y mostrar la advertencia */
+    accionesFormStep1.hidden = true;
+    panelAdvertenciaForm.hidden = false;
+});
+
+/* Cancelar la advertencia → volver al botón */
+btnCancelarAdvertenciaForm.addEventListener("click", () => {
+    panelAdvertenciaForm.hidden = true;
+    accionesFormStep1.hidden = false;
+});
+
+/* Paso 2 — guardar la reserva como CONFIRMADA */
+btnConfirmarReservaFinal.addEventListener("click", () => {
     const carrito = obtenerCarrito();
 
     const items = carrito.map(item => {
@@ -363,6 +754,8 @@ formReserva.addEventListener("submit", (evento) => {
 
     const total = items.reduce((suma, item) => suma + item.subtotal, 0);
 
+    /* La reserva se crea directamente como "confirmada":
+    el usuario ya pasó por el paso de advertencia. */
     const nuevaReserva = {
         id: Date.now(),
         nombre: inputNombre.value.trim(),
@@ -371,7 +764,7 @@ formReserva.addEventListener("submit", (evento) => {
         mensaje: inputMensaje.value.trim(),
         items,
         total,
-        estado: "pendiente",
+        estado: "confirmada",
         fechaCreacion: new Date().toISOString()
     };
 
@@ -379,14 +772,12 @@ formReserva.addEventListener("submit", (evento) => {
     reservas.push(nuevaReserva);
     guardarReservas(reservas);
 
-    // El carrito ya quedó registrado dentro de la reserva.
     guardarCarrito([]);
     actualizarContadorCarrito();
 
-    mensajeFormulario.textContent =
-        `¡Reserva confirmada! Total: ${formatoColones(total)}. Pronto te contactaremos.`;
-    mensajeFormulario.className = "mensaje-formulario mensaje-exito-formulario";
-
+    /* Restaura el formulario a su estado inicial */
+    panelAdvertenciaForm.hidden = true;
+    accionesFormStep1.hidden = false;
     formReserva.reset();
     [inputNombre, inputCorreo, inputTelefono].forEach(input => mostrarError(input, ""));
 
@@ -395,91 +786,11 @@ formReserva.addEventListener("submit", (evento) => {
 });
 
 /* =====================================================
-3. MIS RESERVAS
+/* =====================================================
+Muestra la confirmación para eliminar todas las reservas
 ===================================================== */
-function pintarReservas() {
-    const reservas = obtenerReservas();
-
-    subtituloReservas.textContent =
-        `${reservas.length} ${reservas.length === 1 ? "reserva guardada" : "reservas guardadas"}`;
-
-    if (reservas.length === 0) {
-        contenedorReservas.innerHTML = `
-            <div class="sin-resultados">
-                <i class="fa-solid fa-clipboard-list"></i>
-                <p>Aún no tienes solicitudes. Explora los tours y arma tu próxima aventura.</p>
-                <a href="tours.html" class="btn-clear">
-                    <i class="fa-solid fa-binoculars"></i>
-                    Ver tours
-                </a>
-            </div>`;
-        return;
-    }
-
-    contenedorReservas.innerHTML = reservas.map(reserva => `
-        <article class="reserva-card" data-id-reserva="${reserva.id}">
-            <div class="reserva-card-header">
-                <div>
-                    <h3>${reserva.nombre}</h3>
-                    <p class="reserva-fecha">
-                        <i class="fa-regular fa-calendar"></i>
-                        Solicitada el ${formatoFechaLegible(reserva.fechaCreacion.slice(0, 10))}
-                    </p>
-                </div>
-                <span class="reserva-estado reserva-estado--${reserva.estado}">
-                    ${reserva.estado === "confirmada" ? "Confirmada" : "Pendiente"}
-                </span>
-            </div>
-
-            <ul class="reserva-items">
-                ${reserva.items.map(item => `
-                    <li>
-                        ${item.cantidad} × ${item.nombre} —
-                        ${formatoFechaLegible(item.fecha)} —
-                        ${formatoColones(item.subtotal)}
-                    </li>
-                `).join("")}
-            </ul>
-
-            <div class="reserva-card-footer">
-                <p class="reserva-total">Total: <strong>${formatoColones(reserva.total)}</strong></p>
-                <div class="reserva-acciones">
-                    ${reserva.estado !== "confirmada" ? `
-                        <button type="button" class="btn-secundario btn-confirmar-reserva">
-                            <i class="fa-solid fa-check"></i> Marcar confirmada
-                        </button>` : ""}
-                    <button type="button" class="btn-eliminar-reserva" aria-label="Eliminar esta reserva">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
-                </div>
-            </div>
-        </article>
-    `).join("");
-}
-
-/* Permite confirmar o eliminar una reserva */
-contenedorReservas.addEventListener("click", (evento) => {
-    const tarjeta = evento.target.closest(".reserva-card");
-    if (!tarjeta) return;
-
-    const idReserva = Number(tarjeta.dataset.idReserva);
-    const reservas = obtenerReservas();
-
-    if (evento.target.closest(".btn-eliminar-reserva")) {
-        guardarReservas(reservas.filter(r => r.id !== idReserva));
-        pintarReservas();
-    } else if (evento.target.closest(".btn-confirmar-reserva")) {
-        const reserva = reservas.find(r => r.id === idReserva);
-        if (reserva) reserva.estado = "confirmada";
-        guardarReservas(reservas);
-        pintarReservas();
-    }
-});
-
-/* Muestra la confirmación para eliminar todas las reservas */
 btnLimpiarReservas.addEventListener("click", () => {
     if (obtenerReservas().length === 0) return;
-
     btnLimpiarReservas.hidden = true;
     confirmarLimpiarReservas.hidden = false;
 });
