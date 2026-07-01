@@ -123,11 +123,32 @@
                 </div>
 
                 <div class="formulario-acciones">
-                    <button type="submit" id="btnConfirmarReserva" class="btn-clear" disabled>
-                        <i class="fa-solid fa-circle-check"></i>
-                        Confirmar reserva
-                    </button>
-                    <p id="mensajeFormularioReserva" class="mensaje-formulario" aria-live="polite"></p>
+
+                    <!-- Paso 1: botón principal (valida y abre la advertencia) -->
+                    <div id="accionesFormStep1">
+                        <button type="button" id="btnConfirmarReserva" class="btn-clear" disabled>
+                            <i class="fa-solid fa-circle-check"></i>
+                            Confirmar reserva
+                        </button>
+                        <p id="mensajeFormularioReserva" class="mensaje-formulario" aria-live="polite"></p>
+                    </div>
+
+                    <!-- Paso 2: advertencia antes de guardar (oculto por defecto) -->
+                    <div id="panelAdvertenciaForm" class="panel-form-advertencia" hidden>
+                        <p>
+                            <i class="fa-solid fa-circle-check"></i>
+                            ¿Confirmar esta reserva? Verifica que los tours, fechas y tus datos estén correctos antes de continuar.
+                        </p>
+                        <div class="panel-reserva-botones">
+                            <button type="button" id="btnConfirmarReservaFinal" class="btn-clear">
+                                <i class="fa-solid fa-check"></i> Sí, confirmar
+                            </button>
+                            <button type="button" id="btnCancelarAdvertenciaForm" class="btn-secundario">
+                                Volver
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
 
             </form>

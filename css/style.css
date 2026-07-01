@@ -74,6 +74,11 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+/* Garantiza que el atributo HTML "hidden" siempre oculte el elemento,
+aunque el CSS del componente tenga display: flex o display: block.
+Sin esta regla, display: flex puede anular el hidden. */
+[hidden] { display: none !important; }
+
 img {
     max-width: 100%;
     display: block;
@@ -2068,6 +2073,16 @@ aparece/desaparece al hacer clic en "Ver perfil" */
 }
 
 /* Selector de fecha individual de cada tour del carrito */
+/* Dentro del panel de modificar el label de fecha usa el mismo
+estilo que el de personas para que se vean consistentes */
+.panel-modificar-campos .item-carrito-fecha-label {
+    gap: 8px;
+    margin-top: 0;
+    font-size: .78rem;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+}
+
 .item-carrito-fecha-label {
     display: flex;
     flex-direction: column;
@@ -2252,6 +2267,36 @@ aparece/desaparece al hacer clic en "Ver perfil" */
     cursor: not-allowed;
 }
 
+/* Panel de advertencia inline dentro del formulario (antes de confirmar) */
+.panel-form-advertencia {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    background: var(--beige-verdoso);
+    border-radius: var(--radio-sm);
+    border-left: 3px solid var(--verde-oscuro);
+    font-size: .88rem;
+    color: var(--texto-secundario);
+    animation: aparecerDetalleGuia .18s ease;
+    width: 100%;
+}
+
+.panel-form-advertencia > p {
+    margin: 0;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.panel-form-advertencia > p i {
+    color: var(--verde-oscuro);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+
 .mensaje-formulario {
     font-size: .9rem;
     font-weight: 600;
@@ -2322,40 +2367,318 @@ aparece/desaparece al hacer clic en "Ver perfil" */
 }
 
 .lista-reservas {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
     margin-top: 24px;
 }
 
-.reserva-card {
+/* Grupo = una reserva completa (agrupa todos sus tours) */
+.reserva-grupo {
     background: var(--blanco);
     border-radius: var(--radio-md);
     box-shadow: var(--sombra-suave);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    overflow: hidden;
 }
 
-.reserva-card-header {
+.reserva-grupo-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     gap: 12px;
+    padding: 14px 20px;
+    background: var(--beige-verdoso);
+    border-bottom: 1px solid var(--borde-suave);
 }
 
-.reserva-card-header h3 {
-    font-size: 1.05rem;
-    margin-bottom: 4px;
-}
-
-.reserva-fecha {
-    font-size: .82rem;
-    color: var(--texto-secundario);
+.reserva-grupo-cliente {
+    font-size: .9rem;
+    font-weight: 700;
+    color: var(--texto-principal);
     display: flex;
     align-items: center;
     gap: 6px;
+    margin-bottom: 2px;
+}
+
+.reserva-grupo-fecha {
+    font-size: .78rem;
+    color: var(--texto-secundario);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.reserva-grupo-total {
+    font-size: .85rem;
+    white-space: nowrap;
+}
+
+/* Tarjeta individual por tour dentro del grupo */
+.reserva-item-card {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--borde-suave);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.reserva-item-card:last-of-type {
+    border-bottom: none;
+}
+
+.reserva-item-main {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.reserva-item-img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: var(--radio-sm);
+    flex-shrink: 0;
+    background-color: var(--beige-verdoso);
+}
+
+.reserva-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.reserva-item-nombre {
+    font-size: .95rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--texto-principal);
+}
+
+.reserva-item-fecha {
+    font-size: .82rem;
+    color: var(--texto-secundario);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.reserva-item-meta {
+    font-size: .8rem;
+    color: var(--texto-secundario);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.reserva-item-precio {
+    font-weight: 600;
+    color: var(--verde-oscuro);
+}
+
+/* Columna derecha: estado + botones */
+.reserva-item-derecha {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.reserva-item-acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.reserva-item-acciones .btn-secundario {
+    padding: 7px 14px;
+    font-size: .8rem;
+}
+
+.btn-cancelar-tour-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 7px 14px;
+    font-size: .8rem;
+    font-weight: 600;
+    background-color: transparent;
+    color: var(--rojo-favorito);
+    border: 1.5px solid var(--rojo-favorito);
+    border-radius: var(--radio-sm);
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease;
+    white-space: nowrap;
+}
+
+.btn-cancelar-tour-btn:hover {
+    background-color: var(--rojo-favorito);
+    color: var(--blanco);
+}
+
+/* Paneles de advertencia inline (modificar / cancelar / confirmar) */
+.panel-reserva-advertencia {
+    margin-top: 14px;
+    padding: 14px;
+    background: var(--beige-verdoso);
+    border-radius: var(--radio-sm);
+    border-left: 3px solid var(--dorado);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: .85rem;
+    color: var(--texto-secundario);
+    animation: aparecerDetalleGuia .18s ease;
+}
+
+.panel-reserva-advertencia > i {
+    font-size: 1.1rem;
+    color: var(--dorado);
+    align-self: flex-start;
+}
+
+.panel-reserva-advertencia > p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.panel-modificar-titulo {
+    font-weight: 700;
+    color: var(--texto-principal);
+    font-size: .88rem;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--borde-suave);
+}
+
+.panel-modificar-campos {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    padding: 4px 0 8px;
+}
+
+.campo-cantidad-modificar-label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    letter-spacing: .02em;
+    text-transform: uppercase;
+}
+
+.panel-cantidad-control {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--texto-principal);
+    min-width: 90px;
+}
+
+.panel-cantidad-control .btn-cantidad {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+}
+
+.panel-reserva-botones {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding-top: 4px;
+    border-top: 1px solid var(--borde-suave);
+}
+
+.panel-reserva-botones .btn-clear,
+.panel-reserva-botones .btn-secundario {
+    padding: 9px 20px;
+    font-size: .85rem;
+}
+
+.panel-modificar-error {
+    margin: 0;
+    min-height: 0;
+}
+
+.reserva-grupo-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 12px 20px;
+    border-top: 1px solid var(--borde-suave);
+    background: var(--blanco-hueso);
+}
+
+/* Fila de botones dentro del footer (Confirmar reserva + icono basurita) */
+.reserva-footer-acciones {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Panel de advertencia dentro del footer:
+   agrega margen superior cuando está visible */
+.reserva-grupo-footer .panel-reserva-advertencia:not([hidden]) {
+    margin-top: 12px;
+}
+
+.reserva-grupo-footer--confirmada {
+    justify-content: center;
+}
+
+.reserva-grupo-footer .btn-secundario {
+    padding: 8px 16px;
+    font-size: .82rem;
+}
+
+/* Paso 2 del panel de modificar (confirmación final) */
+.paso-confirm-modificar {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: .85rem;
+    color: var(--texto-secundario);
+}
+
+.paso-confirm-modificar p {
+    margin: 0;
+    line-height: 1.5;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.paso-confirm-modificar i {
+    color: var(--dorado);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .reserva-item-main {
+        flex-wrap: wrap;
+    }
+
+    .reserva-item-derecha {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 10px;
+        border-top: 1px solid var(--borde-suave);
+        margin-top: 10px;
+    }
+
+    .panel-modificar-campos {
+        flex-direction: column;
+    }
 }
 
 .reserva-estado {
@@ -2374,40 +2697,9 @@ aparece/desaparece al hacer clic en "Ver perfil" */
 .reserva-estado--confirmada {
     background-color: var(--verde-oscuro);
     color: var(--texto-claro);
-}
-
-.reserva-items {
-    list-style: none;
-    font-size: .85rem;
-    color: var(--texto-secundario);
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.reserva-card-footer {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    padding-top: 14px;
-    border-top: 1px solid var(--borde-suave);
-    flex-wrap: wrap;
-}
-
-.reserva-total {
-    font-size: .9rem;
-}
-
-.reserva-acciones {
-    display: flex;
-    gap: 10px;
-}
-
-.reserva-acciones .btn-secundario,
-.reserva-acciones .btn-eliminar-reserva {
-    padding: 8px 16px;
-    font-size: .82rem;
+    gap: 6px;
 }
 
 .btn-eliminar-reserva {
@@ -2425,13 +2717,6 @@ aparece/desaparece al hacer clic en "Ver perfil" */
     background-color: #fbe7e9;
     color: var(--rojo-favorito);
     border-color: #fbe7e9;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .lista-reservas {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (max-width: 768px) {
@@ -2457,38 +2742,18 @@ aparece/desaparece al hacer clic en "Ver perfil" */
         min-width: 140px;
     }
 
-    .item-carrito-cantidad {
-        order: 3;
-    }
-
-    .item-carrito-subtotal {
-        order: 4;
-        margin-left: auto;
-    }
-
-    .btn-eliminar-item {
-        order: 5;
-    }
+    .item-carrito-cantidad { order: 3; }
+    .item-carrito-subtotal { order: 4; margin-left: auto; }
+    .btn-eliminar-item { order: 5; }
 
     .confirmar-accion {
         width: 100%;
         right: auto;
         left: 0;
     }
-
-    .reserva-card-footer {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .reserva-acciones {
-        justify-content: flex-end;
-    }
 }
 
-/* -----------------------------------------------------
-15. Página de Favoritos
------------------------------------------------------ */
+
 
 /* Hero */
 

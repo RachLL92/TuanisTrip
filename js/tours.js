@@ -115,6 +115,10 @@ function limpiarFiltros() {
     selectProvincia.value = "";
     selectTipo.value = "";
     selectOrden.value = "recomendados";
+
+    /* Importante: limpiar la categoría ANTES de quitar el estilo
+    visual y de llamar a aplicarFiltros(), para que el filtro
+    quede completamente en cero y no se aplique ninguna actividad */
     categoriaActividadSeleccionada = "";
     document.querySelectorAll(".actividad-card").forEach(boton => boton.classList.remove("activo"));
     aplicarFiltros();
@@ -137,11 +141,9 @@ document.querySelectorAll(".actividad-card").forEach(boton => {
     });
 });
 
-/* Eventos de los filtros del catálogo */
-selectProvincia.addEventListener("change", aplicarFiltros);
-selectTipo.addEventListener("change", aplicarFiltros);
-selectOrden.addEventListener("change", aplicarFiltros);
-/* Filtra los tours mientras el usuario escribe */
+/* En TOURS los selects (provincia, tipo, orden) NO filtran al
+cambiar — solo lo hace el botón "Buscar tour".
+La barra de búsqueda sí filtra mientras se escribe. */
 inputBuscar.addEventListener("input", () => {
     aplicarFiltros();
     /* Desplaza la página si los resultados no son visibles */

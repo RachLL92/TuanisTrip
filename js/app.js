@@ -81,7 +81,7 @@ function aplicarFiltros() {
         const coincideTipo = !tipo || tour.tipo === tipo;
 
         /* Verifica la actividad específica elegida (senderismo, kayak, etc.) */
-        const coincideActividad = !actividad || tour.tipo === actividad;
+        const coincideActividad = !actividad || tour.categoria === actividad;
 
         /* Solo devuelve los tours que cumplen todas las condiciones */
         return (
@@ -124,13 +124,8 @@ function limpiarFiltros() {
 }
 
 /* Eventos de los filtros principales */
-selectProvincia.addEventListener("change", aplicarFiltros);
-selectTipo.addEventListener("change", aplicarFiltros);
-selectActividad.addEventListener("change", aplicarFiltros);
-/* Filtra mientras el usuario escribe */
 inputBuscar.addEventListener("input", () => {
     aplicarFiltros();
-    /* Desplaza la página si los resultados no son visibles */
     desplazarSiNoEsVisible(contenedorDestacados, subtituloDestacados);
 });
 
