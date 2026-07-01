@@ -21,6 +21,7 @@ const inputTelefono = document.getElementById("telefonoReserva");
 const inputMensaje = document.getElementById("mensajeReserva");
 const btnConfirmarReserva = document.getElementById("btnConfirmarReserva");
 const mensajeFormulario = document.getElementById("mensajeFormularioReserva");
+const avisoProvincias = document.getElementById("avisoProvincias");  
 
 /* Referencias al panel de advertencia del formulario (paso 2) */
 const accionesFormStep1 = document.getElementById("accionesFormStep1");
@@ -70,6 +71,25 @@ function obtenerTourPorId(idTour) {
     return todosLosTours.find(tour => tour.id === idTour);
 }
 
+/* Muestra u oculta el aviso cuando hay tours
+de diferentes provincias en el carrito */
+function actualizarAvisoProvincias(carrito) {
+
+    const provincias = [
+        ...new Set(
+            carrito
+                .map(item => {
+                    const tour = obtenerTourPorId(item.idTour);
+                    return tour ? tour.provincia : null;
+                })
+                .filter(Boolean)
+        )
+    ];
+
+    avisoProvincias.hidden = provincias.length <= 1;
+
+}
+
 /* Calcula el monto total de todos los tours del carrito */
 function calcularTotalCarrito() {
     return obtenerCarrito().reduce((total, item) => {
@@ -97,7 +117,12 @@ function actualizarEstadoBotonConfirmar() {
 function pintarCarrito() {
     const carrito = obtenerCarrito(); // viene de carrito.js
 
+    // Muestra el aviso únicamente cuando hay
+    // tours de diferentes provincias.
+    actualizarAvisoProvincias(carrito);
+
     if (carrito.length === 0) {
+        avisoProvincias.hidden = true;
         subtituloCarrito.textContent = "Tu carrito está vacío";
         contenedorCarritoReserva.innerHTML = `
             <div class="sin-resultados">
@@ -138,9 +163,9 @@ function pintarCarrito() {
                     <label class="item-carrito-fecha-label">
                         Fecha de este tour
                         <input type="date"
-                               class="input-fecha-item ${!item.fecha ? "input-invalido" : ""}"
-                               data-id-tour="${tour.id}"
-                               value="${item.fecha || ""}">
+                                class="input-fecha-item ${!item.fecha ? "input-invalido" : ""}"
+                                data-id-tour="${tour.id}"
+                                value="${item.fecha || ""}">
                     </label>
                     <p class="mensaje-error mensaje-error-fecha" aria-live="polite"></p>
                 </div>
@@ -173,11 +198,23 @@ function pintarCarrito() {
 
             const mensajeErrorFecha = input.closest(".item-carrito-info")?.querySelector(".mensaje-error-fecha");
 
-            // Regla: dos tours distintos del carrito no pueden compartir la
-            // misma fecha de viaje (cada uno necesita su propio día).
-            const fechaYaUsadaPorOtroTour = input.value && carritoActual.some(
-                otro => otro.idTour !== idTour && otro.fecha === input.value
-            );
+            /* Verifica si ya existe otro tour con la misma fecha.
+            Solo se considera un conflicto cuando ambos tours
+            pertenecen a provincias diferentes. */
+            const fechaYaUsadaPorOtroTour = input.value && carritoActual.some(otro => {
+
+                /* Ignora el mismo tour y los que tienen otra fecha */
+                if (otro.idTour === idTour || otro.fecha !== input.value) {
+                    return false;
+                }
+
+                const tourActual = obtenerTourPorId(idTour);
+                const otroTour = obtenerTourPorId(otro.idTour);
+
+                /* Hay conflicto únicamente si las provincias son distintas */
+                return tourActual.provincia !== otroTour.provincia;
+
+            });
 
             if (fechaYaUsadaPorOtroTour) {
                 const tourEnConflicto = obtenerTourPorId(
@@ -431,8 +468,8 @@ function pintarReservas() {
                                 <label class="item-carrito-fecha-label">
                                     Nueva fecha
                                     <input type="date"
-                                           class="input-fecha-modificar input-fecha-item"
-                                           value="${item.fecha}">
+                                            class="input-fecha-modificar input-fecha-item"
+                                            value="${item.fecha}">
                                 </label>
                                 <label class="campo-cantidad-modificar-label">
                                     Personas
@@ -712,11 +749,45 @@ btnConfirmarReserva.addEventListener("click", () => {
         return;
     }
 
-    const fechasDelCarrito = obtenerCarrito().map(item => item.fecha);
-    if (new Set(fechasDelCarrito).size !== fechasDelCarrito.length) {
-        mensajeFormulario.textContent = "Dos tours no pueden reservarse para la misma fecha.";
-        mensajeFormulario.className = "mensaje-formulario mensaje-error-formulario";
+/* Verifica si existen dos tours de diferentes
+provincias con la misma fecha seleccionada. */
+    const carrito = obtenerCarrito();
+
+    const conflicto = carrito.some((item, indice) => {
+
+        const tourActual = obtenerTourPorId(item.idTour);
+
+        return carrito.some((otro, indiceOtro) => {
+
+            /* Ignora el mismo tour */
+            if (indice === indiceOtro) {
+                return false;
+            }
+
+            const otroTour = obtenerTourPorId(otro.idTour);
+
+            /* Hay conflicto únicamente cuando ambos
+            tours tienen la misma fecha y pertenecen
+            a provincias diferentes. */
+            return item.fecha &&
+                item.fecha === otro.fecha &&
+                tourActual.provincia !== otroTour.provincia;
+
+        });
+
+    });
+
+    /* Si existe un conflicto, no permite continuar */
+    if (conflicto) {
+
+        mensajeFormulario.textContent =
+            "Los tours de diferentes provincias no pueden reservarse para la misma fecha.";
+
+        mensajeFormulario.className =
+            "mensaje-formulario mensaje-error-formulario";
+
         return;
+
     }
 
     if (!validarFormularioReserva()) {
@@ -765,7 +836,10 @@ btnConfirmarReservaFinal.addEventListener("click", () => {
         items,
         total,
         estado: "confirmada",
-        fechaCreacion: new Date().toISOString()
+        
+        /* Guarda la fecha y hora local de Costa Rica
+        para mostrar correctamente el día de la reserva. */
+        fechaCreacion: new Date().toLocaleString("sv-SE")
     };
 
     const reservas = obtenerReservas();
