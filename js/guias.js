@@ -168,8 +168,16 @@ function aplicarFiltrosGuias() {
 
     const resultado = guias.filter(guia => {
 
+        /* Busca coincidencias por nombre, categoría,
+        especialidad o idiomas. */
         const coincideTexto =
-            !texto || guia.nombre.toLowerCase().includes(texto);
+            !texto ||
+            guia.nombre.toLowerCase().includes(texto) ||
+            guia.categoria.toLowerCase().includes(texto) ||
+            guia.especialidad.toLowerCase().includes(texto) ||
+            guia.idiomas.some(idiomaActual =>
+                idiomaActual.toLowerCase().includes(texto)
+            );
 
         const coincideCategoria =
             categoria === "" || guia.categoria === categoria;
